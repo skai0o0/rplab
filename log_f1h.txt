@@ -1,0 +1,6 @@
+[1/6] StepFun in 2969 out 352 think 41 6.0s
+[2/6] StepFun in 3352 out 412 think 97 4.5s
+[3/6] StepFun in 3512 out 96 think 96 2.1s
+[4/6] StepFun in 3555 out 634 think 260 4.7s
+[5/6] StepFun in 4213 out 459 think 48 4.8s
+[6/6] StepFun in 4662 out 245 think 40 2.6s

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RP Lab character (rplab-char-1)",
+  "type": "object",
+  "required": ["format", "id", "ten", "tuoi", "hu_cau", "mot_dong", "tinh_cach"],
+  "additionalProperties": false,
+  "properties": {
+    "format": {"const": "rplab-char-1"},
+    "id": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+    "ten": {"type": "string", "minLength": 1},
+    "goi": {"type": "array", "items": {"type": "string"}},
+    "tuoi": {"type": ["integer", "null"], "minimum": 0},
+    "hu_cau": {"const": true, "description": "Nhân vật hư cấu, không dựa trên người thật."},
+    "mot_dong": {"type": "string", "maxLength": 200},
+    "tinh_cach": {"type": "string"},
+    "muc_tieu": {"type": "string"},
+    "gioi_han": {"type": "array", "items": {"type": "string"}},
+    "noi": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "xung_ho": {"type": "object", "additionalProperties": {"type": "string"}},
+        "giong": {"type": "string"},
+        "cau_cua_mieng": {"type": "array", "items": {"type": "string"}},
+        "vi_du": {"type": "array", "items": {"type": "string"}, "maxItems": 5}
+      }
+    },
+    "quan_he": {"type": "object", "additionalProperties": {"type": "string"}},
+    "ngoai_hinh": {"type": "string"},
+    "qua_khu": {"type": "string"},
+    "bi_mat": {
+      "type": "array",
+      "items": {"type": "object", "required": ["noi_dung"], "additionalProperties": false,
+                "properties": {"noi_dung": {"type": "string"}, "lo_khi": {"type": "string"}}}
+    },
+    "them": {"type": "object", "additionalProperties": {"type": "string"}}
+  }
+}

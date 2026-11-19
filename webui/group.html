@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RP Lab Group</title>
+<style>
+:root{--bg:#f6f6f4;--panel:#fff;--soft:#efefec;--line:#dddcd7;--text:#1d1d1b;--muted:#6b6a65;--accent:#2f6fd6;--accent-ink:#fff;--user:#e8f0fd;--quote:#9a5b00;--err:#b3261e;--ok:#2e9e57}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151514;--panel:#1d1d1c;--soft:#262624;--line:#353532;--text:#ecebe7;--muted:#9c9b95;--accent:#6ea3ff;--accent-ink:#0d1a33;--user:#1f2a3d;--quote:#e7b45a;--err:#ff8a80;--ok:#5fd18a}}
+:root[data-theme="dark"]{--bg:#151514;--panel:#1d1d1c;--soft:#262624;--line:#353532;--text:#ecebe7;--muted:#9c9b95;--accent:#6ea3ff;--accent-ink:#0d1a33;--user:#1f2a3d;--quote:#e7b45a;--err:#ff8a80;--ok:#5fd18a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;height:100vh;display:flex}
+aside{width:330px;min-width:330px;background:var(--panel);border-right:1px solid var(--line);overflow-y:auto;padding:14px 14px 40px}
+main{flex:1;display:flex;flex-direction:column;min-width:0}
+h1{font-size:16px;margin:0 0 4px;display:flex;justify-content:space-between;align-items:center}
+h1 a{font-size:12px;font-weight:400;color:var(--accent)}
+h2{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:16px 0 6px}
+label{display:block;font-size:12px;color:var(--muted);margin:8px 0 3px}
+input,select,textarea{width:100%;background:var(--soft);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit}
+.row{display:flex;gap:8px}.row>*{flex:1}
+.check{display:flex;align-items:center;gap:6px;font-size:13px;margin-top:8px}.check input{width:auto}
+button{background:var(--soft);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font:inherit;cursor:pointer}
+button:hover{border-color:var(--accent)}button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button:disabled{opacity:.5;cursor:default}
+.hidden{display:none!important}
+.box{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:12px;background:var(--panel)}
+.chip.on{border-color:var(--ok);color:var(--ok)}
+.cast{margin-top:6px;font-size:13px}.cast div{margin:3px 0}.cast b{font-weight:600}
+#topbar{display:flex;gap:6px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--panel);flex-wrap:wrap}
+#topbar .title{font-weight:600;margin-right:auto}
+#chat{flex:1;overflow-y:auto;padding:16px 18px}
+.msg{max-width:860px;margin:0 auto 14px;padding:10px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line)}
+.msg.user{background:var(--user)}.msg.opening{color:var(--muted)}
+.who{font-size:12px;font-weight:700;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.acts{display:flex;gap:4px;opacity:.35;transition:opacity .15s}.msg:hover .acts,.acts:focus-within{opacity:1}
+.acts button{padding:0 7px;font-size:12px;font-weight:400;color:var(--muted)}
+@media (hover:none){.acts{opacity:1}}
+.edit textarea{min-height:120px;margin:6px 0}
+.body em{color:var(--muted)}.body q{color:var(--quote);quotes:none;font-style:normal}
+details.meta{font-size:12px;color:var(--muted);margin-top:6px}
+details.meta summary{cursor:pointer}
+details.meta div{margin:3px 0 0 10px}
+.err{color:var(--err);font-size:13px;white-space:pre-wrap}
+.book{display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px}
+.book b{font-weight:600}
+.book .ct{color:var(--muted);font-size:12px;margin-left:auto}
+.book button{padding:0 6px;font-size:12px}
+.book input{width:auto}
+details.lore{font-size:12px;color:var(--muted);margin-top:6px}
+details.lore summary{cursor:pointer}
+details.lore ul{margin:4px 0 0 18px;padding:0}
+details.lore li{margin:2px 0}
+dialog{max-width:900px;width:92vw;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:0}
+dialog .dh{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}
+dialog pre{margin:0;padding:14px;max-height:70vh;overflow:auto;white-space:pre-wrap;font-size:12px}
+#composer{border-top:1px solid var(--line);background:var(--panel);padding:10px 14px}
+#composer .inner{max-width:860px;margin:0 auto;display:flex;gap:8px;align-items:flex-end}
+#composer textarea{min-height:46px;max-height:200px;resize:vertical}
+@media (max-width:760px){body{flex-direction:column;height:auto;min-height:100vh}aside{width:auto;min-width:0;border-right:none;border-bottom:1px solid var(--line)}#chat{min-height:60vh}}
+</style>
+</head>
+<body>
+<aside>
+  <h1>RP Lab · Group <span><a href="/editor">Soạn bộ</a> · <a href="/">chat đơn</a></span></h1>
+  <div style="font-size:12px;color:var(--muted)">Đạo diễn (model Decisions) chọn ai nói, cần dữ liệu gì; model chính viết; trạng thái thế giới tự cập nhật.</div>
+
+  <h2>Gói thế giới</h2>
+  <div class="row"><button id="loadSample">Nạp bộ mẫu Hoa Phượng</button></div>
+  <label>Hoặc nạp file thế giới (.json, rplab-world-1; gói cũ rplab-group-1 vẫn đọc được)</label>
+  <input type="file" id="packFile" accept=".json">
+
+  <label>Thêm nhân vật: file rplab-char-1 (.json) hoặc card SillyTavern (.json / .png, tự chuyển)</label>
+  <input type="file" id="cardFile" accept=".json,.png">
+  <div class="check"><input type="checkbox" id="cardPresent" checked><span>Cho nhân vật mới có mặt ngay trong cảnh</span></div>
+
+  <h2>Trạng thái thế giới</h2>
+  <div class="box" id="stateBox">Chưa nạp gói.</div>
+  <div class="cast" id="castBox"></div>
+  <details class="meta" id="summaryBox" style="display:none"><summary>Tóm tắt dài hạn</summary><div id="summaryText" style="white-space:pre-wrap"></div></details>
+
+  <h2>Lorebook</h2>
+  <label>Nạp file World Info (.json) xuất từ SillyTavern, character_book, hoặc card (.json, .png)</label>
+  <input type="file" id="loreFile" accept=".json,.png" multiple>
+  <div id="bookList"></div>
+  <div class="check"><input type="checkbox" id="lore_recursive"><span>Quét đệ quy (mục bật kéo theo mục khác)</span></div>
+  <div class="check"><input type="checkbox" id="lore_whole_words"><span>Khớp nguyên từ (khuyên bật với tiếng Việt)</span></div>
+  <div class="row">
+    <div><label>Quét bao nhiêu tin gần nhất</label><input id="lore_scan_depth" type="number" min="0" max="50"></div>
+    <div><label>Ngân sách (token)</label><input id="lore_budget" type="number" min="0" step="500"></div>
+  </div>
+
+  <h2>Model viết</h2>
+  <label>Nhà cung cấp</label>
+  <select id="provider"><option value="openrouter">OpenRouter</option><option value="google">Google AI Studio</option></select>
+  <label>Model</label><input id="model">
+  <div id="orBox" class="row">
+    <div><label>Provider OpenRouter</label><input id="or_providers"></div>
+    <div><label>Quantization</label><input id="or_quant"></div>
+  </div>
+  <div class="row">
+    <div><label>Reasoning</label><select id="reasoning"><option value="off">Tắt</option><option value="auto">Bật</option><option value="medium">medium</option><option value="high">high</option></select></div>
+    <div><label>Temperature</label><input id="temperature" type="number" step="0.05"></div>
+    <div><label>Max tokens</label><input id="max_tokens" type="number" step="100"></div>
+  </div>
+
+  <h2>Đạo diễn &amp; cổng chấm</h2>
+  <label>Model đạo diễn (Decisions)</label>
+  <select id="director_model">
+    <option value="microsoft/microsoft-decision-1">Microsoft-Decision-1</option>
+    <option value="google/gemini-decision-1">Google Gemini Decision 1</option>
+    <option value="openai/gpt-6-luna-decisions">OpenAI GPT-6 Luna Decisions</option>
+    <option value="typesafe/jev-1.14">TypeSafe Jev 1.14</option>
+  </select>
+  <div class="check"><input type="checkbox" id="gate"><span>Bật cổng chấm (đạt thì xuất thẳng, trượt thì sửa)</span></div>
+  <label>Phản ứng dây chuyền: số lượt nhân vật được tự chen vào sau mỗi lượt (0 = tắt)</label>
+  <input id="chain_max" type="number" min="0" max="4" step="1">
+  <div class="row">
+    <div><label>Model chấm</label><select id="judge_model">
+      <option value="microsoft/microsoft-decision-1">Microsoft</option><option value="google/gemini-decision-1">Gemini</option>
+      <option value="openai/gpt-6-luna-decisions">GPT-6 Luna</option></select></div>
+    <div><label>Ngưỡng</label><input id="judge_threshold" type="number" step="0.05" min="0.5" max="0.99"></div>
+  </div>
+</aside>
+
+<main>
+  <div id="topbar">
+    <span class="title" id="title">Group chat</span>
+    <button id="undoBtn" title="Hoàn tác lượt cuối (khôi phục cả trạng thái)">↶ Hoàn tác</button>
+    <button id="exportBtn">Xuất JSON</button>
+    <button id="resetBtn">Chơi lại</button>
+  </div>
+  <div id="chat"></div>
+  <div id="composer"><div class="inner">
+    <textarea id="input" placeholder="Bạn nói hoặc làm gì… (Enter gửi, Shift+Enter xuống dòng; để trống rồi bấm ▶ để câu chuyện tự tiếp diễn)"></textarea>
+    <button id="contBtn" title="Không nói gì, để các nhân vật tiếp diễn">▶ Tiếp diễn</button>
+    <button id="sendBtn" class="primary">Gửi</button>
+  </div></div>
+</main>
+
+<dialog id="dlg"><div class="dh"><b id="dlgTitle"></b><button onclick="dlg.close()">Đóng</button></div><pre id="dlgBody"></pre></dialog>
+
+<script>
+const $ = id => document.getElementById(id);
+const store = { get(k, d) { try { const v = localStorage.getItem('rplabg.' + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem('rplabg.' + k, JSON.stringify(v)); } catch {} } };
+const DEF = { provider: 'openrouter', model: 'deepseek/deepseek-v4.1-flash-1017', or_providers: 'StepFun', or_quant: 'fp8', reasoning: 'medium',
+  temperature: 1.0, max_tokens: 2500, director_model: 'microsoft/microsoft-decision-1', gate: true,
+  judge_model: 'microsoft/microsoft-decision-1', judge_threshold: 0.8, chain_max: 2,
+  lore_recursive: true, lore_whole_words: true, lore_scan_depth: 4, lore_budget: 6000 };
+let S = Object.assign({}, DEF, store.get('settings', {}));
+let pack = store.get('pack', null), state = store.get('state', null), history = store.get('history', []);
+let books = store.get('lorebooks', null);
+if (books === null) {
+  try {
+    const fromSingle = localStorage.getItem('rplab.lorebooks');
+    books = fromSingle ? JSON.parse(fromSingle) : [];
+  } catch {
+    books = [];
+  }
+}
+let busy = false;
+const COLORS = ['#c2410c', '#7c3aed', '#0f766e', '#be185d', '#1d4ed8', '#4d7c0f'];
+
+for (const k of Object.keys(DEF)) {
+  const el = $(k); if (!el) continue;
+  if (el.type === 'checkbox') el.checked = !!S[k]; else el.value = S[k];
+  el.addEventListener('change', () => { S[k] = el.type === 'checkbox' ? el.checked : el.value; store.set('settings', S); syncUI(); });
+}
+function syncUI() { $('orBox').classList.toggle('hidden', S.provider !== 'openrouter'); }
+syncUI();
+
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function fmt(t) {
+  let h = esc(t);
+  h = h.replace(/\*([^*\n]+)\*/g, '<em>$1</em>');
+  h = h.replace(/&quot;([^\n]*?)&quot;|“([^”\n]*)”/g, (m, a, b) => `<q>“${a !== undefined ? a : b}”</q>`);
+  return h.replace(/\n/g, '<br>');
+}
+function nameOf(id) {
+  if (id === 'user') return pack ? pack.user : 'Bạn';
+  if (id === 'nguoi_dan_truyen') return 'Người dẫn truyện';
+  const c = pack && pack.cast.find(c => c.id === id); return c ? c.name : id;
+}
+function colorOf(id) {
+  if (id === 'nguoi_dan_truyen') return 'var(--muted)';
+  const i = pack ? pack.cast.findIndex(c => c.id === id) : -1; return i >= 0 ? COLORS[i % COLORS.length] : 'var(--text)';
+}
+function saveBooks() { store.set('lorebooks', books); }
+function saveAll() { store.set('pack', pack); store.set('state', state); store.set('history', history); saveBooks(); }
+
+function show(title, obj) { $('dlgTitle').textContent = title; $('dlgBody').textContent = typeof obj === 'string' ? obj : JSON.stringify(obj, null, 2); $('dlg').showModal(); }
+function loreHtml(l) {
+  if (!l || !l.entries || !l.entries.length) return '';
+  const on = l.entries.filter(e => !e.status.startsWith('bỏ qua'));
+  return `<details class="lore"><summary>Lorebook: ${on.length} mục bật · ~${l.tokens} token</summary><ul>`
+    + l.entries.map(e => `<li><b>${esc(e.entry)}</b> <span>(${esc(e.book)})</span> — ${esc(e.status)}${e.position ? ' · chèn ' + esc(e.position) : ''}</li>`).join('') + '</ul></details>';
+}
+
+function renderState() {
+  if (!pack || !state) { $('stateBox').textContent = 'Chưa nạp gói.'; $('castBox').innerHTML = ''; return; }
+  const tension = ['Rất thoải mái', 'Bình thường', 'Hơi căng', 'Căng thẳng', 'Rất căng'][state.do_cang] || '?';
+  const loreCount = (pack.lorebook || []).length;
+  $('stateBox').innerHTML = `<div><b>Địa điểm:</b> ${esc((pack.locations[state.dia_diem] || state.dia_diem).split(':')[0])}</div>`
+    + `<div><b>Thời gian:</b> ${esc(state.thoi_gian)}</div><div><b>Độ căng:</b> ${esc(tension)}</div>`
+    + (loreCount ? `<div><b>Lore gói thế giới:</b> ${loreCount} mục (đạo diễn chọn)</div>` : '')
+    + `<div class="chips">${pack.cast.map(c => `<span class="chip ${state.co_mat.includes(c.id) ? 'on' : ''}">${esc(c.name)}${state.co_mat.includes(c.id) ? ' ●' : ''}</span>`).join('')}</div>`;
+  $('castBox').innerHTML = pack.cast.map(c => `<div><b style="color:${colorOf(c.id)}">${esc(c.name)}</b> — ${esc(c.short)} <span style="color:var(--muted)">(${Object.keys(c.fields || {}).length} trường)</span></div>`).join('');
+  $('title').textContent = pack.name;
+  $('summaryBox').style.display = state.tom_tat ? '' : 'none'; $('summaryText').textContent = state.tom_tat || '';
+}
+function metaHtml(m) {
+  let h = '';
+  const d = m.director;
+  if (d) {
+    const probs = Object.entries(d.speaker_probs || {}).map(([k, v]) => `${k} ${v.toFixed(2)}`).join(' · ');
+    const lore = (d.lore || []).map(l => `${l.title} ${l.p}${d.lore_used.includes(l.id) ? ' ✓' : ''}`).join(' · ');
+    const fp = Object.entries(d.field_probs || {}).map(([k, v]) => `${k} ${v}`).join(' · ');
+    h += `<details class="meta"><summary>Đạo diễn: ${esc(d.speaker_name)} (${esc(d.speaker_why)}) · ${esc(d.turn_type_label)} · ${d.secs}s</summary>`
+      + `<div>Ai nói: ${esc(probs || '—')}</div>`
+      + (d.address_probs && Object.keys(d.address_probs).length ? `<div>Người chơi đang nói với: ${esc(Object.entries(d.address_probs).map(([k, v]) => k + ' ' + v).join(' · '))}</div>` : '')
+      + `<div>Trường card nạp: ${esc((d.fields || []).join(', ') || '—')} ${fp ? '(' + esc(fp) + ')' : ''}</div>`
+      + `<div>Lore gói (đạo diễn): ${esc(lore || '—')}</div></details>`;
+  }
+  if (m.lore) h += loreHtml(m.lore);
+  const j = m.judge;
+  if (j) {
+    const lab = j.labels || {};
+    const parts = Object.entries(j.probs || {}).map(([k, p]) => `${lab[k] || k} ${p.toFixed(2)}${(j.failed || []).includes(k) ? ' ✗' : ''}`).join(' · ');
+    const rj = m.rejudge ? (m.rejudge.kept === 'draft' ? ` · bản sửa kém hơn (${m.rejudge.score_final} < ${m.rejudge.score_draft}) → giữ bản nháp` : ` · bản sửa ${m.rejudge.score_final} ≥ nháp ${m.rejudge.score_draft}`) : '';
+    const ov = (j.overridden || []).length ? ` · bỏ qua "mở diễn biến mới" vì do người chơi dẫn tới (${j.user_led})` : '';
+    h += `<details class="meta"><summary>Chấm: ${j.error ? 'lỗi' : j.passed ? 'ĐẠT → xuất thẳng' : 'TRƯỢT → đã sửa'}${esc(rj)} · ${j.secs}s</summary><div>${esc(j.error || parts)}${esc(ov)}</div>`
+      + (m.draft && !j.passed ? `<div>Bản nháp: ${fmt(m.draft)}</div>` : '') + `</details>`;
+  }
+  if (m.stateInfo) {
+    const i = m.stateInfo;
+    h += `<details class="meta"><summary>Trạng thái sau lượt: ${esc(i.after || '')}</summary>`
+      + `<div>Có mặt (xác suất): ${esc(Object.entries(i.co_mat_p || {}).map(([k, v]) => k + ' ' + v).join(' · '))}</div>`
+      + (i.chen_p && Object.keys(i.chen_p).length ? `<div>Muốn chen vào: ${esc(Object.entries(i.chen_p).map(([k, v]) => k + ' ' + v).join(' · '))}${i.next_speaker ? ' → ' + esc(nameOf(i.next_speaker)) + ' nói tiếp (' + esc(i.next_why || '') + ')' : ''}</div>` : '')
+      + (i.owed && i.owed.length ? `<div>Chưa đáp lời người chơi: ${esc(i.owed.join(', '))}</div>` : '')
+      + `<div>Độ chắc địa điểm ${i.dia_diem_conf} · thời gian ${i.thoi_gian_conf}${i.extract_error ? ' · lỗi trích xuất: ' + esc(i.extract_error) : ''}</div></details>`;
+  }
+  if (m.usage) {
+    const u = m.usage;
+    h += `<div class="meta">${esc([u.provider, u.prompt_tokens != null && 'vào ' + u.prompt_tokens, u.completion_tokens != null && 'ra ' + u.completion_tokens,
+      u.secs != null && u.secs + 's', u.cost != null && '$' + (+u.cost).toFixed(5), u.extra_cost && '(đạo diễn+chấm+trạng thái $' + (+u.extra_cost).toFixed(5) + ')'].filter(Boolean).join(' · '))}</div>`;
+  }
+  return h;
+}
+function msgEl(m) {
+  const i = history.indexOf(m), ai = m.speaker !== 'user';
+  const div = document.createElement('div');
+  div.className = 'msg ' + (ai ? '' : 'user');
+  div.innerHTML = `<div class="who" style="color:${colorOf(m.speaker)}"><span>${esc(nameOf(m.speaker))}</span><span class="acts">`
+    + (ai ? `<button data-a="regen" title="Tạo lại câu này, vẫn do ${esc(nameOf(m.speaker))} nói">↻ tạo lại</button>` : '')
+    + `<button data-a="edit">sửa</button><button data-a="del">xoá</button></span></div><div class="body">${fmt(m.content || '')}</div>`
+    + (m.error ? `<div class="err">${esc(m.error)}</div>` : '') + `<div class="metas">${metaHtml(m)}</div>`;
+  if (i >= 0) {
+    div.querySelector('[data-a=edit]').onclick = () => editMsg(div, i);
+    div.querySelector('[data-a=del]').onclick = () => delMsg(i);
+    if (ai) div.querySelector('[data-a=regen]').onclick = () => regenMsg(i);
+  }
+  return div;
+}
+function editMsg(div, i) {
+  if (busy) return;
+  const body = div.querySelector('.body'); body.innerHTML = '';
+  const ta = document.createElement('textarea'); ta.value = history[i].content || '';
+  const ok = document.createElement('button'); ok.textContent = 'Lưu'; ok.className = 'primary';
+  const no = document.createElement('button'); no.textContent = 'Huỷ';
+  const wrap = document.createElement('div'); wrap.className = 'edit'; wrap.append(ta, ok, ' ', no);
+  body.append(wrap); ta.focus();
+  ok.onclick = () => { history[i].content = ta.value; history[i].edited = true; delete history[i].error; saveAll(); render(); };
+  no.onclick = render;
+}
+function delMsg(i) {
+  if (busy) return;
+  // xoa tin cuoi = tra trang thai the gioi ve truoc tin do; xoa tin giua thi trang thai giu nguyen
+  if (i === history.length - 1 && history[i].stateBefore) state = history[i].stateBefore;
+  history.splice(i, 1); saveAll(); renderState(); render();
+}
+function regenMsg(i) {
+  if (busy) return;
+  const m = history[i], after = history.length - 1 - i;
+  if (after && !confirm(`Tạo lại câu này sẽ xoá ${after} tin phía sau. Tiếp tục?`)) return;
+  if (m.stateBefore) state = m.stateBefore;
+  history = history.slice(0, i); saveAll(); renderState();
+  turn('', m.speaker, 0, 'tạo lại (giữ người nói)');
+}
+function render() {
+  const c = $('chat'); c.innerHTML = '';
+  if (!pack) { c.innerHTML = '<div class="msg" style="color:var(--muted)">Nạp bộ mẫu hoặc một file gói thế giới ở cột trái để bắt đầu.</div>'; return; }
+  const op = document.createElement('div'); op.className = 'msg opening'; op.innerHTML = `<div class="body">${fmt(pack.opening || '')}</div>`; c.append(op);
+  history.forEach(m => c.append(msgEl(m)));
+  c.scrollTop = c.scrollHeight;
+}
+function startPack(p) {
+  pack = p; state = JSON.parse(JSON.stringify(p.state)); history = []; saveAll(); renderState(); render();
+}
+$('loadSample').onclick = async () => {
+  if (history.length && !confirm('Bỏ cuộc chơi hiện tại và nạp bộ mẫu?')) return;
+  startPack(await (await fetch('/api/group/sample')).json());
+};
+$('cardFile').onchange = async e => {
+  const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+  if (!pack) { alert('Nạp gói thế giới trước đã.'); return; }
+  const r = await fetch('/api/group/card', { method: 'POST', body: await f.arrayBuffer(),
+    headers: { 'X-Existing-Ids': encodeURIComponent(JSON.stringify(pack.cast.map(c => c.id))) } });
+  const j = await r.json();
+  if (j.error) { alert(j.error); return; }
+  pack.cast.push(j.member);
+  if ($('cardPresent').checked) state.co_mat = [...new Set([...state.co_mat, j.member.id])];
+  saveAll(); renderState();
+  let msg = `Đã thêm ${j.member.name} (${Object.keys(j.member.fields).length} mục đạo diễn chọn được).`;
+  if (j.converted) {
+    msg += `\nCard SillyTavern đã được tự chuyển sang rplab-char-1. Bấm OK để tải file mới về rồi đọc lại: tách khối chữ dài, điền xưng hô, quan hệ, bí mật; kiểm tra tuổi (${j.char.tuoi ?? 'chưa rõ'}).`;
+    if (j.mo_dau) msg += '\n(Card có scenario/first_mes: đã tách riêng, không đưa vào nhân vật.)';
+    if (confirm(msg)) {
+      const blob = new Blob([JSON.stringify(j.char, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = j.char.id + '.rplab-char.json'; a.click();
+    }
+  } else alert(msg);
+};
+$('packFile').onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try {
+    const r = await fetch('/api/group/load', { method: 'POST', body: await f.arrayBuffer() }); const j = await r.json();
+    if (j.error) throw new Error(j.error);
+    startPack(j.pack);
+    if (j.warnings && j.warnings.length) alert('Lưu ý:\n' + j.warnings.join('\n'));
+  } catch (err) { alert('File thế giới không hợp lệ: ' + err.message); }
+  e.target.value = '';
+};
+
+async function turn(userMsg, forceSpeaker, depth, forceReason) {
+  depth = depth || 0;
+  if (busy || !pack) return;
+  busy = true; $('sendBtn').disabled = $('contBtn').disabled = true;
+  const snapshot = JSON.parse(JSON.stringify(state));
+  const body = { pack, state, history: history.map(m => ({ speaker: m.speaker, content: m.content })), user_msg: userMsg, force_speaker: forceSpeaker || null, force_reason: forceReason || null,
+    options: { provider: S.provider, model: S.model, or_providers: S.or_providers, or_quant: S.or_quant, or_fallbacks: false,
+      reasoning: S.reasoning, temperature: S.temperature, top_p: 0.95, max_tokens: S.max_tokens, director_model: S.director_model,
+      gate: S.gate, judge_model: S.judge_model, judge_threshold: S.judge_threshold,
+      lore_recursive: S.lore_recursive, lore_whole_words: S.lore_whole_words, lore_scan_depth: S.lore_scan_depth, lore_budget: S.lore_budget },
+    lorebooks: books.filter(b => b.enabled) };
+  if (userMsg) { history.push({ speaker: 'user', content: userMsg, stateBefore: snapshot }); }
+  const m = { speaker: 'nguoi_dan_truyen', content: '', draft: '', stateBefore: snapshot };
+  history.push(m); render();
+  let el = $('chat').lastChild;
+  const refresh = () => { const n = msgEl(m); el.replaceWith(n); el = n; $('chat').scrollTop = $('chat').scrollHeight; };
+  try {
+    const r = await fetch('/api/group/turn', { method: 'POST', body: JSON.stringify(body) });
+    const reader = r.body.getReader(), dec = new TextDecoder(); let buf = '';
+    while (true) {
+      const { value, done } = await reader.read(); if (done) break;
+      buf += dec.decode(value, { stream: true }); let k;
+      while ((k = buf.indexOf('\n\n')) >= 0) {
+        const line = buf.slice(0, k).trim(); buf = buf.slice(k + 2);
+        if (!line.startsWith('data:')) continue;
+        const ev = JSON.parse(line.slice(5));
+        if (ev.type === 'director') { m.director = ev; m.speaker = ev.speaker; refresh(); }
+        else if (ev.type === 'lore') { m.lore = { entries: ev.entries, tokens: ev.tokens }; refresh(); }
+        else if (ev.type === 'draft') { m.draft += ev.text; el.querySelector('.body').innerHTML = '<em>(nháp) </em>' + fmt(m.draft); }
+        else if (ev.type === 'judge') { m.judge = ev; refresh(); }
+        else if (ev.type === 'rejudge') { m.rejudge = ev; refresh(); }
+        else if (ev.type === 'content') { m.content += ev.text; el.querySelector('.body').innerHTML = fmt(m.content); }
+        else if (ev.type === 'reset_content') { m.content = ''; }
+        else if (ev.type === 'state') { state = ev.state; m.stateInfo = Object.assign({}, ev.info, { after: (pack.locations[state.dia_diem] || '').split(':')[0] + ' · ' + state.thoi_gian }); renderState(); refresh(); }
+        else if (ev.type === 'usage') { m.usage = ev; refresh(); }
+        else if (ev.type === 'notice' || ev.type === 'error') { m.error = (m.error ? m.error + '\n' : '') + ev.text; refresh(); }
+      }
+    }
+  } catch (e) { m.error = 'Lỗi kết nối: ' + e.message; }
+  if (!m.content && !m.error) m.error = 'Không có nội dung trả về.';
+  busy = false; $('sendBtn').disabled = $('contBtn').disabled = false; saveAll(); render();
+  const nxt = m.stateInfo && m.stateInfo.next_speaker;
+  if (!m.error && nxt && depth < (+S.chain_max || 0)) turn('', nxt, depth + 1, 'phản ứng dây chuyền: ' + (m.stateInfo.next_why || 'chen vào sau lượt trước'));
+}
+$('sendBtn').onclick = () => { const t = $('input').value.trim(); if (!t) return; $('input').value = ''; turn(t); };
+$('contBtn').onclick = () => turn('');
+$('input').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); $('sendBtn').click(); } });
+$('undoBtn').onclick = () => {
+  if (busy || !history.length) return;
+  const last = history.pop();
+  if (last.speaker !== 'user' && history.length && history[history.length - 1].speaker === 'user' && history[history.length - 1].stateBefore
+      && JSON.stringify(history[history.length - 1].stateBefore) === JSON.stringify(last.stateBefore)) {
+    // luot nguoi choi + luot AI di cung nhau: hoan tac ca hai, tra lai chu cho o nhap
+    $('input').value = history.pop().content;
+  }
+  if (last.stateBefore) state = last.stateBefore;
+  saveAll(); renderState(); render();
+};
+$('resetBtn').onclick = () => { if (!pack || (history.length && !confirm('Chơi lại từ đầu với gói hiện tại?'))) return; startPack(pack); };
+$('exportBtn').onclick = () => {
+  const blob = new Blob([JSON.stringify({ pack: pack && pack.name, state, history }, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'rplab-group-' + Date.now() + '.json'; a.click();
+};
+function renderBooks() {
+  const box = $('bookList');
+  if (!box) return;
+  box.innerHTML = books.length ? '' : '<div style="font-size:12px;color:var(--muted);margin-top:6px">Chưa có lorebook riêng. Nạp file World Info (.json) xuất từ SillyTavern, file character_book, hoặc card (.json, .png).</div>';
+  books.forEach((b, i) => {
+    const d = document.createElement('div'); d.className = 'book';
+    const nConst = b.entries.filter(e => e.constant).length;
+    d.innerHTML = `<label style="display:flex;align-items:center;gap:6px;flex:1;margin:0"><input type="checkbox"${b.enabled ? ' checked' : ''}><b>${esc(b.name)}</b></label>`
+      + `<span class="ct">${b.entries.length} mục${nConst ? ' · ' + nConst + ' cố định' : ''}</span>`
+      + `<button data-a="v" title="Xem các mục">xem</button>`
+      + `<button data-a="merge" title="Gộp các mục vào gói thế giới hiện tại để đạo diễn chọn">gộp</button>`
+      + `<button data-a="x" title="Gỡ">✕</button>`;
+    d.querySelector('input').onchange = ev => { b.enabled = ev.target.checked; saveBooks(); };
+    d.querySelector('[data-a=x]').onclick = () => { if (confirm('Gỡ lorebook "' + b.name + '"?')) { books.splice(i, 1); saveBooks(); renderBooks(); } };
+    d.querySelector('[data-a=v]').onclick = () => show(b.name + ` (${b.entries.length} mục)`, b.entries.map(e =>
+      `• ${e.comment}${e.enabled ? '' : ' [TẮT]'}${e.constant ? ' [CỐ ĐỊNH]' : ''} · chèn ${e.position}${e.position === 'depth' ? ' ' + e.depth : ''} · order ${e.order}\n  khóa: ${(e.keys || []).join(', ') || '—'}${(e.secondary_keys || []).length ? '\n  khóa phụ (logic ' + e.logic + '): ' + e.secondary_keys.join(', ') : ''}\n  ${(e.content || '').slice(0, 160).replace(/\n/g, ' ')}${(e.content || '').length > 160 ? '…' : ''}`).join('\n\n'));
+    d.querySelector('[data-a=merge]').onclick = () => {
+      if (!pack) { alert('Nạp gói thế giới trước đã.'); return; }
+      if (!confirm(`Gộp ${b.entries.length} mục của "${b.name}" vào gói "${pack.name}"? Đạo diễn sẽ trực tiếp hỏi về các mục này.`)) return;
+      if (!pack.lorebook) pack.lorebook = [];
+      const existing = new Set(pack.lorebook.map(x => x.id));
+      let count = 0;
+      for (const e of b.entries) {
+        let id = String(e.uid || e.comment || 'lore').toLowerCase().replace(/[^a-z0-9_]+/g, '_').replace(/^_+|_+$/g, '') || 'lore';
+        let base = id, k = 2;
+        while (existing.has(id)) { id = `${base}_${k}`; k++; }
+        existing.add(id);
+        pack.lorebook.push({ id, title: e.comment || (e.keys && e.keys.join(', ')) || id, content: e.content });
+        count++;
+      }
+      saveAll(); renderState();
+      alert(`Đã gộp ${count} mục vào gói thế giới "${pack.name}".`);
+    };
+    box.append(d);
+  });
+}
+$('loreFile').addEventListener('change', async e => {
+  for (const f of e.target.files) {
+    const r = await fetch('/api/lorebook', { method: 'POST', body: await f.arrayBuffer(), headers: { 'X-Filename': encodeURIComponent(f.name) } });
+    const j = await r.json();
+    if (j.error) { alert(f.name + ': ' + j.error); continue; }
+    books.push(Object.assign({ enabled: true }, j.book));
+  }
+  e.target.value = '';
+  saveBooks();
+  renderBooks();
+});
+
+renderState(); render(); renderBooks();
+</script>
+</body>
+</html>

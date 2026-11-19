@@ -1,0 +1,962 @@
+{
+ "typesafe/jev-1.14|v1_run1#1": {
+  "p": {
+   "tra_loi_dung": 0.97,
+   "mo_dien_bien_moi": 0.42,
+   "viet_ho_user": 0.2,
+   "giong_tro_ly": 0.03
+  },
+  "cost": 4.6872e-05,
+  "secs": 1.1601343154907227
+ },
+ "typesafe/jev-1.14|v1_run1#2": {
+  "p": {
+   "tra_loi_dung": 0.95,
+   "mo_dien_bien_moi": 0.75,
+   "viet_ho_user": 0.36,
+   "giong_tro_ly": 0.04
+  },
+  "cost": 4.956e-05,
+  "secs": 1.1378097534179688
+ },
+ "typesafe/jev-1.14|v1_run1#3": {
+  "p": {
+   "tra_loi_dung": 0.95,
+   "mo_dien_bien_moi": 0.58,
+   "viet_ho_user": 0.19,
+   "giong_tro_ly": 0.04
+  },
+  "cost": 5.1912e-05,
+  "secs": 1.1749176979064941
+ },
+ "typesafe/jev-1.14|v1_run1#4": {
+  "p": {
+   "tra_loi_dung": 0.95,
+   "mo_dien_bien_moi": 0.92,
+   "viet_ho_user": 0.26,
+   "giong_tro_ly": 0.03
+  },
+  "cost": 5.0652e-05,
+  "secs": 1.2248287200927734
+ },
+ "typesafe/jev-1.14|v1_run1#5": {
+  "p": {
+   "tra_loi_dung": 0.96,
+   "mo_dien_bien_moi": 0.81,
+   "viet_ho_user": 0.18,
+   "giong_tro_ly": 0.03
+  },
+  "cost": 5.0232e-05,
+  "secs": 1.1870577335357666
+ },
+ "typesafe/jev-1.14|v1_run1#6": {
+  "p": {
+   "tra_loi_dung": 0.95,
+   "mo_dien_bien_moi": 0.49,
+   "viet_ho_user": 0.34,
+   "giong_tro_ly": 0.04
+  },
+  "cost": 4.7964e-05,
+  "secs": 1.19962477684021
+ },
+ "typesafe/jev-1.14|v1_run2#1": {
+  "p": {
+   "tra_loi_dung": 0.96,
+   "mo_dien_bien_moi": 0.3,
+   "viet_ho_user": 0.16,
+   "giong_tro_ly": 0.02
+  },
+  "cost": 4.5276e-05,
+  "secs": 1.19962477684021
+ },
+ "typesafe/jev-1.14|v1_run2#2": {
+  "p": {
+   "tra_loi_dung": 0.97,
+   "mo_dien_bien_moi": 0.15,
+   "viet_ho_user": 0.26,
+   "giong_tro_ly": 0.03
+  },
+  "cost": 4.6452e-05,
+  "secs": 1.1644692420959473
+ },
+ "typesafe/jev-1.14|v1_run2#3": {
+  "p": {
+   "tra_loi_dung": 0.93,
+   "mo_dien_bien_moi": 0.85,
+   "viet_ho_user": 0.18,
+   "giong_tro_ly": 0.03
+  },
+  "cost": 4.8048e-05,
+  "secs": 0.6823549270629883
+ },
+ "typesafe/jev-1.14|v1_run2#4": {
+  "p": {
+   "tra_loi_dung": 0.96,
+   "mo_dien_bien_moi": 0.64,
+   "viet_ho_user": 0.32,
+   "giong_tro_ly": 0.04
+  },
+  "cost": 4.6704e-05,
+  "secs": 0.5870141983032227
+ },
+ "typesafe/jev-1.14|v1_run2#5": {
+  "p": {
+   "tra_loi_dung": 0.97,
+   "mo_dien_bien_moi": 0.29,
+   "viet_ho_user": 0.21,
+   "giong_tro_ly": 0.03
+  },
+  "cost": 4.6452e-05,
+  "secs": 0.6312606334686279
+ },
+ "typesafe/jev-1.14|v1_run2#6": {
+  "p": {
+   "tra_loi_dung": 0.96,
+   "mo_dien_bien_moi": 0.31,
+   "viet_ho_user": 0.19,
+   "giong_tro_ly": 0.03
+  },
+  "cost": 4.3218e-05,
+  "secs": 0.796806812286377
+ },
+ "typesafe/jev-1.14|v1_run3#1": {
+  "p": {
+   "tra_loi_dung": 0.97,
+   "mo_dien_bien_moi": 0.37,
+   "viet_ho_user": 0.16,
+   "giong_tro_ly": 0.02
+  },
+  "cost": 4.4856e-05,
+  "secs": 0.6559696197509766
+ },
+ "typesafe/jev-1.14|v1_run3#2": {
+  "p": {
+   "tra_loi_dung": 0.94,
+   "mo_dien_bien_moi": 0.8,
+   "viet_ho_user": 0.18,
+   "giong_tro_ly": 0.03
+  },
+  "cost": 4.4394e-05,
+  "secs": 0.6319365501403809
+ },
+ "typesafe/jev-1.14|v1_run3#3": {
+  "p": {
+   "tra_loi_dung": 0.93,
+   "mo_dien_bien_moi": 0.6,
+   "viet_ho_user": 0.15,
+   "giong_tro_ly": 0.03
+  },
+  "cost": 4.4688e-05,
+  "secs": 0.6199097633361816
+ },
+ "typesafe/jev-1.14|v1_run3#4": {
+  "p": {
+   "tra_loi_dung": 0.96,
+   "mo_dien_bien_moi": 0.81,
+   "viet_ho_user": 0.21,
+   "giong_tro_ly": 0.04
+  },
+  "cost": 4.2168e-05,
+  "secs": 0.6310262680053711
+ },
+ "typesafe/jev-1.14|v1_run3#5": {
+  "p": {
+   "tra_loi_dung": 0.96,
+   "mo_dien_bien_moi": 0.65,
+   "viet_ho_user": 0.19,
+   "giong_tro_ly": 0.03
+  },
+  "cost": 4.116e-05,
+  "secs": 0.6403703689575195
+ },
+ "typesafe/jev-1.14|v1_run3#6": {
+  "p": {
+   "tra_loi_dung": 0.97,
+   "mo_dien_bien_moi": 0.25,
+   "viet_ho_user": 0.14,
+   "giong_tro_ly": 0.04
+  },
+  "cost": 4.1958e-05,
+  "secs": 0.6841561794281006
+ },
+ "typesafe/jev-1.14|v2_run1#1": {
+  "p": {
+   "tra_loi_dung": 0.96,
+   "mo_dien_bien_moi": 0.52,
+   "viet_ho_user": 0.15,
+   "giong_tro_ly": 0.03
+  },
+  "cost": 4.9392e-05,
+  "secs": 0.657360315322876
+ },
+ "typesafe/jev-1.14|v2_run1#2": {
+  "p": {
+   "tra_loi_dung": 0.96,
+   "mo_dien_bien_moi": 0.32,
+   "viet_ho_user": 0.27,
+   "giong_tro_ly": 0.04
+  },
+  "cost": 5.0736e-05,
+  "secs": 0.618370532989502
+ },
+ "typesafe/jev-1.14|v2_run1#3": {
+  "p": {
+   "tra_loi_dung": 0.93,
+   "mo_dien_bien_moi": 0.2,
+   "viet_ho_user": 0.28,
+   "giong_tro_ly": 0.04
+  },
+  "cost": 5.3886e-05,
+  "secs": 0.5905032157897949
+ },
+ "typesafe/jev-1.14|v2_run1#4": {
+  "p": {
+   "tra_loi_dung": 0.95,
+   "mo_dien_bien_moi": 0.92,
+   "viet_ho_user": 0.34,
+   "giong_tro_ly": 0.04
+  },
+  "cost": 5.481e-05,
+  "secs": 0.608039140701294
+ },
+ "typesafe/jev-1.14|v2_run1#5": {
+  "p": {
+   "tra_loi_dung": 0.97,
+   "mo_dien_bien_moi": 0.72,
+   "viet_ho_user": 0.16,
+   "giong_tro_ly": 0.03
+  },
+  "cost": 5.0316e-05,
+  "secs": 0.630634069442749
+ },
+ "typesafe/jev-1.14|v2_run1#6": {
+  "p": {
+   "tra_loi_dung": 0.96,
+   "mo_dien_bien_moi": 0.27,
+   "viet_ho_user": 0.17,
+   "giong_tro_ly": 0.04
+  },
+  "cost": 4.578e-05,
+  "secs": 0.5961124897003174
+ },
+ "google/gemini-decision-1|v1_run1#1": {
+  "p": {
+   "tra_loi_dung": 0.9767972657614384,
+   "mo_dien_bien_moi": 0.12805788301921087,
+   "viet_ho_user": 0.07037605067231056,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 8.94e-05,
+  "secs": 0.715120792388916
+ },
+ "google/gemini-decision-1|v1_run1#2": {
+  "p": {
+   "tra_loi_dung": 0.9156459902863506,
+   "mo_dien_bien_moi": 0.8727261886488826,
+   "viet_ho_user": 0.1107257866112906,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 9.54e-05,
+  "secs": 1.060800313949585
+ },
+ "google/gemini-decision-1|v1_run1#3": {
+  "p": {
+   "tra_loi_dung": 0.9408264489767204,
+   "mo_dien_bien_moi": 0.28113535617408736,
+   "viet_ho_user": 0.12261945610333644,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 0.0001015,
+  "secs": 0.8589785099029541
+ },
+ "google/gemini-decision-1|v1_run1#4": {
+  "p": {
+   "tra_loi_dung": 0.9624459372736334,
+   "mo_dien_bien_moi": 0.9492748209306094,
+   "viet_ho_user": 0.07065333536160165,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 9.92e-05,
+  "secs": 0.8699572086334229
+ },
+ "google/gemini-decision-1|v1_run1#5": {
+  "p": {
+   "tra_loi_dung": 0.9679158870992965,
+   "mo_dien_bien_moi": 0.6753467195473749,
+   "viet_ho_user": 0.2456978171367654,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 9.76e-05,
+  "secs": 0.7615518569946289
+ },
+ "google/gemini-decision-1|v1_run1#6": {
+  "p": {
+   "tra_loi_dung": 0.9528703158682533,
+   "mo_dien_bien_moi": 0.13259335335355332,
+   "viet_ho_user": 0.12648005049477712,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 9.05e-05,
+  "secs": 0.9703621864318848
+ },
+ "google/gemini-decision-1|v1_run2#1": {
+  "p": {
+   "tra_loi_dung": 0.9749205624383162,
+   "mo_dien_bien_moi": 0.09885580551430082,
+   "viet_ho_user": 0.056881607923259664,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 8.71e-05,
+  "secs": 0.9207847118377686
+ },
+ "google/gemini-decision-1|v1_run2#2": {
+  "p": {
+   "tra_loi_dung": 0.9674311489302806,
+   "mo_dien_bien_moi": 0.06389960376842198,
+   "viet_ho_user": 0.06769184195146684,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 8.96e-05,
+  "secs": 0.8455805778503418
+ },
+ "google/gemini-decision-1|v1_run2#3": {
+  "p": {
+   "tra_loi_dung": 0.9403096375297927,
+   "mo_dien_bien_moi": 0.6157884472812435,
+   "viet_ho_user": 0.18080800992595195,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 9.25e-05,
+  "secs": 1.419243335723877
+ },
+ "google/gemini-decision-1|v1_run2#4": {
+  "p": {
+   "tra_loi_dung": 0.9722097526242556,
+   "mo_dien_bien_moi": 0.747313833377229,
+   "viet_ho_user": 0.13406978596511032,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 9.11e-05,
+  "secs": 1.104356288909912
+ },
+ "google/gemini-decision-1|v1_run2#5": {
+  "p": {
+   "tra_loi_dung": 0.9696878907386249,
+   "mo_dien_bien_moi": 0.049441349583698765,
+   "viet_ho_user": 0.062353526753518726,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 8.92e-05,
+  "secs": 0.894456148147583
+ },
+ "google/gemini-decision-1|v1_run2#6": {
+  "p": {
+   "tra_loi_dung": 0.9516738231080867,
+   "mo_dien_bien_moi": 0.15441577559896366,
+   "viet_ho_user": 0.10069992116337972,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 7.91e-05,
+  "secs": 1.046234369277954
+ },
+ "google/gemini-decision-1|v1_run3#1": {
+  "p": {
+   "tra_loi_dung": 0.9883070218838463,
+   "mo_dien_bien_moi": 0.3225715219723071,
+   "viet_ho_user": 0.16844523795862024,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 8.56e-05,
+  "secs": 0.8291192054748535
+ },
+ "google/gemini-decision-1|v1_run3#2": {
+  "p": {
+   "tra_loi_dung": 0.926241306462915,
+   "mo_dien_bien_moi": 0.6176759084507791,
+   "viet_ho_user": 0.11245036126089963,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 8.49e-05,
+  "secs": 1.3699967861175537
+ },
+ "google/gemini-decision-1|v1_run3#3": {
+  "p": {
+   "tra_loi_dung": 0.956827070025746,
+   "mo_dien_bien_moi": 0.26912867788487854,
+   "viet_ho_user": 0.07066203236285344,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 8.5e-05,
+  "secs": 0.8045225143432617
+ },
+ "google/gemini-decision-1|v1_run3#4": {
+  "p": {
+   "tra_loi_dung": 0.9123289091370043,
+   "mo_dien_bien_moi": 0.5277286448604729,
+   "viet_ho_user": 0.14311787715021304,
+   "giong_tro_ly": 0.0112608581053181
+  },
+  "cost": 7.98e-05,
+  "secs": 0.9415552616119385
+ },
+ "google/gemini-decision-1|v1_run3#5": {
+  "p": {
+   "tra_loi_dung": 0.96529564039751,
+   "mo_dien_bien_moi": 0.17744840969059897,
+   "viet_ho_user": 0.06993161323439105,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 7.75e-05,
+  "secs": 1.5176730155944824
+ },
+ "google/gemini-decision-1|v1_run3#6": {
+  "p": {
+   "tra_loi_dung": 0.9738651050039947,
+   "mo_dien_bien_moi": 0.14744539184968836,
+   "viet_ho_user": 0.07801802226323724,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 7.83e-05,
+  "secs": 1.1111490726470947
+ },
+ "google/gemini-decision-1|v2_run1#1": {
+  "p": {
+   "tra_loi_dung": 0.9590988168056473,
+   "mo_dien_bien_moi": 0.35144628681502504,
+   "viet_ho_user": 0.08115427464264066,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 9.5e-05,
+  "secs": 1.070535659790039
+ },
+ "google/gemini-decision-1|v2_run1#2": {
+  "p": {
+   "tra_loi_dung": 0.9448421083545676,
+   "mo_dien_bien_moi": 0.1305727603996705,
+   "viet_ho_user": 0.11237128671559457,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 9.86e-05,
+  "secs": 1.0223910808563232
+ },
+ "google/gemini-decision-1|v2_run1#3": {
+  "p": {
+   "tra_loi_dung": 0.9389645833366812,
+   "mo_dien_bien_moi": 0.08998606237098186,
+   "viet_ho_user": 0.10339142631668918,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 0.0001059,
+  "secs": 1.005746603012085
+ },
+ "google/gemini-decision-1|v2_run1#4": {
+  "p": {
+   "tra_loi_dung": 0.9665374849333316,
+   "mo_dien_bien_moi": 0.9402468958673941,
+   "viet_ho_user": 0.08366423280976834,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 0.0001079,
+  "secs": 0.9905490875244141
+ },
+ "google/gemini-decision-1|v2_run1#5": {
+  "p": {
+   "tra_loi_dung": 0.9651524030413127,
+   "mo_dien_bien_moi": 0.6040467226104261,
+   "viet_ho_user": 0.0531024164463148,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 9.89e-05,
+  "secs": 0.905372142791748
+ },
+ "google/gemini-decision-1|v2_run1#6": {
+  "p": {
+   "tra_loi_dung": 0.9533522202296595,
+   "mo_dien_bien_moi": 0.11746690662329343,
+   "viet_ho_user": 0.24212120500223597,
+   "giong_tro_ly": 0.01
+  },
+  "cost": 8.76e-05,
+  "secs": 0.8827817440032959
+ },
+ "openai/gpt-6-luna-decisions|v1_run1#1": {
+  "p": {
+   "tra_loi_dung": 1,
+   "mo_dien_bien_moi": 0.56,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001331,
+  "secs": 0.8793423175811768
+ },
+ "openai/gpt-6-luna-decisions|v1_run1#2": {
+  "p": {
+   "tra_loi_dung": 0.99,
+   "mo_dien_bien_moi": 0.98,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001387,
+  "secs": 0.8113868236541748
+ },
+ "openai/gpt-6-luna-decisions|v1_run1#3": {
+  "p": {
+   "tra_loi_dung": 0.99,
+   "mo_dien_bien_moi": 0.15,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001437,
+  "secs": 0.8760292530059814
+ },
+ "openai/gpt-6-luna-decisions|v1_run1#4": {
+  "p": {
+   "tra_loi_dung": 0.99,
+   "mo_dien_bien_moi": 1,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001419,
+  "secs": 0.7896292209625244
+ },
+ "openai/gpt-6-luna-decisions|v1_run1#5": {
+  "p": {
+   "tra_loi_dung": 1,
+   "mo_dien_bien_moi": 0.99,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001416,
+  "secs": 0.8491067886352539
+ },
+ "openai/gpt-6-luna-decisions|v1_run1#6": {
+  "p": {
+   "tra_loi_dung": 0.99,
+   "mo_dien_bien_moi": 0.67,
+   "viet_ho_user": 0.03,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001352,
+  "secs": 0.725520133972168
+ },
+ "openai/gpt-6-luna-decisions|v1_run2#1": {
+  "p": {
+   "tra_loi_dung": 0.96,
+   "mo_dien_bien_moi": 0,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001306,
+  "secs": 0.9515080451965332
+ },
+ "openai/gpt-6-luna-decisions|v1_run2#2": {
+  "p": {
+   "tra_loi_dung": 0.98,
+   "mo_dien_bien_moi": 0,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001335,
+  "secs": 0.8480403423309326
+ },
+ "openai/gpt-6-luna-decisions|v1_run2#3": {
+  "p": {
+   "tra_loi_dung": 0.93,
+   "mo_dien_bien_moi": 1,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.000136,
+  "secs": 0.873422384262085
+ },
+ "openai/gpt-6-luna-decisions|v1_run2#4": {
+  "p": {
+   "tra_loi_dung": 0.96,
+   "mo_dien_bien_moi": 0.99,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001333,
+  "secs": 1.0808429718017578
+ },
+ "openai/gpt-6-luna-decisions|v1_run2#5": {
+  "p": {
+   "tra_loi_dung": 1,
+   "mo_dien_bien_moi": 0,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001336,
+  "secs": 0.8068516254425049
+ },
+ "openai/gpt-6-luna-decisions|v1_run2#6": {
+  "p": {
+   "tra_loi_dung": 1,
+   "mo_dien_bien_moi": 0,
+   "viet_ho_user": 0.01,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001254,
+  "secs": 1.0085716247558594
+ },
+ "openai/gpt-6-luna-decisions|v1_run3#1": {
+  "p": {
+   "tra_loi_dung": 1,
+   "mo_dien_bien_moi": 0.18,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001293,
+  "secs": 0.9463908672332764
+ },
+ "openai/gpt-6-luna-decisions|v1_run3#2": {
+  "p": {
+   "tra_loi_dung": 1,
+   "mo_dien_bien_moi": 1,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001282,
+  "secs": 0.9690015316009521
+ },
+ "openai/gpt-6-luna-decisions|v1_run3#3": {
+  "p": {
+   "tra_loi_dung": 0.94,
+   "mo_dien_bien_moi": 0,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001285,
+  "secs": 0.9987552165985107
+ },
+ "openai/gpt-6-luna-decisions|v1_run3#4": {
+  "p": {
+   "tra_loi_dung": 0.96,
+   "mo_dien_bien_moi": 1,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001232,
+  "secs": 0.7957272529602051
+ },
+ "openai/gpt-6-luna-decisions|v1_run3#5": {
+  "p": {
+   "tra_loi_dung": 1,
+   "mo_dien_bien_moi": 0.54,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001212,
+  "secs": 0.718674898147583
+ },
+ "openai/gpt-6-luna-decisions|v1_run3#6": {
+  "p": {
+   "tra_loi_dung": 1,
+   "mo_dien_bien_moi": 0,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001221,
+  "secs": 0.8486294746398926
+ },
+ "openai/gpt-6-luna-decisions|v2_run1#1": {
+  "p": {
+   "tra_loi_dung": 1,
+   "mo_dien_bien_moi": 0.48,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001392,
+  "secs": 0.8227741718292236
+ },
+ "openai/gpt-6-luna-decisions|v2_run1#2": {
+  "p": {
+   "tra_loi_dung": 1,
+   "mo_dien_bien_moi": 0,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001431,
+  "secs": 0.8524048328399658
+ },
+ "openai/gpt-6-luna-decisions|v2_run1#3": {
+  "p": {
+   "tra_loi_dung": 0.97,
+   "mo_dien_bien_moi": 0,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001498,
+  "secs": 1.0864055156707764
+ },
+ "openai/gpt-6-luna-decisions|v2_run1#4": {
+  "p": {
+   "tra_loi_dung": 0.99,
+   "mo_dien_bien_moi": 1,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001518,
+  "secs": 1.342259407043457
+ },
+ "openai/gpt-6-luna-decisions|v2_run1#5": {
+  "p": {
+   "tra_loi_dung": 1,
+   "mo_dien_bien_moi": 0.08,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001431,
+  "secs": 0.7832732200622559
+ },
+ "openai/gpt-6-luna-decisions|v2_run1#6": {
+  "p": {
+   "tra_loi_dung": 1,
+   "mo_dien_bien_moi": 0,
+   "viet_ho_user": 0,
+   "giong_tro_ly": 0
+  },
+  "cost": 0.0001318,
+  "secs": 1.1296916007995605
+ },
+ "microsoft/microsoft-decision-1|v1_run1#1": {
+  "p": {
+   "tra_loi_dung": 0.990291529603005,
+   "mo_dien_bien_moi": 0.08509991179243227,
+   "viet_ho_user": 0.022977470279371214,
+   "giong_tro_ly": 0.0009110530917070209
+  },
+  "cost": 3.0114e-05,
+  "secs": 1.3629772663116455
+ },
+ "microsoft/microsoft-decision-1|v1_run1#2": {
+  "p": {
+   "tra_loi_dung": 0.9875683570032898,
+   "mo_dien_bien_moi": 0.5000048593016371,
+   "viet_ho_user": 0.047426221114937994,
+   "giong_tro_ly": 0.00055277964307505
+  },
+  "cost": 3.2844e-05,
+  "secs": 1.576887845993042
+ },
+ "microsoft/microsoft-decision-1|v1_run1#3": {
+  "p": {
+   "tra_loi_dung": 0.9933071497642112,
+   "mo_dien_bien_moi": 0.13296637023275998,
+   "viet_ho_user": 0.1192042251218823,
+   "giong_tro_ly": 0.0011695132776395716
+  },
+  "cost": 3.5238e-05,
+  "secs": 1.5216786861419678
+ },
+ "microsoft/microsoft-decision-1|v1_run1#4": {
+  "p": {
+   "tra_loi_dung": 0.9959298641780968,
+   "mo_dien_bien_moi": 0.9914225149537832,
+   "viet_ho_user": 0.025957475816540263,
+   "giong_tro_ly": 0.0008040875632390439
+  },
+  "cost": 3.4188e-05,
+  "secs": 1.3454663753509521
+ },
+ "microsoft/microsoft-decision-1|v1_run1#5": {
+  "p": {
+   "tra_loi_dung": 0.9975273779761785,
+   "mo_dien_bien_moi": 0.9399135602462048,
+   "viet_ho_user": 0.05340362217019174,
+   "giong_tro_ly": 0.0017007266225512096
+  },
+  "cost": 3.3642e-05,
+  "secs": 1.4726827144622803
+ },
+ "microsoft/microsoft-decision-1|v1_run1#6": {
+  "p": {
+   "tra_loi_dung": 0.995390428691317,
+   "mo_dien_bien_moi": 0.02297753427897753,
+   "viet_ho_user": 0.06008704228816113,
+   "giong_tro_ly": 0.0015011851229511603
+  },
+  "cost": 3.1038e-05,
+  "secs": 0.7611691951751709
+ },
+ "microsoft/microsoft-decision-1|v1_run2#1": {
+  "p": {
+   "tra_loi_dung": 0.9914225177455205,
+   "mo_dien_bien_moi": 0.10669227047341248,
+   "viet_ho_user": 0.01798627802193919,
+   "giong_tro_ly": 0.0019267390021791735
+  },
+  "cost": 2.9148e-05,
+  "secs": 0.9916882514953613
+ },
+ "microsoft/microsoft-decision-1|v1_run2#2": {
+  "p": {
+   "tra_loi_dung": 0.9959298636674709,
+   "mo_dien_bien_moi": 0.010987002327594895,
+   "viet_ho_user": 0.060087106897906827,
+   "giong_tro_ly": 0.0007096713525115865
+  },
+  "cost": 3.0324e-05,
+  "secs": 1.5028529167175293
+ },
+ "microsoft/microsoft-decision-1|v1_run2#3": {
+  "p": {
+   "tra_loi_dung": 0.9924227597756152,
+   "mo_dien_bien_moi": 0.8519538226965241,
+   "viet_ho_user": 0.053403683858599595,
+   "giong_tro_ly": 0.0010322327313208905
+  },
+  "cost": 3.171e-05,
+  "secs": 1.6820006370544434
+ },
+ "microsoft/microsoft-decision-1|v1_run2#4": {
+  "p": {
+   "tra_loi_dung": 0.9968273175534497,
+   "mo_dien_bien_moi": 0.7773016205208574,
+   "viet_ho_user": 0.09535019411731877,
+   "giong_tro_ly": 0.00048785804381141893
+  },
+  "cost": 3.1122e-05,
+  "secs": 1.3922340869903564
+ },
+ "microsoft/microsoft-decision-1|v1_run2#5": {
+  "p": {
+   "tra_loi_dung": 0.9975273770295181,
+   "mo_dien_bien_moi": 0.014063704709270566,
+   "viet_ho_user": 0.14804859851059113,
+   "giong_tro_ly": 0.001501185033435105
+  },
+  "cost": 3.045e-05,
+  "secs": 1.523198127746582
+ },
+ "microsoft/microsoft-decision-1|v1_run2#6": {
+  "p": {
+   "tra_loi_dung": 0.9980732656757519,
+   "mo_dien_bien_moi": 0.13296593758610836,
+   "viet_ho_user": 0.08509976075603642,
+   "giong_tro_ly": 0.0005527794647893162
+  },
+  "cost": 2.667e-05,
+  "secs": 0.8268706798553467
+ },
+ "microsoft/microsoft-decision-1|v1_run3#1": {
+  "p": {
+   "tra_loi_dung": 0.9940889332374111,
+   "mo_dien_bien_moi": 0.18242762681756458,
+   "viet_ho_user": 0.02033243327044191,
+   "giong_tro_ly": 0.0017007258945050247
+  },
+  "cost": 2.8686e-05,
+  "secs": 1.3710153102874756
+ },
+ "microsoft/microsoft-decision-1|v1_run3#2": {
+  "p": {
+   "tra_loi_dung": 0.9820138017475679,
+   "mo_dien_bien_moi": 0.9241421089209105,
+   "viet_ho_user": 0.06754723295245145,
+   "giong_tro_ly": 0.0006263355313979856
+  },
+  "cost": 2.8728e-05,
+  "secs": 1.4069247245788574
+ },
+ "microsoft/microsoft-decision-1|v1_run3#3": {
+  "p": {
+   "tra_loi_dung": 0.9859363866536934,
+   "mo_dien_bien_moi": 0.16451895122734142,
+   "viet_ho_user": 0.08509968370824128,
+   "giong_tro_ly": 0.0009110532370040443
+  },
+  "cost": 2.8602e-05,
+  "secs": 1.438080072402954
+ },
+ "microsoft/microsoft-decision-1|v1_run3#4": {
+  "p": {
+   "tra_loi_dung": 0.9953904289419532,
+   "mo_dien_bien_moi": 0.8807978009392454,
+   "viet_ho_user": 0.06754717808452806,
+   "giong_tro_ly": 0.0009110534287290786
+  },
+  "cost": 2.6502e-05,
+  "secs": 0.8459253311157227
+ },
+ "microsoft/microsoft-decision-1|v1_run3#5": {
+  "p": {
+   "tra_loi_dung": 0.9982992776690529,
+   "mo_dien_bien_moi": 0.067547475902586,
+   "viet_ho_user": 0.033086170799065596,
+   "giong_tro_ly": 0.0008040875015150978
+  },
+  "cost": 2.583e-05,
+  "secs": 0.8638718128204346
+ },
+ "microsoft/microsoft-decision-1|v1_run3#6": {
+  "p": {
+   "tra_loi_dung": 0.9953904303426259,
+   "mo_dien_bien_moi": 0.04208803209376246,
+   "viet_ho_user": 0.06008706803797608,
+   "giong_tro_ly": 0.0013250246753064856
+  },
+  "cost": 2.625e-05,
+  "secs": 1.3198397159576416
+ },
+ "microsoft/microsoft-decision-1|v2_run1#1": {
+  "p": {
+   "tra_loi_dung": 0.99640639793917,
+   "mo_dien_bien_moi": 0.2450892742168121,
+   "viet_ho_user": 0.015906454660417634,
+   "giong_tro_ly": 0.0007096713264666108
+  },
+  "cost": 3.2634e-05,
+  "secs": 1.4507238864898682
+ },
+ "microsoft/microsoft-decision-1|v2_run1#2": {
+  "p": {
+   "tra_loi_dung": 0.9933071524232236,
+   "mo_dien_bien_moi": 0.015906472961395142,
+   "viet_ho_user": 0.0675472266437954,
+   "giong_tro_ly": 0.0005527797144548729
+  },
+  "cost": 3.4566e-05,
+  "secs": 1.010404348373413
+ },
+ "microsoft/microsoft-decision-1|v2_run1#3": {
+  "p": {
+   "tra_loi_dung": 0.9947798753621651,
+   "mo_dien_bien_moi": 0.09535061888451318,
+   "viet_ho_user": 0.0600870958405571,
+   "giong_tro_ly": 0.0005527795489366126
+  },
+  "cost": 3.7464e-05,
+  "secs": 1.4240522384643555
+ },
+ "microsoft/microsoft-decision-1|v2_run1#4": {
+  "p": {
+   "tra_loi_dung": 0.9964063982737044,
+   "mo_dien_bien_moi": 0.9968273167697098,
+   "viet_ho_user": 0.022977458876424113,
+   "giong_tro_ly": 0.0009110535867430449
+  },
+  "cost": 3.7884e-05,
+  "secs": 0.8689761161804199
+ },
+ "microsoft/microsoft-decision-1|v2_run1#5": {
+  "p": {
+   "tra_loi_dung": 0.997199073834903,
+   "mo_dien_bien_moi": 0.6791817055877816,
+   "viet_ho_user": 0.033086173696298495,
+   "giong_tro_ly": 0.00103223313520783
+  },
+  "cost": 3.4188e-05,
+  "secs": 1.5340194702148438
+ },
+ "microsoft/microsoft-decision-1|v2_run1#6": {
+  "p": {
+   "tra_loi_dung": 0.9959298625113393,
+   "mo_dien_bien_moi": 0.03308623113986384,
+   "viet_ho_user": 0.08509971073782431,
+   "giong_tro_ly": 0.0003799850994775123
+  },
+  "cost": 3.0156e-05,
+  "secs": 1.3992362022399902
+ }
+}

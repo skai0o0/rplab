@@ -1,0 +1,264 @@
+{
+    "chat_completion_source": "openrouter",
+    "openai_model": "gpt-5.6-terra",
+    "claude_model": "claude-sonnet-5",
+    "openrouter_model": "deepseek/deepseek-v4.1-flash-1017",
+    "openrouter_use_fallback": false,
+    "openrouter_group_models": false,
+    "openrouter_sort_models": "alphabetically",
+    "ai21_model": "jamba-large",
+    "mistralai_model": "mistral-large-latest",
+    "chutes_model": "deepseek-ai/DeepSeek-V3-0324",
+    "chutes_sort_models": "alphabetically",
+    "minimax_model": "MiniMax-M2.7",
+    "minimax_endpoint": "global",
+    "electronhub_model": "gpt-4o-mini",
+    "electronhub_sort_models": "alphabetically",
+    "electronhub_group_models": false,
+    "custom_model": "",
+    "custom_url": "",
+    "custom_include_body": "",
+    "custom_exclude_body": "",
+    "custom_include_headers": "",
+    "google_model": "gemini-3.7-flash",
+    "vertexai_model": "gemini-3.7-flash",
+    "temperature": 1.0,
+    "frequency_penalty": 0,
+    "presence_penalty": 0,
+    "top_p": 0.95,
+    "top_k": 0,
+    "top_a": 0,
+    "min_p": 0,
+    "repetition_penalty": 1,
+    "openai_max_context": 32768,
+    "openai_max_tokens": 2500,
+    "names_behavior": 0,
+    "send_if_empty": "",
+    "impersonation_prompt": "[Viết lượt tiếp theo dưới góc nhìn của {{user}}, theo giọng văn của đoạn chat. Không viết lời của {{char}}.]",
+    "new_chat_prompt": "",
+    "new_group_chat_prompt": "[Start a new group chat. Group members: {{group}}]",
+    "new_example_chat_prompt": "[Ví dụ hội thoại]",
+    "continue_nudge_prompt": "[Viết tiếp tin nhắn trước của {{char}}, không lặp lại nội dung cũ.]",
+    "bias_preset_selected": "Default (none)",
+    "reverse_proxy": "",
+    "proxy_password": "",
+    "max_context_unlocked": true,
+    "wi_format": "{0}",
+    "scenario_format": "{{scenario}}",
+    "personality_format": "{{personality}}",
+    "group_nudge_prompt": "[Chỉ viết lượt tiếp theo của {{char}}.]",
+    "stream_openai": true,
+    "prompts": [
+        {
+            "name": "Main Prompt",
+            "system_prompt": true,
+            "role": "system",
+            "content": "",
+            "identifier": "main",
+            "forbid_overrides": false
+        },
+        {
+            "name": "Auxiliary Prompt",
+            "system_prompt": true,
+            "role": "system",
+            "content": "",
+            "identifier": "nsfw",
+            "forbid_overrides": false
+        },
+        {
+            "identifier": "dialogueExamples",
+            "name": "Chat Examples",
+            "system_prompt": true,
+            "marker": true
+        },
+        {
+            "name": "Post-History Instructions",
+            "system_prompt": true,
+            "role": "system",
+            "content": "",
+            "identifier": "jailbreak",
+            "forbid_overrides": false
+        },
+        {
+            "identifier": "chatHistory",
+            "name": "Chat History",
+            "system_prompt": true,
+            "marker": true
+        },
+        {
+            "identifier": "worldInfoAfter",
+            "name": "World Info (after)",
+            "system_prompt": true,
+            "marker": true
+        },
+        {
+            "identifier": "worldInfoBefore",
+            "name": "World Info (before)",
+            "system_prompt": true,
+            "marker": true
+        },
+        {
+            "identifier": "enhanceDefinitions",
+            "role": "system",
+            "name": "Enhance Definitions",
+            "content": "",
+            "system_prompt": true,
+            "marker": false,
+            "forbid_overrides": false
+        },
+        {
+            "identifier": "charDescription",
+            "name": "Char Description",
+            "system_prompt": true,
+            "marker": true
+        },
+        {
+            "identifier": "charPersonality",
+            "name": "Char Personality",
+            "system_prompt": true,
+            "marker": true
+        },
+        {
+            "identifier": "scenario",
+            "name": "Scenario",
+            "system_prompt": true,
+            "marker": true
+        },
+        {
+            "identifier": "personaDescription",
+            "name": "Persona Description",
+            "system_prompt": true,
+            "marker": true
+        }
+    ],
+    "prompt_order": [
+        {
+            "character_id": 100000,
+            "order": [
+                {
+                    "identifier": "main",
+                    "enabled": true
+                },
+                {
+                    "identifier": "worldInfoBefore",
+                    "enabled": true
+                },
+                {
+                    "identifier": "personaDescription",
+                    "enabled": true
+                },
+                {
+                    "identifier": "charDescription",
+                    "enabled": true
+                },
+                {
+                    "identifier": "charPersonality",
+                    "enabled": true
+                },
+                {
+                    "identifier": "scenario",
+                    "enabled": true
+                },
+                {
+                    "identifier": "enhanceDefinitions",
+                    "enabled": false
+                },
+                {
+                    "identifier": "nsfw",
+                    "enabled": false
+                },
+                {
+                    "identifier": "worldInfoAfter",
+                    "enabled": true
+                },
+                {
+                    "identifier": "dialogueExamples",
+                    "enabled": true
+                },
+                {
+                    "identifier": "chatHistory",
+                    "enabled": true
+                },
+                {
+                    "identifier": "jailbreak",
+                    "enabled": true
+                }
+            ]
+        },
+        {
+            "character_id": 100001,
+            "order": [
+                {
+                    "identifier": "main",
+                    "enabled": true
+                },
+                {
+                    "identifier": "worldInfoBefore",
+                    "enabled": true
+                },
+                {
+                    "identifier": "personaDescription",
+                    "enabled": true
+                },
+                {
+                    "identifier": "charDescription",
+                    "enabled": true
+                },
+                {
+                    "identifier": "charPersonality",
+                    "enabled": true
+                },
+                {
+                    "identifier": "scenario",
+                    "enabled": true
+                },
+                {
+                    "identifier": "enhanceDefinitions",
+                    "enabled": false
+                },
+                {
+                    "identifier": "nsfw",
+                    "enabled": false
+                },
+                {
+                    "identifier": "worldInfoAfter",
+                    "enabled": true
+                },
+                {
+                    "identifier": "dialogueExamples",
+                    "enabled": true
+                },
+                {
+                    "identifier": "chatHistory",
+                    "enabled": true
+                },
+                {
+                    "identifier": "jailbreak",
+                    "enabled": true
+                }
+            ]
+        }
+    ],
+    "show_external_models": false,
+    "assistant_prefill": "",
+    "assistant_impersonation": "",
+    "use_sysprompt": false,
+    "squash_system_messages": false,
+    "media_inlining": true,
+    "bypass_status_check": false,
+    "continue_prefill": false,
+    "continue_postfix": " ",
+    "seed": -1,
+    "n": 1,
+    "custom_prompt_post_processing": "",
+    "show_thoughts": true,
+    "reasoning_effort": "medium",
+    "enable_web_search": false,
+    "openrouter_providers": [
+        "StepFun"
+    ],
+    "openrouter_quantizations": [
+        "fp8"
+    ],
+    "openrouter_allow_fallbacks": false
+}

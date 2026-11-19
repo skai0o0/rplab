@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RP Lab</title>
+<style>
+:root{--bg:#f6f6f4;--panel:#ffffff;--soft:#efefec;--line:#dddcd7;--text:#1d1d1b;--muted:#6b6a65;--accent:#2f6fd6;--accent-ink:#fff;--user:#e8f0fd;--quote:#9a5b00;--think:#f3f1ea;--err:#b3261e;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151514;--panel:#1d1d1c;--soft:#262624;--line:#353532;--text:#ecebe7;--muted:#9c9b95;--accent:#6ea3ff;--accent-ink:#0d1a33;--user:#1f2a3d;--quote:#e7b45a;--think:#22211e;--err:#ff8a80;}}
+:root[data-theme="dark"]{--bg:#151514;--panel:#1d1d1c;--soft:#262624;--line:#353532;--text:#ecebe7;--muted:#9c9b95;--accent:#6ea3ff;--accent-ink:#0d1a33;--user:#1f2a3d;--quote:#e7b45a;--think:#22211e;--err:#ff8a80;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;height:100vh;display:flex}
+aside{width:320px;min-width:320px;background:var(--panel);border-right:1px solid var(--line);overflow-y:auto;padding:14px 14px 40px}
+main{flex:1;display:flex;flex-direction:column;min-width:0}
+h1{font-size:16px;margin:0 0 10px;display:flex;justify-content:space-between;align-items:center}
+h2{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:16px 0 6px}
+label{display:block;font-size:12px;color:var(--muted);margin:8px 0 3px}
+input,select,textarea{width:100%;background:var(--soft);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit}
+textarea{resize:vertical}
+.row{display:flex;gap:8px}.row>*{flex:1}
+.check{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text);margin-top:8px}.check input{width:auto}
+button{background:var(--soft);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font:inherit;cursor:pointer}
+button:hover{border-color:var(--accent)}button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button:disabled{opacity:.5;cursor:default}
+.keys{font-size:12px;color:var(--muted)}.keys b{color:var(--text)}
+.ok{color:#2e9e57}.no{color:var(--err)}
+.cardbox{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:8px;font-size:13px;margin-top:6px}
+.hidden{display:none!important}
+#topbar{display:flex;gap:6px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--panel);flex-wrap:wrap}
+#topbar .title{font-weight:600;margin-right:auto}
+#chat{flex:1;overflow-y:auto;padding:16px 18px}
+.msg{max-width:860px;margin:0 auto 14px;padding:10px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line)}
+.msg.user{background:var(--user)}
+.msg .who{font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px;display:flex;justify-content:space-between;gap:8px}
+.msg .who .acts button{padding:0 6px;font-size:12px;border:none;background:none;color:var(--muted)}
+.msg .who .acts button:hover{color:var(--accent)}
+.msg .body{white-space:normal;word-wrap:break-word}
+.msg .body em{color:var(--muted)}
+.msg .body q{color:var(--quote);quotes:none;font-style:normal}
+details.think{background:var(--think);border:1px solid var(--line);border-radius:8px;padding:6px 10px;margin-bottom:8px;font-size:13px;color:var(--muted)}
+details.think summary{cursor:pointer}
+details.think div{white-space:pre-wrap;margin-top:6px}
+.stats{font-size:11px;color:var(--muted);margin-top:6px}
+.err{color:var(--err);font-size:13px;white-space:pre-wrap}
+#composer{border-top:1px solid var(--line);background:var(--panel);padding:10px 14px}
+#composer .inner{max-width:860px;margin:0 auto;display:flex;gap:8px;align-items:flex-end}
+#composer textarea{min-height:46px;max-height:220px}
+dialog{max-width:900px;width:92vw;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:0}
+dialog .dh{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}
+dialog pre{margin:0;padding:14px;max-height:70vh;overflow:auto;white-space:pre-wrap;font-size:12px}
+.edit textarea{min-height:120px;margin-top:6px}
+details.draft{background:var(--soft);border:1px dashed var(--line);border-radius:8px;padding:6px 10px;margin-bottom:8px;font-size:13px;color:var(--muted)}
+details.draft summary{cursor:pointer}
+details.draft .dtxt{margin-top:6px}
+.book{display:flex;align-items:center;gap:6px;background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:6px 8px;margin-top:6px;font-size:13px}
+.book .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.book .ct{color:var(--muted);font-size:12px}
+.book button{padding:0 6px;font-size:12px}
+.book input{width:auto}
+details.lore{font-size:12px;color:var(--muted);margin-top:6px}
+details.lore summary{cursor:pointer}
+details.lore li{margin:2px 0}
+@media (max-width:760px){body{flex-direction:column;height:auto;min-height:100vh}aside{width:auto;min-width:0;border-right:none;border-bottom:1px solid var(--line)}#chat{min-height:60vh}}
+</style>
+</head>
+<body>
+<aside>
+  <h1>RP Lab <span><a href="/group" style="font-size:12px;font-weight:400;color:var(--accent);margin-right:8px">Group chat →</a><button id="themeBtn" title="Đổi giao diện sáng/tối">◐</button></span></h1>
+  <div class="keys" id="keys">Đang kiểm tra key…</div>
+
+  <h2>Kết nối</h2>
+  <label>Nhà cung cấp</label>
+  <select id="provider">
+    <option value="openrouter">OpenRouter</option>
+    <option value="compat">OpenAI-compatible (tuỳ chỉnh)</option>
+    <option value="google">Google AI Studio</option>
+    <option value="vertex">Vertex AI (express, API key)</option>
+  </select>
+  <div id="compatBox" class="hidden">
+    <label>Base URL (vd https://api.example.com/v1)</label><input id="base_url">
+    <label>API key (chỉ lưu trong trình duyệt này)</label><input id="api_key" type="password">
+  </div>
+  <label>Model</label>
+  <div class="row"><input id="model" list="modelList" style="flex:3"><button id="loadModels" style="flex:1" title="Tải danh sách model">⟳</button></div>
+  <datalist id="modelList"></datalist>
+  <div id="orBox">
+    <label>Provider OpenRouter (thứ tự, cách nhau bởi dấu phẩy)</label><input id="or_providers" placeholder="StepFun">
+    <label>Quantization</label><input id="or_quant" placeholder="fp8">
+    <div class="check"><input type="checkbox" id="or_fallbacks"><span>Cho phép rơi sang provider khác</span></div>
+  </div>
+
+  <h2>Sinh văn bản</h2>
+  <label>Chế độ viết</label>
+  <select id="mode">
+    <option value="normal">Bình thường (1 lượt)</option>
+    <option value="rewrite">Nháp → soát → viết lại (2 lượt)</option>
+    <option value="gate">Nháp → chấm → chỉ viết lại khi trượt</option>
+  </select>
+  <div id="gateBox">
+    <label>Model chấm (OpenRouter Decisions)</label>
+    <select id="judge_model">
+      <option value="microsoft/microsoft-decision-1">Microsoft-Decision-1 (rẻ, tốt nhất khi đo)</option>
+      <option value="google/gemini-decision-1">Google Gemini Decision 1</option>
+      <option value="openai/gpt-6-luna-decisions">OpenAI GPT-6 Luna Decisions</option>
+      <option value="typesafe/jev-1.14">TypeSafe Jev 1.14</option>
+      <option value="heygen/heygen-decision-1-turbo">HeyGen Decision 1 Turbo</option>
+    </select>
+    <label>Ngưỡng tự xuất (độ chắc tối thiểu cho mỗi tiêu chí)</label>
+    <input id="judge_threshold" type="number" step="0.05" min="0.5" max="0.99">
+  </div>
+  <div id="rewriteBox">
+    <label>Model cho lượt viết lại (để trống = dùng model ở trên)</label><input id="rewrite_model" list="modelList">
+  </div>
+  <label>Reasoning / thinking</label>
+  <select id="reasoning">
+    <option value="off">Tắt</option><option value="auto">Bật (model tự quyết)</option>
+    <option value="low">low</option><option value="medium">medium</option><option value="high">high</option>
+  </select>
+  <div class="check"><input type="checkbox" id="showThink"><span>Hiện phần suy nghĩ</span></div>
+  <div class="row">
+    <div><label>Temperature</label><input id="temperature" type="number" step="0.05" min="0" max="2"></div>
+    <div><label>Top P</label><input id="top_p" type="number" step="0.01" min="0" max="1"></div>
+    <div><label>Max tokens</label><input id="max_tokens" type="number" step="50" min="16"></div>
+  </div>
+  <div id="safetyBox"><label>Ngưỡng an toàn của Gemini</label>
+    <select id="safety"><option>BLOCK_ONLY_HIGH</option><option>BLOCK_MEDIUM_AND_ABOVE</option><option>BLOCK_LOW_AND_ABOVE</option></select></div>
+
+  <h2>Lorebook</h2>
+  <input type="file" id="loreFile" accept=".json" multiple>
+  <div id="bookList"></div>
+  <div class="check"><input type="checkbox" id="card_lore"><span>Dùng lorebook nhúng trong card</span></div>
+  <div class="check"><input type="checkbox" id="lore_recursive"><span>Quét đệ quy (mục bật kéo theo mục khác)</span></div>
+  <div class="check"><input type="checkbox" id="lore_whole_words"><span>Khớp nguyên từ (khuyên bật với tiếng Việt)</span></div>
+  <div class="row">
+    <div><label>Quét bao nhiêu tin gần nhất</label><input id="lore_scan_depth" type="number" min="0" max="50"></div>
+    <div><label>Ngân sách (token)</label><input id="lore_budget" type="number" min="0" step="500"></div>
+  </div>
+
+  <h2>Character card</h2>
+  <input type="file" id="cardFile" accept=".json,.png">
+  <div id="cardInfo" class="cardbox hidden"></div>
+  <label>Tên của bạn ({{user}})</label><input id="user">
+  <label>Persona (tuỳ chọn)</label><textarea id="persona" rows="2"></textarea>
+  <label>System prompt (không card: dùng làm system; có card: ghi đè system_prompt của card)</label>
+  <textarea id="system_prompt" rows="4"></textarea>
+</aside>
+
+<main>
+  <div id="topbar">
+    <span class="title" id="chatTitle">Chat</span>
+    <button id="previewBtn" title="Xem prompt thực tế sẽ gửi">Xem prompt</button>
+    <button id="lastReqBtn" title="Request JSON gần nhất">Request gần nhất</button>
+    <button id="exportBtn">Xuất JSON</button>
+    <button id="newBtn">Chat mới</button>
+  </div>
+  <div id="chat"></div>
+  <div id="composer"><div class="inner">
+    <textarea id="input" placeholder="Nhập tin nhắn… (Enter để gửi, Shift+Enter xuống dòng)"></textarea>
+    <button id="regenBtn" title="Tạo lại câu trả lời cuối">↻</button>
+    <button id="sendBtn" class="primary">Gửi</button>
+  </div></div>
+</main>
+
+<dialog id="dlg"><div class="dh"><b id="dlgTitle"></b><button onclick="dlg.close()">Đóng</button></div><pre id="dlgBody"></pre></dialog>
+
+<script>
+const $ = id => document.getElementById(id);
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('rplab.' + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem('rplab.' + k, JSON.stringify(v)); } catch {} }
+};
+const DEFAULTS = { provider: 'openrouter', model: 'deepseek/deepseek-v4.1-flash-1017', or_providers: 'StepFun', or_quant: 'fp8',
+  or_fallbacks: false, reasoning: 'medium', showThink: true, temperature: 1.0, top_p: 0.95, max_tokens: 1500,
+  safety: 'BLOCK_ONLY_HIGH', mode: 'normal', rewrite_model: '', judge_model: 'microsoft/microsoft-decision-1', judge_threshold: 0.8, card_lore: true, lore_recursive: true, lore_whole_words: true, lore_scan_depth: 4, lore_budget: 6000, user: 'Nem', persona: '', system_prompt: '', base_url: '', api_key: '' };
+const MODEL_DEFAULT = { openrouter: 'deepseek/deepseek-v4.1-flash-1017', google: 'gemini-3.8-flash', vertex: 'gemini-3.8-flash', compat: '' };
+const FIELDS = Object.keys(DEFAULTS);
+let S = Object.assign({}, DEFAULTS, store.get('settings', {}));
+let card = store.get('card', null);
+let books = store.get('lorebooks', []);   // [{name, enabled, entries:[...]}]
+let history = store.get('history', []);   // [{role, content, reasoning?, stats?, error?}]
+let lastRequest = null, busy = false, ctrl = null;
+
+// ---------- theme
+const savedTheme = store.get('theme', null);
+if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+$('themeBtn').onclick = () => {
+  const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next; store.set('theme', next);
+};
+
+// ---------- settings binding
+function loadSettings() {
+  for (const k of FIELDS) { const el = $(k); if (!el) continue; if (el.type === 'checkbox') el.checked = !!S[k]; else el.value = S[k]; }
+  syncProvider();
+}
+function readSettings() {
+  for (const k of FIELDS) { const el = $(k); if (!el) continue; S[k] = el.type === 'checkbox' ? el.checked : el.value; }
+  store.set('settings', S);
+}
+for (const k of FIELDS) { const el = $(k); if (el) el.addEventListener('change', () => { readSettings(); }); }
+function syncProvider() {
+  const p = $('provider').value;
+  $('orBox').classList.toggle('hidden', p !== 'openrouter');
+  $('compatBox').classList.toggle('hidden', p !== 'compat');
+  $('safetyBox').classList.toggle('hidden', !(p === 'google' || p === 'vertex'));
+  $('rewriteBox').classList.toggle('hidden', $('mode').value === 'normal');
+  $('gateBox').classList.toggle('hidden', $('mode').value !== 'gate');
+}
+$('mode').addEventListener('change', syncProvider);
+$('provider').addEventListener('change', () => {
+  const p = $('provider').value;
+  $('model').value = store.get('model.' + p, MODEL_DEFAULT[p]);
+  $('modelList').innerHTML = '';
+  syncProvider(); readSettings();
+});
+$('model').addEventListener('change', () => store.set('model.' + $('provider').value, $('model').value));
+$('loadModels').onclick = async () => {
+  const p = $('provider').value;
+  if (p === 'compat') { alert('Với OpenAI-compatible tuỳ chỉnh, hãy nhập tên model bằng tay.'); return; }
+  $('loadModels').disabled = true;
+  try {
+    const r = await fetch('/api/models?provider=' + p); const j = await r.json();
+    if (j.error) throw new Error(j.error);
+    $('modelList').innerHTML = j.models.map(m => `<option value="${esc(m)}">`).join('');
+    $('model').focus();
+  } catch (e) { alert('Không tải được danh sách model: ' + e.message); }
+  $('loadModels').disabled = false;
+};
+fetch('/api/status').then(r => r.json()).then(j => {
+  $('keys').innerHTML = Object.entries(j.keys).map(([k, v]) => `<b>${k.replace('_API_KEY', '')}</b> <span class="${v ? 'ok' : 'no'}">${v ? '✓' : '✗'}</span>`).join(' · ')
+    + '<br>Key đọc từ file .env, không gửi ra trình duyệt.';
+}).catch(() => { $('keys').textContent = 'Không kết nối được server.'; });
+
+// ---------- card
+function cardName() { return card ? card.data.name : 'Assistant'; }
+function fillT(t) { return (t || '').replaceAll('{{user}}', S.user || 'User').replaceAll('{{char}}', cardName()); }
+function renderCardInfo() {
+  const box = $('cardInfo');
+  if (!card) { box.classList.add('hidden'); $('chatTitle').textContent = 'Chat'; return; }
+  const d = card.data, alts = d.alternate_greetings || [];
+  const lore = (d.character_book && d.character_book.entries || []).length;
+  box.classList.remove('hidden');
+  box.innerHTML = `<b>${esc(d.name)}</b><br><span style="color:var(--muted)">${lore} mục lorebook · ${alts.length} lời chào thay thế`
+    + `${d.extensions && d.extensions.depth_prompt && d.extensions.depth_prompt.prompt ? ' · có depth prompt' : ''}</span>`
+    + `<label>Lời chào mở đầu</label><select id="greetSel"><option value="0">Mặc định (first_mes)</option>`
+    + alts.map((_, i) => `<option value="${i + 1}">Lời chào ${i + 1}</option>`).join('') + `<option value="-1">Không dùng lời chào</option></select>`
+    + `<div style="margin-top:8px;display:flex;gap:6px"><button id="applyGreet">Bắt đầu chat với card</button><button id="removeCard">Bỏ card</button></div>`;
+  $('chatTitle').textContent = d.name;
+  $('applyGreet').onclick = () => { if (!history.length || confirm('Xoá chat hiện tại và bắt đầu lại với card này?')) startWithCard(); };
+  $('removeCard').onclick = () => { card = null; store.set('card', null); renderCardInfo(); };
+}
+function startWithCard() {
+  const d = card.data, sel = +($('greetSel') ? $('greetSel').value : 0);
+  history = [];
+  const g = sel === 0 ? d.first_mes : sel > 0 ? (d.alternate_greetings || [])[sel - 1] : '';
+  if (g) history.push({ role: 'assistant', content: fillT(g) });
+  saveHistory(); render();
+}
+$('cardFile').addEventListener('change', async e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = await fetch('/api/card', { method: 'POST', body: await f.arrayBuffer() }); const j = await r.json();
+  e.target.value = '';
+  if (j.error) { alert(j.error); return; }
+  card = j.card; store.set('card', card); renderCardInfo();
+  if (!history.length || confirm('Đã nạp card "' + card.data.name + '". Bắt đầu chat mới với lời chào của card?')) startWithCard();
+});
+
+// ---------- rendering
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function fmt(t) {
+  let h = esc(t);
+  h = h.replace(/\*([^*\n]+)\*/g, '<em>$1</em>');
+  h = h.replace(/&quot;([^\n]*?)&quot;|“([^”\n]*)”/g, (m, a, b) => `<q>“${a !== undefined ? a : b}”</q>`);
+  return h.replace(/\n/g, '<br>');
+}
+function statsLine(s) {
+  if (!s) return '';
+  const p = [s.provider, s.prompt_tokens != null && `vào ${s.prompt_tokens}`, s.completion_tokens != null && `ra ${s.completion_tokens}`,
+    s.reasoning_tokens && `nghĩ ${s.reasoning_tokens}`, s.ttft != null && `chữ đầu ${s.ttft}s`, s.secs != null && `${s.secs}s`,
+    s.cost != null && `$${(+s.cost).toFixed(5)}`, s.passes === 2 && `2 lượt (nháp: ra ${s.pass1 && s.pass1.completion_tokens})`,
+    s.gate === 'pass' && '1 lượt + chấm (đạt)', s.gate === 'rewrite' && 'đã chấm'].filter(Boolean);
+  return p.join(' · ');
+}
+function msgEl(m, i) {
+  const div = document.createElement('div');
+  div.className = 'msg ' + m.role; div.dataset.i = i;
+  const name = m.role === 'user' ? (S.user || 'Bạn') : cardName();
+  div.innerHTML = `<div class="who"><span>${esc(name)}</span><span class="acts"><button data-a="edit">sửa</button><button data-a="del">xoá</button></span></div>`
+    + judgeHtml(m.judge)
+    + (m.draft && !(m.judge && m.judge.passed) ? `<details class="draft"><summary>Bản nháp (lượt 1, ${m.draft.length} ký tự)</summary><div class="dtxt">${fmt(m.draft)}</div></details>` : '')
+    + (m.reasoning && S.showThink ? `<details class="think"><summary>Suy nghĩ (${m.reasoning.length} ký tự)</summary><div>${esc(m.reasoning)}</div></details>` : '')
+    + `<div class="body">${fmt(m.content || '')}</div>`
+    + (m.error ? `<div class="err">${esc(m.error)}</div>` : '')
+    + (m.stats ? `<div class="stats">${esc(statsLine(m.stats))}</div>` : '')
+    + loreHtml(m.lore);
+  div.querySelector('[data-a=del]').onclick = () => { if (busy) return; history.splice(i, 1); saveHistory(); render(); };
+  div.querySelector('[data-a=edit]').onclick = () => editMsg(div, i);
+  return div;
+}
+function editMsg(div, i) {
+  if (busy) return;
+  const body = div.querySelector('.body');
+  body.innerHTML = '';
+  const ta = document.createElement('textarea'); ta.value = history[i].content; ta.className = 'edit';
+  const ok = document.createElement('button'); ok.textContent = 'Lưu'; ok.className = 'primary';
+  const no = document.createElement('button'); no.textContent = 'Huỷ';
+  const wrap = document.createElement('div'); wrap.className = 'edit'; wrap.append(ta, ok, ' ', no);
+  body.append(wrap); ta.focus();
+  ok.onclick = () => { history[i].content = ta.value; saveHistory(); render(); };
+  no.onclick = render;
+}
+function render() {
+  const c = $('chat'); c.innerHTML = '';
+  if (!history.length) c.innerHTML = `<div class="msg" style="color:var(--muted)">Chưa có tin nhắn. ${card ? 'Bấm "Bắt đầu chat với card" ở cột trái, hoặc gõ tin đầu tiên.' : 'Nạp character card ở cột trái, hoặc chat trực tiếp với model.'}</div>`;
+  history.forEach((m, i) => c.append(msgEl(m, i)));
+  c.scrollTop = c.scrollHeight;
+}
+function saveHistory() { store.set('history', history.map(m => ({ role: m.role, content: m.content, reasoning: m.reasoning, stats: m.stats, lore: m.lore, draft: m.draft, judge: m.judge }))); }
+function judgeHtml(j) {
+  if (!j) return '';
+  if (j.error) return `<div class="stats">Chấm lỗi (${esc(j.error)}) → đã viết lại theo checklist chung</div>`;
+  const lab = j.labels || {};
+  const parts = Object.entries(j.probs || {}).map(([k, p]) => `${lab[k] || k} ${p.toFixed(2)}${(j.failed || []).includes(k) ? ' ✗' : ''}`);
+  if ((j.failed || []).includes('bi_cat')) parts.push('bị cắt cụt ✗');
+  const head = j.passed ? `Chấm: ĐẠT ≥${j.threshold} → xuất thẳng bản nháp` : `Chấm: TRƯỢT (${(j.failed || []).map(k => lab[k] || k).join(', ')}) → đã viết lại`;
+  return `<details class="lore"><summary>${esc(head)} · ${esc((j.model || '').split('/').pop())} ${j.secs}s</summary><div>${esc(parts.join(' · '))}</div></details>`;
+}
+function loreHtml(l) {
+  if (!l || !l.entries || !l.entries.length) return '';
+  const on = l.entries.filter(e => !e.status.startsWith('bỏ qua'));
+  return `<details class="lore"><summary>Lorebook: ${on.length} mục bật · ~${l.tokens} token</summary><ul>`
+    + l.entries.map(e => `<li><b>${esc(e.entry)}</b> <span>(${esc(e.book)})</span> — ${esc(e.status)}${e.position ? ' · chèn ' + esc(e.position) : ''}</li>`).join('') + '</ul></details>';
+}
+
+// ---------- request
+function payload(hist) {
+  readSettings();
+  return { card, user: S.user || 'User', history: hist.filter(m => m.content).map(m => ({ role: m.role, content: m.content })),
+    options: { provider: S.provider, model: S.model, base_url: S.base_url, api_key: S.api_key, or_providers: S.or_providers,
+      or_quant: S.or_quant, or_fallbacks: S.or_fallbacks, reasoning: S.reasoning, temperature: S.temperature, top_p: S.top_p,
+      max_tokens: S.max_tokens, safety: S.safety, mode: S.mode, rewrite_model: S.rewrite_model, judge_model: S.judge_model, judge_threshold: S.judge_threshold, persona: S.persona, system_prompt: S.system_prompt,
+      card_lore: S.card_lore, lore_recursive: S.lore_recursive, lore_whole_words: S.lore_whole_words, lore_scan_depth: S.lore_scan_depth, lore_budget: S.lore_budget },
+    lorebooks: books.filter(b => b.enabled) };
+}
+async function generate() {
+  if (busy) return;
+  if (!S.model) { alert('Chưa chọn model'); return; }
+  busy = true; setBusy(true);
+  const body = payload(history);
+  const m = { role: 'assistant', content: '', reasoning: '' };
+  history.push(m); render();
+  const el = $('chat').lastChild, bodyEl = el.querySelector('.body');
+  let thinkEl = null, draftEl = null;
+  const ensureDraft = () => {
+    if (!draftEl) { draftEl = document.createElement('details'); draftEl.className = 'draft'; draftEl.open = true;
+      draftEl.innerHTML = '<summary>Bản nháp (lượt 1) — đang viết…</summary><div class="dtxt"></div>';
+      el.insertBefore(draftEl, el.querySelector('.body')); }
+    return draftEl; };
+  ctrl = new AbortController();
+  try {
+    const r = await fetch('/api/chat', { method: 'POST', body: JSON.stringify(body), signal: ctrl.signal });
+    const reader = r.body.getReader(), dec = new TextDecoder(); let buf = '';
+    while (true) {
+      const { value, done } = await reader.read(); if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let k;
+      while ((k = buf.indexOf('\n\n')) >= 0) {
+        const line = buf.slice(0, k).trim(); buf = buf.slice(k + 2);
+        if (!line.startsWith('data:')) continue;
+        const ev = JSON.parse(line.slice(5));
+        if (ev.type === 'request') { lastRequest = { url: ev.url, body: ev.body }; }
+        else if (ev.type === 'content') { m.content += ev.text; bodyEl.innerHTML = fmt(m.content); }
+        else if (ev.type === 'reasoning') {
+          m.reasoning += ev.text;
+          if (S.showThink) {
+            if (!thinkEl) { thinkEl = document.createElement('details'); thinkEl.className = 'think'; thinkEl.open = true;
+              thinkEl.innerHTML = '<summary>Đang suy nghĩ…</summary><div></div>'; el.insertBefore(thinkEl, bodyEl); }
+            thinkEl.querySelector('div').textContent = m.reasoning;
+          }
+        }
+        else if (ev.type === 'usage') { m.stats = ev; }
+        else if (ev.type === 'draft') { m.draft = (m.draft || '') + ev.text; ensureDraft().querySelector('.dtxt').innerHTML = fmt(m.draft); }
+        else if (ev.type === 'draft_reasoning') { m.draftReasoning = (m.draftReasoning || '') + ev.text; }
+        else if (ev.type === 'judge') { m.judge = ev; ensureDraft().querySelector('summary').textContent = ev.passed
+            ? 'Bản nháp — ĐẠT, xuất thẳng (không tốn lượt viết lại)' : 'Bản nháp — TRƯỢT, đang viết lại…'; }
+        else if (ev.type === 'usage1') { ensureDraft().querySelector('summary').textContent = 'Bản nháp (lượt 1) — đang soát và viết lại…'; }
+        else if (ev.type === 'lore') { m.lore = { entries: ev.entries, tokens: ev.tokens }; }
+        else if (ev.type === 'notice') { m.error = (m.error ? m.error + '\n' : '') + ev.text; }
+        else if (ev.type === 'error') { m.error = ev.text; }
+        $('chat').scrollTop = $('chat').scrollHeight;
+      }
+    }
+  } catch (e) { if (e.name !== 'AbortError') m.error = 'Lỗi kết nối: ' + e.message; else m.error = 'Đã dừng.'; }
+  if (!m.content && !m.error) m.error = 'Model trả về rỗng (thử tạo lại, hoặc tăng max tokens nếu đang bật reasoning).';
+  busy = false; setBusy(false); saveHistory(); render();
+}
+function setBusy(b) { $('sendBtn').textContent = b ? 'Dừng' : 'Gửi'; $('regenBtn').disabled = b; }
+async function send() {
+  if (busy) { ctrl && ctrl.abort(); return; }
+  const t = $('input').value.trim();
+  if (t) { history.push({ role: 'user', content: t }); $('input').value = ''; saveHistory(); render(); }
+  if (!history.length || history[history.length - 1].role !== 'user') { if (!t) return; }
+  generate();
+}
+$('sendBtn').onclick = send;
+$('input').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); send(); } });
+$('regenBtn').onclick = () => {
+  if (busy) return;
+  if (history.length && history[history.length - 1].role === 'assistant') history.pop();
+  if (!history.length || history[history.length - 1].role !== 'user') { alert('Cần có tin nhắn của bạn ở cuối để tạo lại.'); render(); return; }
+  generate();
+};
+$('newBtn').onclick = () => { if (busy) return; if (history.length && !confirm('Xoá chat hiện tại?')) return; if (card) startWithCard(); else { history = []; saveHistory(); render(); } };
+function show(title, obj) { $('dlgTitle').textContent = title; $('dlgBody').textContent = typeof obj === 'string' ? obj : JSON.stringify(obj, null, 2); $('dlg').showModal(); }
+$('previewBtn').onclick = async () => {
+  const r = await fetch('/api/preview', { method: 'POST', body: JSON.stringify(payload(history)) }); const j = await r.json();
+  const txt = j.messages.map(m => `── ${m.role.toUpperCase()} ──\n${m.content}`).join('\n\n');
+  const lt = (j.lore && j.lore.entries.length)
+    ? '── LOREBOOK ĐƯỢC BẬT ──\n' + j.lore.entries.map(e => `• ${e.entry} [${e.book}] — ${e.status}${e.position ? ' · ' + e.position : ''}`).join('\n') + '\n\n'
+    : '── LOREBOOK: không có mục nào bật ──\n\n';
+  show(`Prompt sẽ gửi (${j.messages.length} tin, ~${Math.round(txt.length / 3.5)} token ước tính)`, lt + txt);
+};
+$('lastReqBtn').onclick = () => show('Request gần nhất', lastRequest || 'Chưa gửi request nào trong phiên này.');
+$('exportBtn').onclick = () => {
+  const blob = new Blob([JSON.stringify({ card: card && card.data.name, settings: Object.assign({}, S, { api_key: undefined }), history }, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'rplab-chat-' + Date.now() + '.json'; a.click();
+};
+
+function saveBooks() { store.set('lorebooks', books); }
+function renderBooks() {
+  const box = $('bookList');
+  box.innerHTML = books.length ? '' : '<div class="keys" style="margin-top:6px">Chưa có lorebook riêng. Nạp file World Info (.json) xuất từ SillyTavern, file character_book, hoặc chính file card.</div>';
+  books.forEach((b, i) => {
+    const d = document.createElement('div'); d.className = 'book';
+    const nConst = b.entries.filter(e => e.constant).length;
+    d.innerHTML = `<input type="checkbox" ${b.enabled ? 'checked' : ''} title="Bật/tắt"><span class="nm" title="${esc(b.name)}">${esc(b.name)}</span>`
+      + `<span class="ct">${b.entries.length} mục${nConst ? ' · ' + nConst + ' cố định' : ''}</span><button data-a="v" title="Xem các mục">xem</button><button data-a="x" title="Gỡ">✕</button>`;
+    d.querySelector('input').onchange = ev => { b.enabled = ev.target.checked; saveBooks(); };
+    d.querySelector('[data-a=x]').onclick = () => { if (confirm('Gỡ lorebook "' + b.name + '"?')) { books.splice(i, 1); saveBooks(); renderBooks(); } };
+    d.querySelector('[data-a=v]').onclick = () => show(b.name + ` (${b.entries.length} mục)`, b.entries.map(e =>
+      `• ${e.comment}${e.enabled ? '' : ' [TẮT]'}${e.constant ? ' [CỐ ĐỊNH]' : ''} · chèn ${e.position}${e.position === 'depth' ? ' ' + e.depth : ''} · order ${e.order}\n  khóa: ${e.keys.join(', ') || '—'}${e.secondary_keys.length ? '\n  khóa phụ (logic ' + e.logic + '): ' + e.secondary_keys.join(', ') : ''}\n  ${e.content.slice(0, 160).replace(/\n/g, ' ')}${e.content.length > 160 ? '…' : ''}`).join('\n\n'));
+    box.append(d);
+  });
+}
+$('loreFile').addEventListener('change', async e => {
+  for (const f of e.target.files) {
+    const r = await fetch('/api/lorebook', { method: 'POST', body: await f.arrayBuffer(), headers: { 'X-Filename': encodeURIComponent(f.name) } });
+    const j = await r.json();
+    if (j.error) { alert(f.name + ': ' + j.error); continue; }
+    books.push(Object.assign({ enabled: true }, j.book));
+  }
+  e.target.value = ''; saveBooks(); renderBooks();
+});
+
+loadSettings(); renderCardInfo(); renderBooks(); render();
+</script>
+</body>
+</html>

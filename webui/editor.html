@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RP Lab Editor</title>
+<style>
+:root{--bg:#f6f6f4;--panel:#fff;--soft:#efefec;--line:#dddcd7;--text:#1d1d1b;--muted:#6b6a65;--accent:#2f6fd6;--accent-ink:#fff;--err:#b3261e;--warn:#9a5b00;--ok:#2e9e57}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151514;--panel:#1d1d1c;--soft:#262624;--line:#353532;--text:#ecebe7;--muted:#9c9b95;--accent:#6ea3ff;--accent-ink:#0d1a33;--err:#ff8a80;--warn:#e7b45a;--ok:#5fd18a}}
+:root[data-theme="dark"]{--bg:#151514;--panel:#1d1d1c;--soft:#262624;--line:#353532;--text:#ecebe7;--muted:#9c9b95;--accent:#6ea3ff;--accent-ink:#0d1a33;--err:#ff8a80;--warn:#e7b45a;--ok:#5fd18a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;height:100vh;display:flex;flex-direction:column}
+#topbar{display:flex;gap:6px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--panel);flex-wrap:wrap}
+#topbar .title{font-weight:600;margin-right:auto}
+#topbar a{color:var(--accent);font-size:13px;margin-right:6px}
+.wrap{flex:1;display:flex;min-height:0}
+nav{width:250px;min-width:250px;background:var(--panel);border-right:1px solid var(--line);overflow-y:auto;padding:10px}
+nav h2{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:14px 6px 6px}
+nav .it{display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:13px}
+nav .it:hover{background:var(--soft)}nav .it.on{background:var(--soft);font-weight:600;box-shadow:inset 3px 0 0 var(--accent)}
+nav .it .bad{margin-left:auto;color:var(--err);font-size:12px}
+nav .it .sub{color:var(--muted);font-size:12px;margin-left:auto}nav .it .sub+.bad{margin-left:4px}
+main{flex:1;overflow-y:auto;padding:18px 22px 60px}
+.sheet{max-width:820px;margin:0 auto}
+h1{font-size:18px;margin:0 0 4px}
+.lead{color:var(--muted);font-size:13px;margin:0 0 14px}
+h3{font-size:13px;margin:22px 0 4px;padding-top:12px;border-top:1px solid var(--line)}
+h3 small{font-weight:400;color:var(--muted)}
+label{display:block;font-size:12px;color:var(--muted);margin:10px 0 3px}
+label .cnt{float:right}label .cnt.over{color:var(--warn)}
+input,select,textarea{width:100%;background:var(--soft);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit}
+textarea{resize:vertical;min-height:60px}
+.row{display:flex;gap:10px}.row>*{flex:1;min-width:0}
+.check{display:flex;align-items:center;gap:6px;font-size:13px;margin-top:10px}.check input{width:auto}
+button{background:var(--soft);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font:inherit;cursor:pointer}
+button:hover{border-color:var(--accent)}button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button.small{padding:2px 8px;font-size:12px}button.danger{color:var(--err)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-top:8px}
+.card .head{display:flex;gap:8px;align-items:center}.card .head input{flex:1}
+.grid{display:grid;grid-template-columns:160px 1fr;gap:6px 10px;align-items:center;margin-top:6px}
+.grid .k{font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis}
+.hint{font-size:12px;color:var(--muted);margin-top:3px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chips label{display:flex;align-items:center;gap:5px;margin:0;padding:3px 9px;border:1px solid var(--line);border-radius:999px;color:var(--text);font-size:13px;cursor:pointer}
+.chips input{width:auto}
+#issues{margin-top:4px}
+.iss{font-size:13px;padding:5px 9px;border-radius:6px;margin-top:4px;background:var(--soft)}
+.iss.err{color:var(--err)}.iss.warn{color:var(--warn)}.iss.ok{color:var(--ok)}
+input[type=file]{display:none}
+@media (max-width:760px){.wrap{flex-direction:column}nav{width:auto;min-width:0;border-right:none;border-bottom:1px solid var(--line);max-height:40vh}main{padding:14px 16px 60px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="topbar">
+  <span class="title" id="title">Soạn bộ group chat</span>
+  <a href="/group">Group chat →</a>
+  <button id="newBtn">Mới</button>
+  <button id="openBtn" title="Mở world (rplab-world-1), nhân vật (rplab-char-1) hoặc card SillyTavern (.json/.png)">Mở file…</button>
+  <button id="sampleBtn">Nạp mẫu Hoa Phượng</button>
+  <button id="saveBtn">Tải world .json</button>
+  <button id="playBtn" class="primary">▶ Chơi ngay</button>
+  <input type="file" id="fileIn" accept=".json,.png" multiple>
+</div>
+<div class="wrap">
+  <nav id="nav"></nav>
+  <main><div class="sheet" id="sheet"></div></main>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const KEY = 'rplabe.world';
+const load = () => { try { return JSON.parse(localStorage.getItem(KEY)); } catch { return null; } };
+const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(W)); } catch {} };
+const blank = () => ({ format: 'rplab-world-1', ten: 'Thế giới mới', luat: '', nguoi_choi: { ten: 'Bạn', mo_ta: '' }, dia_diem: {}, lore: [], nhan_vat: [],
+  mo_dau: { loi_dan: '', trang_thai: { dia_diem: '', thoi_gian: '', co_mat: [], do_cang: 1 } } });
+const blankChar = (id, ten) => ({ format: 'rplab-char-1', id, ten, goi: [], tuoi: null, hu_cau: true, mot_dong: '', tinh_cach: '', muc_tieu: '', gioi_han: [],
+  noi: { xung_ho: { mac_dinh: '' }, giong: '', cau_cua_mieng: [], vi_du: [] }, quan_he: {}, ngoai_hinh: '', qua_khu: '', bi_mat: [], them: {} });
+let W = normalize(load() || blank());
+let sel = 'chung';
+const TENSION = ['0 · Rất thoải mái', '1 · Bình thường', '2 · Hơi căng', '3 · Căng thẳng', '4 · Rất căng'];
+
+function slug(t) {
+  return (t || '').toLowerCase().replace(/đ/g, 'd').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '') || 'nv';
+}
+function uniq(base, taken) { let id = base, i = 2; while (taken.includes(id)) id = base + '_' + i++; return id; }
+function normalize(w) {
+  w = Object.assign(blank(), w);
+  w.nguoi_choi = Object.assign({ ten: 'Bạn', mo_ta: '' }, w.nguoi_choi);
+  w.mo_dau = Object.assign({ loi_dan: '' }, w.mo_dau); w.mo_dau.trang_thai = Object.assign({ dia_diem: '', thoi_gian: '', co_mat: [], do_cang: 1 }, w.mo_dau.trang_thai);
+  w.nhan_vat = (w.nhan_vat || []).filter(c => typeof c === 'object').map(normChar);
+  return w;
+}
+function normChar(c) {
+  const b = blankChar(c.id || slug(c.ten), c.ten || 'Nhân vật');
+  c = Object.assign(b, c); c.noi = Object.assign(blankChar().noi, c.noi); c.noi.xung_ho = Object.assign({ mac_dinh: '' }, c.noi.xung_ho);
+  return c;
+}
+function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function h(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) { if (k.startsWith('on')) e[k] = v; else if (v !== false && v != null) e.setAttribute(k, v === true ? '' : v); }
+  for (const k of kids.flat()) if (k != null && k !== false) e.append(k instanceof Node ? k : String(k));
+  return e;
+}
+const changed = () => { persist(); renderNav(); };
+
+// ---------------------------------------------------------------- o nhap
+// get/set: doc/ghi gia tri; opt: {multi, rows, hint, max, type, ph}
+function field(label, get, set, opt = {}) {
+  const cnt = opt.max ? h('span', { class: 'cnt' }) : null;
+  const tag = opt.multi ? 'textarea' : 'input';
+  const el = h(tag, { rows: opt.rows || 3, type: opt.type, placeholder: opt.ph || '' });
+  el.value = get() ?? '';
+  const upd = () => { if (cnt) { const n = el.value.length; cnt.textContent = n + '/' + opt.max; cnt.className = 'cnt' + (n > opt.max ? ' over' : ''); } };
+  el.oninput = () => { set(opt.type === 'number' ? (el.value === '' ? null : +el.value) : el.value); upd(); changed(); };
+  upd();
+  return h('div', null, h('label', null, label, cnt), el, opt.hint ? h('div', { class: 'hint' }, opt.hint) : null);
+}
+// mang chuoi: moi dong mot muc
+function lines(label, arr, setArr, opt = {}) {
+  return field(label, () => (arr() || []).join('\n'), v => setArr(v.split('\n').map(s => s.trim()).filter(Boolean)), Object.assign({ multi: true, rows: 2 }, opt));
+}
+function section(title, sub) { return h('h3', null, title, sub ? h('small', null, ' · ' + sub) : null); }
+
+// ---------------------------------------------------------------- dieu huong
+function issues() {
+  const out = [], ids = W.nhan_vat.map(c => c.id);
+  if (!W.ten.trim()) out.push(['err', 'chung', 'Thế giới chưa có tên.']);
+  if (!Object.keys(W.dia_diem).length) out.push(['err', 'dia_diem', 'Chưa có địa điểm nào.']);
+  if (!W.nhan_vat.length) out.push(['err', 'nhan_vat', 'Chưa có nhân vật nào.']);
+  const st = W.mo_dau.trang_thai;
+  if (st.dia_diem && !(st.dia_diem in W.dia_diem)) out.push(['err', 'mo_dau', `Mở đầu: địa điểm "${st.dia_diem}" không tồn tại.`]);
+  if (!st.dia_diem) out.push(['warn', 'mo_dau', 'Mở đầu chưa chọn địa điểm (sẽ lấy địa điểm đầu tiên).']);
+  if (!W.mo_dau.loi_dan.trim()) out.push(['warn', 'mo_dau', 'Chưa có lời dẫn mở đầu.']);
+  if (!st.co_mat.length) out.push(['warn', 'mo_dau', 'Lúc mở đầu chưa có ai có mặt cùng người chơi.']);
+  W.nhan_vat.forEach((c, i) => {
+    const at = 'char:' + i, nm = c.ten || c.id;
+    if (!/^[a-z0-9_]+$/.test(c.id)) out.push(['err', at, `${nm}: id chỉ gồm a-z, 0-9, _`]);
+    if (ids.indexOf(c.id) !== i) out.push(['err', at, `${nm}: trùng id "${c.id}"`]);
+    for (const k of ['ten', 'mot_dong', 'tinh_cach']) if (!String(c[k] || '').trim()) out.push(['err', at, `${nm}: thiếu ${({ ten: 'tên', mot_dong: 'mô tả một dòng', tinh_cach: 'tính cách' })[k]}`]);
+    if (c.hu_cau !== true) out.push(['err', at, `${nm}: phải xác nhận là nhân vật hư cấu.`]);
+    if (c.tuoi == null) out.push(['warn', at, `${nm}: chưa ghi tuổi.`]);
+    else if (c.tuoi < 18) out.push(['warn', at, `${nm}: dưới 18 tuổi, hệ thống sẽ tự giới hạn nội dung khi nhân vật này có mặt.`]);
+    if ((c.mot_dong || '').length > 140) out.push(['warn', at, `${nm}: mô tả một dòng dài hơn 140 ký tự.`]);
+    const long = ['tinh_cach', 'ngoai_hinh', 'qua_khu', 'muc_tieu'].filter(k => (c[k] || '').length > 300);
+    if (long.length) out.push(['warn', at, `${nm}: ${long.length} mục dài hơn 300 ký tự, nên tách nhỏ.`]);
+  });
+  return out;
+}
+function renderNav() {
+  const iss = issues(), bad = s => iss.some(x => x[0] === 'err' && (x[1] === s || (s === 'nhan_vat' && x[1].startsWith('char:'))));
+  const item = (key, label, sub) => h('div', { class: 'it' + (sel === key ? ' on' : ''), onclick: () => { sel = key; renderAll(); } },
+    label, sub ? h('span', { class: 'sub' }, sub) : null, bad(key) ? h('span', { class: 'bad' }, '●') : null);
+  const nav = $('nav'); nav.innerHTML = '';
+  nav.append(h('h2', null, 'Thế giới'),
+    item('chung', 'Chung & người chơi'), item('dia_diem', 'Địa điểm', String(Object.keys(W.dia_diem).length)),
+    item('lore', 'Lore', String(W.lore.length)), item('mo_dau', 'Cảnh mở đầu'),
+    h('h2', null, 'Nhân vật'),
+    ...W.nhan_vat.map((c, i) => item('char:' + i, c.ten || c.id, c.tuoi != null ? c.tuoi + 't' : '')),
+    h('div', { class: 'it', onclick: addChar }, '+ Nhân vật mới'),
+    h('div', { class: 'it', onclick: () => $('fileIn').click() }, '⇪ Nhập file / card SillyTavern'),
+    h('h2', null, 'Kiểm tra'), item('check', 'Lỗi & cảnh báo', String(iss.length)));
+  $('title').textContent = 'Soạn: ' + (W.ten || 'thế giới');
+}
+function renderAll() { renderNav(); renderSheet(); }
+
+// ---------------------------------------------------------------- cac trang
+function renderSheet() {
+  const s = $('sheet'); s.innerHTML = '';
+  if (sel.startsWith('char:')) return charSheet(s, +sel.slice(5));
+  ({ chung: generalSheet, dia_diem: placesSheet, lore: loreSheet, mo_dau: openingSheet, check: checkSheet }[sel] || generalSheet)(s);
+}
+function generalSheet(s) {
+  s.append(h('h1', null, 'Chung & người chơi'), h('p', { class: 'lead' }, 'Luật chung và văn phong áp cho mọi lượt. Không viết lệnh đóng vai riêng cho nhân vật ở đây.'),
+    field('Tên thế giới', () => W.ten, v => W.ten = v),
+    field('Luật & văn phong', () => W.luat, v => W.luat = v, { multi: true, rows: 6, ph: 'Truyện tương tác đời thường bằng tiếng Việt… văn xuôi tự nhiên, thoại khẩu ngữ…' }),
+    section('Người chơi'),
+    field('Tên người chơi', () => W.nguoi_choi.ten, v => W.nguoi_choi.ten = v),
+    field('Mô tả người chơi', () => W.nguoi_choi.mo_ta, v => W.nguoi_choi.mo_ta = v, { multi: true, rows: 3 }));
+}
+function placesSheet(s) {
+  s.append(h('h1', null, 'Địa điểm'), h('p', { class: 'lead' }, 'Đạo diễn dùng danh sách này để theo dõi cảnh đang ở đâu. Mô tả bắt đầu bằng tên địa điểm, rồi dấu hai chấm.'));
+  const ents = Object.entries(W.dia_diem);
+  const rebuild = list => { W.dia_diem = Object.fromEntries(list); };
+  ents.forEach(([id, desc], i) => {
+    const idIn = h('input', { value: id, title: 'id' }); const dIn = h('textarea', { rows: 2 }); dIn.value = desc;
+    idIn.onchange = () => { const nid = uniq(slug(idIn.value), Object.keys(W.dia_diem).filter(k => k !== id));
+      const l = Object.entries(W.dia_diem); l[i][0] = nid; rebuild(l); if (W.mo_dau.trang_thai.dia_diem === id) W.mo_dau.trang_thai.dia_diem = nid; changed(); renderSheet(); };
+    dIn.oninput = () => { W.dia_diem[id] = dIn.value; changed(); };
+    s.append(h('div', { class: 'card' }, h('div', { class: 'head' }, idIn,
+      h('button', { class: 'small danger', onclick: () => { const l = Object.entries(W.dia_diem); l.splice(i, 1); rebuild(l); changed(); renderSheet(); } }, 'xoá')), dIn));
+  });
+  s.append(h('div', { style: 'margin-top:10px' }, h('button', { onclick: () => { W.dia_diem[uniq('dia_diem', Object.keys(W.dia_diem))] = 'Tên địa điểm: mô tả ngắn.'; changed(); renderSheet(); } }, '+ Thêm địa điểm')));
+}
+function loreSheet(s) {
+  s.append(h('h1', null, 'Lore'), h('p', { class: 'lead' }, 'Mỗi mục là một sự thật về thế giới. Đạo diễn chỉ nạp mục liên quan tới lượt đang viết, nên mỗi mục nên ngắn và nói về một thứ.'));
+  W.lore.forEach((e, i) => {
+    const t = h('input', { value: e.tieu_de || '', placeholder: 'Tiêu đề' }); const c = h('textarea', { rows: 3 }); c.value = e.noi_dung || '';
+    t.oninput = () => { e.tieu_de = t.value; e.id = uniq(slug(t.value), W.lore.filter(x => x !== e).map(x => x.id)); changed(); };
+    c.oninput = () => { e.noi_dung = c.value; changed(); };
+    s.append(h('div', { class: 'card' }, h('div', { class: 'head' }, t,
+      h('button', { class: 'small danger', onclick: () => { W.lore.splice(i, 1); changed(); renderSheet(); } }, 'xoá')), c));
+  });
+  s.append(h('div', { style: 'margin-top:10px' }, h('button', { onclick: () => { W.lore.push({ id: uniq('lore', W.lore.map(x => x.id)), tieu_de: '', noi_dung: '' }); changed(); renderSheet(); } }, '+ Thêm mục lore')));
+}
+function openingSheet(s) {
+  const st = W.mo_dau.trang_thai;
+  const sel1 = h('select', null, h('option', { value: '' }, '(chọn)'), ...Object.entries(W.dia_diem).map(([k, v]) => h('option', { value: k, selected: k === st.dia_diem }, v.split(':')[0])));
+  sel1.onchange = () => { st.dia_diem = sel1.value; changed(); };
+  const ten = h('select', null, ...TENSION.map((t, i) => h('option', { value: i, selected: i === +st.do_cang }, t)));
+  ten.onchange = () => { st.do_cang = +ten.value; changed(); };
+  s.append(h('h1', null, 'Cảnh mở đầu'), h('p', { class: 'lead' }, 'Muốn mở đầu khác thì chỉ sửa phần này, nhân vật giữ nguyên.'),
+    field('Lời dẫn mở đầu', () => W.mo_dau.loi_dan, v => W.mo_dau.loi_dan = v, { multi: true, rows: 5, ph: '*Mười hai giờ rưỡi trưa…*' }),
+    h('div', { class: 'row' }, h('div', null, h('label', null, 'Địa điểm'), sel1),
+      field('Thời gian', () => st.thoi_gian, v => st.thoi_gian = v, { ph: '12 giờ 30 trưa thứ Hai' }),
+      h('div', null, h('label', null, 'Độ căng'), ten)),
+    h('label', null, 'Ai có mặt lúc mở đầu'),
+    h('div', { class: 'chips' }, ...W.nhan_vat.map(c => {
+      const cb = h('input', { type: 'checkbox', checked: st.co_mat.includes(c.id) });
+      cb.onchange = () => { st.co_mat = cb.checked ? [...new Set([...st.co_mat, c.id])] : st.co_mat.filter(x => x !== c.id); changed(); };
+      return h('label', null, cb, c.ten || c.id);
+    })),
+    W.nhan_vat.length ? null : h('div', { class: 'hint' }, 'Chưa có nhân vật.'));
+}
+function checkSheet(s) {
+  const iss = issues();
+  s.append(h('h1', null, 'Lỗi & cảnh báo'), h('p', { class: 'lead' }, 'Lỗi đỏ phải sửa mới chơi được. Cảnh báo vàng thì tuỳ bạn.'));
+  if (!iss.length) s.append(h('div', { class: 'iss ok' }, 'Không có lỗi nào.'));
+  for (const [lv, at, msg] of iss) s.append(h('div', { class: 'iss ' + lv, style: 'cursor:pointer', onclick: () => { sel = at === 'nhan_vat' ? 'chung' : at; renderAll(); } }, msg));
+  const out = h('div', { id: 'issues' });
+  s.append(h('div', { style: 'margin-top:14px' }, h('button', { onclick: async () => { const r = await serverCheck(); out.innerHTML = '';
+    out.append(h('div', { class: 'iss ' + (r.error ? 'err' : 'ok') }, r.error ? 'Máy chủ báo lỗi: ' + r.error : 'Máy chủ nạp được thế giới này.'),
+      ...(r.warnings || []).map(w => h('div', { class: 'iss warn' }, w))); } }, 'Kiểm tra bằng máy chủ')), out);
+}
+
+// ---------------------------------------------------------------- nhan vat
+function others(c) { return W.nhan_vat.filter(x => x !== c); }
+function charSheet(s, i) {
+  const c = W.nhan_vat[i]; if (!c) { sel = 'chung'; return renderAll(); }
+  const targets = [['nguoi_choi', 'Người chơi (' + (W.nguoi_choi.ten || 'bạn') + ')'], ...others(c).map(o => [o.id, o.ten || o.id])];
+  const idIn = h('input', { value: c.id }); idIn.onchange = () => renameChar(c, idIn.value);
+  const hc = h('input', { type: 'checkbox', checked: c.hu_cau === true }); hc.onchange = () => { c.hu_cau = hc.checked; changed(); };
+  s.append(h('div', { class: 'row', style: 'align-items:center' }, h('h1', { style: 'flex:3' }, c.ten || 'Nhân vật'),
+      h('div', { style: 'flex:0 0 auto;display:flex;gap:6px' },
+        h('button', { onclick: () => download(c, c.id + '.rplab-char.json') }, 'Tải nhân vật .json'),
+        h('button', { class: 'danger', onclick: () => delChar(i) }, 'Xoá'))),
+    h('p', { class: 'lead' }, 'Mục "luôn nạp" đi theo mọi lượt nhân vật nói. Mục trong phần cuối chỉ được nạp khi đạo diễn thấy cần.'),
+    h('div', { class: 'row' }, field('Tên đầy đủ', () => c.ten, v => { c.ten = v; }),
+      h('div', null, h('label', null, 'id'), idIn), field('Tuổi', () => c.tuoi, v => c.tuoi = v, { type: 'number' })),
+    lines('Tên gọi khác (mỗi dòng một tên; dùng để nhận ra khi được nhắc tới)', () => c.goi, v => c.goi = v, { rows: 2 }),
+    h('div', { class: 'check' }, hc, h('span', null, 'Nhân vật hư cấu, không dựa trên người thật (bắt buộc)')),
+
+    section('Luôn nạp'),
+    field('Mô tả một dòng', () => c.mot_dong, v => c.mot_dong = v, { max: 140 }),
+    field('Tính cách', () => c.tinh_cach, v => c.tinh_cach = v, { multi: true, rows: 3, max: 300 }),
+    field('Đang muốn gì (mục tiêu lúc này)', () => c.muc_tieu, v => c.muc_tieu = v, { multi: true, rows: 2, max: 300, hint: 'Thứ khiến nhân vật tự hành động thay vì chỉ đáp lời.' }),
+    lines('Giới hạn riêng (mỗi dòng một luật cứng)', () => c.gioi_han, v => c.gioi_han = v),
+
+    section('Giọng nói'),
+    field('Giọng', () => c.noi.giong, v => c.noi.giong = v, { multi: true, rows: 2, max: 300 }),
+    lines('Câu cửa miệng (mỗi dòng một câu; hệ thống nhắc chỉ dùng thỉnh thoảng)', () => c.noi.cau_cua_mieng, v => c.noi.cau_cua_mieng = v),
+    lines('Câu nói mẫu (1–3 câu, mỗi dòng một câu)', () => c.noi.vi_du, v => c.noi.vi_du = v, { rows: 3 }),
+
+    section('Xưng hô', 'chỉ nạp với người đang có mặt'),
+    pairGrid([['mac_dinh', 'Mặc định'], ...targets], c.noi.xung_ho, 'tui - ông/bà'),
+    section('Quan hệ', 'chỉ nạp với người đang có mặt'),
+    pairGrid(targets, c.quan_he, 'Bạn thân từ năm nhất…', true),
+
+    section('Đạo diễn chọn nạp khi cần'),
+    field('Ngoại hình', () => c.ngoai_hinh, v => c.ngoai_hinh = v, { multi: true, rows: 2, max: 300 }),
+    field('Quá khứ', () => c.qua_khu, v => c.qua_khu = v, { multi: true, rows: 2, max: 300 }),
+    secretList(c), extraList(c));
+}
+function pairGrid(rows, obj, ph, multi) {
+  const g = h('div', { class: 'grid' });
+  const known = new Set(rows.map(r => r[0]));
+  for (const k of Object.keys(obj)) if (!known.has(k)) rows.push([k, k + ' (không còn trong dàn)']);
+  for (const [k, lab] of rows) {
+    const el = h(multi ? 'textarea' : 'input', { rows: 1, placeholder: ph }); el.value = obj[k] || '';
+    el.oninput = () => { if (el.value.trim()) obj[k] = el.value; else delete obj[k]; changed(); };
+    g.append(h('div', { class: 'k', title: lab }, lab), el);
+  }
+  return g;
+}
+function secretList(c) {
+  const box = h('div');
+  box.append(h('label', null, 'Bí mật (mỗi bí mật là một mục riêng, kèm điều kiện được lộ)'));
+  c.bi_mat.forEach((b, j) => {
+    const n = h('textarea', { rows: 2, placeholder: 'Nội dung bí mật' }); n.value = b.noi_dung || '';
+    const l = h('input', { placeholder: 'Chỉ lộ ra khi… (bị hỏi thẳng về…)' }); l.value = b.lo_khi || '';
+    n.oninput = () => { b.noi_dung = n.value; changed(); }; l.oninput = () => { b.lo_khi = l.value; changed(); };
+    box.append(h('div', { class: 'card' }, n, h('div', { class: 'head', style: 'margin-top:6px' }, l,
+      h('button', { class: 'small danger', onclick: () => { c.bi_mat.splice(j, 1); changed(); renderSheet(); } }, 'xoá'))));
+  });
+  box.append(h('div', { style: 'margin-top:6px' }, h('button', { class: 'small', onclick: () => { c.bi_mat.push({ noi_dung: '', lo_khi: '' }); changed(); renderSheet(); } }, '+ Thêm bí mật')));
+  return box;
+}
+function extraList(c) {
+  const box = h('div');
+  box.append(h('label', null, 'Mục thêm (sở thích, đồ vật, thói quen…; mỗi mục đạo diễn chọn riêng)'));
+  Object.entries(c.them).forEach(([k, v]) => {
+    const kin = h('input', { value: k.replace(/_/g, ' '), placeholder: 'tên mục' }); const vin = h('textarea', { rows: 2 }); vin.value = v;
+    kin.onchange = () => { const nk = uniq(slug(kin.value), Object.keys(c.them).filter(x => x !== k));
+      c.them = Object.fromEntries(Object.entries(c.them).map(([a, b]) => [a === k ? nk : a, b])); changed(); renderSheet(); };
+    vin.oninput = () => { c.them[k] = vin.value; changed(); };
+    box.append(h('div', { class: 'card' }, h('div', { class: 'head' }, kin,
+      h('button', { class: 'small danger', onclick: () => { delete c.them[k]; changed(); renderSheet(); } }, 'xoá')), vin));
+  });
+  box.append(h('div', { style: 'margin-top:6px' }, h('button', { class: 'small', onclick: () => { c.them[uniq('muc_moi', Object.keys(c.them))] = ''; changed(); renderSheet(); } }, '+ Thêm mục')));
+  return box;
+}
+function addChar() {
+  const ten = prompt('Tên nhân vật?'); if (!ten) return;
+  const id = uniq(slug(ten.split(' ').pop()), W.nhan_vat.map(c => c.id));
+  const c = blankChar(id, ten.trim()); c.goi = [ten.trim().split(' ').pop()];
+  W.nhan_vat.push(c); sel = 'char:' + (W.nhan_vat.length - 1); persist(); renderAll();
+}
+function renameChar(c, raw) {
+  const old = c.id, nid = uniq(slug(raw), W.nhan_vat.filter(x => x !== c).map(x => x.id));
+  if (nid === old) return renderSheet();
+  c.id = nid;
+  for (const o of W.nhan_vat) for (const m of [o.noi.xung_ho, o.quan_he]) if (old in m) { m[nid] = m[old]; delete m[old]; }
+  const st = W.mo_dau.trang_thai; st.co_mat = st.co_mat.map(x => x === old ? nid : x);
+  changed(); renderSheet();
+}
+function delChar(i) {
+  const c = W.nhan_vat[i]; if (!confirm(`Xoá ${c.ten}? Xưng hô và quan hệ của người khác với nhân vật này cũng bị xoá.`)) return;
+  W.nhan_vat.splice(i, 1);
+  for (const o of W.nhan_vat) { delete o.noi.xung_ho[c.id]; delete o.quan_he[c.id]; }
+  W.mo_dau.trang_thai.co_mat = W.mo_dau.trang_thai.co_mat.filter(x => x !== c.id);
+  sel = 'chung'; persist(); renderAll();
+}
+
+// ---------------------------------------------------------------- file & choi
+function download(obj, name) {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 2)], { type: 'application/json' })); a.download = name; a.click();
+}
+// bo cac truong rong truoc khi xuat
+function clean(o) {
+  if (Array.isArray(o)) return o.map(clean);
+  if (o && typeof o === 'object') return Object.fromEntries(Object.entries(o).map(([k, v]) => [k, clean(v)])
+    .filter(([k, v]) => ['tuoi', 'hu_cau', 'format', 'id', 'ten', 'mot_dong', 'tinh_cach', 'co_mat', 'nhan_vat', 'dia_diem', 'lore'].includes(k)
+      || !(v === '' || v == null || (Array.isArray(v) && !v.length) || (typeof v === 'object' && !Array.isArray(v) && !Object.keys(v).length))));
+  return typeof o === 'string' ? o.trim() : o;
+}
+const exportWorld = () => clean(JSON.parse(JSON.stringify(W)));
+async function serverCheck() {
+  try { return await (await fetch('/api/group/load', { method: 'POST', body: JSON.stringify(exportWorld()) })).json(); }
+  catch (e) { return { error: 'không kết nối được máy chủ: ' + e.message }; }
+}
+async function importFile(f) {
+  const buf = await f.arrayBuffer();
+  let obj = null; try { obj = JSON.parse(new TextDecoder().decode(buf).replace(/^﻿/, '')); } catch {}
+  if (obj && obj.format === 'rplab-world-1') {
+    if (!confirm(`Mở thế giới "${obj.ten}"? Bộ đang soạn sẽ bị thay (hãy tải về trước nếu cần).`)) return;
+    W = normalize(obj); sel = 'chung'; persist(); renderAll(); return;
+  }
+  if (obj && obj.format === 'rplab-group-1') { alert('Đây là gói định dạng cũ rplab-group-1, trình soạn chỉ mở rplab-world-1.'); return; }
+  const r = await (await fetch('/api/group/card', { method: 'POST', body: buf,
+    headers: { 'X-Existing-Ids': encodeURIComponent(JSON.stringify(W.nhan_vat.map(c => c.id))) } })).json();
+  if (r.error) { alert(f.name + ': ' + r.error); return; }
+  W.nhan_vat.push(normChar(r.char));
+  if (r.mo_dau && !W.mo_dau.loi_dan.trim() && r.mo_dau.loi_dan && confirm('Card có lời chào (first_mes). Dùng làm lời dẫn mở đầu của thế giới này?')) W.mo_dau.loi_dan = r.mo_dau.loi_dan;
+  if (r.mo_dau && r.mo_dau.boi_canh && confirm('Card có scenario. Thêm vào lore thành mục "Bối cảnh ' + r.char.ten + '"?'))
+    W.lore.push({ id: uniq(slug('boi canh ' + r.char.id), W.lore.map(x => x.id)), tieu_de: 'Bối cảnh ' + r.char.ten, noi_dung: r.mo_dau.boi_canh });
+  sel = 'char:' + (W.nhan_vat.length - 1); persist(); renderAll();
+  if (r.converted) alert(`Đã chuyển card SillyTavern "${r.char.ten}". Hãy đọc lại: tách khối chữ dài, điền xưng hô, quan hệ, bí mật, và kiểm tra tuổi.`);
+}
+$('fileIn').onchange = async e => { for (const f of e.target.files) await importFile(f); e.target.value = ''; };
+$('openBtn').onclick = () => $('fileIn').click();
+$('newBtn').onclick = () => { if (!confirm('Bắt đầu bộ mới? Bộ đang soạn sẽ bị xoá (hãy tải về trước nếu cần).')) return; W = blank(); sel = 'chung'; persist(); renderAll(); };
+$('sampleBtn').onclick = async () => { if (!confirm('Nạp mẫu Hoa Phượng? Bộ đang soạn sẽ bị thay.')) return;
+  W = normalize(await (await fetch('/api/group/sample_world')).json()); sel = 'chung'; persist(); renderAll(); };
+$('saveBtn').onclick = () => download(exportWorld(), slug(W.ten) + '.rplab-world.json');
+$('playBtn').onclick = async () => {
+  if (issues().some(x => x[0] === 'err')) { sel = 'check'; renderAll(); alert('Còn lỗi, sửa trước khi chơi.'); return; }
+  const r = await serverCheck(); if (r.error) { alert('Máy chủ báo lỗi: ' + r.error); return; }
+  let hist = []; try { hist = JSON.parse(localStorage.getItem('rplabg.history') || '[]'); } catch {}
+  if (hist.length && !confirm('Group chat đang có một cuộc chơi dở. Thay bằng thế giới này?')) return;
+  try {
+    localStorage.setItem('rplabg.pack', JSON.stringify(r.pack)); localStorage.setItem('rplabg.state', JSON.stringify(r.pack.state));
+    localStorage.setItem('rplabg.history', '[]');
+  } catch (e) { alert('Không lưu được vào trình duyệt: ' + e.message); return; }
+  location.href = '/group';
+};
+renderAll();
+</script>
+</body>
+</html>

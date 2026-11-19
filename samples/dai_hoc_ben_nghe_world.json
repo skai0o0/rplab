@@ -1,0 +1,49 @@
+{
+  "format": "rplab-world-1",
+  "ten": "Đại học Bến Nghé",
+  "luat": "Truyện tương tác đời thường bằng tiếng Việt, đặt tại Trường Đại học Bến Nghé, một trường đa ngành hư cấu ở Sài Gòn. Mọi nhân vật đều hư cấu và là sinh viên, giảng viên hoặc nhân viên đã trưởng thành. Văn xuôi tự nhiên, thoại khẩu ngữ, cử chỉ lồng vào câu văn. Không khí đời sinh viên: học, deadline, câu lạc bộ, ký túc xá, ăn vặt, tình bạn. Tôn trọng tính cách, xưng hô và quan hệ của từng nhân vật; không tự ý nhảy thời gian hay đổi địa điểm.",
+  "nguoi_choi": {
+    "ten": "Nem",
+    "mo_ta": "Sinh viên năm hai Trường Đại học Bến Nghé, ở ký túc xá khu A."
+  },
+  "dia_diem": {
+    "cong_chinh": "Cổng chính: cổng sắt sơn xanh trên đường Tôn Đức Thắng, có bảng tên trường bằng đồng, nhà bảo vệ và bãi xe máy dưới tầng hầm bên cạnh.",
+    "san_truong": "Sân trường: sân lát gạch đỏ giữa ba dãy nhà, hàng me tây già, ghế đá, nơi tổ chức chào cờ, hội trại và bán hàng gây quỹ.",
+    "nha_a": "Nhà A (hiệu bộ): phòng đào tạo, phòng công tác sinh viên, phòng tài vụ; hành lang lúc nào cũng có hàng người chờ nộp đơn.",
+    "giang_duong_b": "Giảng đường B: dãy năm tầng, phòng học lớn có máy chiếu hay chập chờn, quạt trần và máy lạnh chỉ bật buổi chiều.",
+    "giang_duong_c": "Giảng đường C (nhà mới): phòng lab máy tính, phòng thực hành ngôn ngữ, thang máy chỉ dành cho giảng viên.",
+    "thu_vien": "Thư viện Bến Nghé: bốn tầng, tầng trệt mượn trả sách, tầng 2 phòng tự học im lặng, tầng 3 phòng học nhóm phải đặt trước, tầng 4 kho báo cũ ít ai lên.",
+    "can_tin": "Căn tin trung tâm: dãy quầy cơm phần, bún, bánh mì, nước mía; giờ trưa đông nghẹt, bàn inox dài, tivi treo tường chiếu bóng đá.",
+    "ktx_a": "Ký túc xá khu A: tòa sáu tầng cho sinh viên, phòng sáu người giường tầng, ban công phơi đồ, phòng sinh hoạt chung tầng trệt có tivi và máy giặt xu.",
+    "ktx_b": "Ký túc xá khu B: tòa mới hơn, phòng bốn người có máy lạnh, cổng quẹt thẻ, ban quản lý khó tính.",
+    "nha_thi_dau": "Nhà thi đấu đa năng: sân bóng rổ, cầu lông, sàn tập võ; buổi tối các câu lạc bộ thể thao thay nhau mượn sân.",
+    "san_bong": "Sân bóng cỏ nhân tạo sau trường: lưới thủng một góc, đèn pha chỉ bật tới 21h, khán đài xi măng nhỏ.",
+    "phong_clb": "Dãy phòng câu lạc bộ: tầng trệt nhà D cũ, mỗi câu lạc bộ một phòng nhỏ chật, tường dán đầy poster, sáng đèn tới khuya trước sự kiện.",
+    "hoi_truong": "Hội trường lớn: sân khấu gỗ, 600 ghế bọc nỉ đỏ, dùng cho lễ khai giảng, văn nghệ và hội thảo.",
+    "ho_sen": "Hồ sen sau thư viện: hồ nhỏ có cầu gỗ và chòi lá, chỗ hẹn hò và ngồi tâm sự quen thuộc, buổi tối hơi tối và nhiều muỗi.",
+    "hem_an_vat": "Hẻm ăn vặt cổng sau: con hẻm dài bán bánh tráng trộn, xiên que, trà sữa, cơm tấm đêm; mở tới gần nửa đêm.",
+    "quan_cafe_gac": "Quán cà phê Gác Xép: quán nhỏ trên gác một căn nhà cũ đối diện trường, wifi mạnh, bàn gỗ thấp, chủ quán cho ngồi lâu, sinh viên hay chạy deadline ở đây.",
+    "tram_xe_buyt": "Trạm xe buýt trước cổng: mái che xanh, tuyến 19 và 52 chạy về trung tâm và làng đại học, giờ cao điểm chen chúc."
+  },
+  "lore": [
+    {"id": "gioi_thieu_truong", "tieu_de": "Trường Đại học Bến Nghé", "noi_dung": "Trường đa ngành công lập hư cấu ở quận 1, Sài Gòn, thành lập năm 1976, khoảng mười hai nghìn sinh viên. Mạnh về Kinh tế, Ngôn ngữ, Công nghệ thông tin và Truyền thông. Biệt danh của sinh viên là \"dân Bến\"."},
+    {"id": "khoa_nganh", "tieu_de": "Các khoa", "noi_dung": "Năm khoa chính: Kinh tế - Quản trị, Ngôn ngữ và Văn hóa, Công nghệ thông tin, Báo chí - Truyền thông, Thiết kế. Khoa CNTT học ở giảng đường C, khoa Thiết kế có xưởng riêng ở tầng 5 giảng đường B."},
+    {"id": "lich_hoc", "tieu_de": "Lịch học và học kỳ", "noi_dung": "Một năm hai học kỳ chính và một học kỳ hè. Tiết 1 bắt đầu 7h, buổi chiều từ 13h. Thi giữa kỳ tuần 8, thi cuối kỳ tuần 16–17. Điểm danh bằng quét mã QR, vắng quá 20% số buổi bị cấm thi."},
+    {"id": "dang_ky_tin_chi", "tieu_de": "Đăng ký tín chỉ", "noi_dung": "Cổng đăng ký học phần mở lúc 0h, thường sập trong vài phút đầu. Lớp của giảng viên dễ tính hết chỗ ngay; sinh viên hay nhờ nhau canh máy hoặc ra quán net trước cổng để đăng ký."},
+    {"id": "luat_ktx", "tieu_de": "Nội quy ký túc xá", "noi_dung": "Đóng cổng lúc 23h, trễ phải ghi tên ở sổ bảo vệ, ba lần trễ trong tháng bị cảnh cáo. Khách khác giới chỉ được ở phòng sinh hoạt chung tới 21h. Cấm nấu ăn trong phòng, nhưng ai cũng lén có nồi lẩu điện."},
+    {"id": "chu_ba_bao_ve", "tieu_de": "Chú Ba bảo vệ", "noi_dung": "Chú Ba gác cổng ký túc xá khu A hơn hai mươi năm, nhớ mặt gần hết sinh viên, nói nhiều, mê đá gà qua điện thoại. Khó tính sau 23h nhưng mềm lòng nếu được mua cho ly cà phê sữa đá."},
+    {"id": "co_nam_can_tin", "tieu_de": "Cô Năm căn tin", "noi_dung": "Cô Năm đứng quầy cơm phần ở căn tin trung tâm, múc cơm thêm cho sinh viên gầy, cho ghi nợ trong cuốn sổ bìa đỏ, mắng như mẹ mắng con nếu bỏ mứa."},
+    {"id": "co_thu_thu", "tieu_de": "Cô thủ thư Diệp", "noi_dung": "Cô Diệp quản lý thư viện, nghiêm khắc chuyện im lặng ở tầng 2, nhắc nhở bằng cách gõ nhẹ cây bút xuống bàn. Âm thầm để dành phòng học nhóm cho sinh viên chăm chỉ."},
+    {"id": "thay_hieu_pho", "tieu_de": "Thầy Quang, phó hiệu trưởng", "noi_dung": "Thầy Quang phụ trách công tác sinh viên, phát biểu dài ở mọi buổi lễ, nổi tiếng với câu \"các em là tương lai\". Dễ gặp ở sân trường buổi sáng, hay hỏi thăm sinh viên bất chợt."},
+    {"id": "doan_hoi", "tieu_de": "Đoàn - Hội sinh viên", "noi_dung": "Đoàn trường và Hội sinh viên tổ chức tình nguyện Mùa hè xanh, Xuân tình nguyện, hiến máu và các cuộc thi học thuật. Tham gia được cộng điểm rèn luyện, nên phong trào lúc nào cũng thiếu người làm nhưng dư người điểm danh."},
+    {"id": "cau_lac_bo", "tieu_de": "Các câu lạc bộ nổi bật", "noi_dung": "Câu lạc bộ Guitar Bến Nghé (tập ở phòng CLB số 3), CLB Tiếng Nhật Sakura, CLB Bóng rổ Rồng Xanh, CLB Nhiếp ảnh Ống Kính, CLB Tranh biện. Mỗi đầu năm có Ngày hội CLB ở sân trường để tuyển thành viên."},
+    {"id": "su_kien_nam_hoc", "tieu_de": "Sự kiện trong năm", "noi_dung": "Tháng 9 khai giảng và Ngày hội CLB; tháng 11 Hội thao sinh viên; tháng 12 đêm văn nghệ Giáng sinh ở hội trường; tháng 3 Hội trại 26/3 ở sân trường; tháng 5 lễ tốt nghiệp với áo cử nhân màu xanh dương."},
+    {"id": "ho_sen_tin_don", "tieu_de": "Lời đồn hồ sen", "noi_dung": "Sinh viên đồn cặp nào cùng đi qua cầu gỗ hồ sen lúc trăng tròn sẽ yêu nhau tới khi ra trường; ngược lại, ai đi một mình qua cầu trước kỳ thi sẽ rớt môn. Không ai tin, nhưng ai cũng tránh."},
+    {"id": "tang_4_thu_vien", "tieu_de": "Tầng 4 thư viện", "noi_dung": "Kho báo cũ ở tầng 4 thư viện ít người lên, đèn hành lang chập chờn, nên thành nơi trốn học, ngủ trưa và kể chuyện ma. Thật ra chỉ có một con mèo mướp tên Bột sống ở đó."},
+    {"id": "meo_bot", "tieu_de": "Con mèo Bột", "noi_dung": "Bột là con mèo mướp béo được cả trường nuôi chung, ngủ ở tầng 4 thư viện hoặc trên ghế đá sân trường. Có fanpage riêng do CLB Nhiếp ảnh quản lý."},
+    {"id": "hem_an_vat_lore", "tieu_de": "Hẻm ăn vặt và quán quen", "noi_dung": "Quán bánh tráng trộn bà Tư đầu hẻm đông nhất buổi chiều; xe cơm tấm đêm của anh Lộc mở từ 21h, là chỗ dân ký túc xá ăn khuya; tiệm trà sữa Mây đổi tên ba lần trong hai năm."},
+    {"id": "hoc_bong", "tieu_de": "Học bổng và điểm rèn luyện", "noi_dung": "Học bổng khuyến khích xét theo điểm trung bình học kỳ từ 3.2 và điểm rèn luyện từ 80. Điểm rèn luyện cộng từ hoạt động phong trào, nên cuối kỳ phòng Công tác sinh viên lúc nào cũng đông người đi xin xác nhận."},
+    {"id": "do_an_nhom", "tieu_de": "Văn hóa làm nhóm", "noi_dung": "Hầu hết môn học có đồ án nhóm ba tới năm người. Chuyện muôn thuở: một người gánh, một người mất tích, một người chỉ làm slide. Nộp bài qua cổng e-learning, hạn chót thường là 23h59."}
+  ],
+  "nhan_vat": []
+}
