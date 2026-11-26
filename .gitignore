@@ -8,5 +8,6 @@ __pycache__/
 Thumbs.db
 
 # Du lieu chay cuc bo (DB chat, traces, prompt tuy chinh) - khong dua len repo
-webui/data/
+webui/data/*
+!webui/data/prompts_custom.json
 iso_engine/data/*.db
