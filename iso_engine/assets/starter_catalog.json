@@ -1,0 +1,597 @@
+{
+  "version": "1.0",
+  "prefabs": [
+    {
+      "asset_tag": "arch_wall_segment",
+      "kind": "voxel-prop-v1",
+      "category": "arch",
+      "name_vi": "Tường ngăn phòng",
+      "size": [1, 1],
+      "height": 2.4,
+      "walkable": false,
+      "mount": "wall",
+      "pose_slots": {},
+      "voxels": [
+        {"x": 0, "y": 0, "z": 6, "w": 16, "h": 2, "d": 4, "color": "#5c4033", "shape": "cube", "material": "wood"},
+        {"x": 0, "y": 2, "z": 6, "w": 16, "h": 13, "d": 4, "color": "#e6e1d6", "shape": "cube", "material": "plastic"},
+        {"x": 0, "y": 15, "z": 6, "w": 16, "h": 1, "d": 4, "color": "#cfc8ba", "shape": "cube", "material": "plastic"}
+      ]
+    },
+    {
+      "asset_tag": "arch_door_wood",
+      "kind": "voxel-prop-v1",
+      "category": "arch",
+      "name_vi": "Cửa gỗ thông phòng",
+      "size": [1, 1],
+      "height": 2.4,
+      "walkable": true,
+      "mount": "wall",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.65], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 0, "y": 0, "z": 6, "w": 2, "h": 16, "d": 4, "color": "#6b4423", "shape": "cube", "material": "wood"},
+        {"x": 14, "y": 0, "z": 6, "w": 2, "h": 16, "d": 4, "color": "#6b4423", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 14, "z": 6, "w": 12, "h": 2, "d": 4, "color": "#6b4423", "shape": "cube", "material": "wood"},
+        {"x": 1, "y": 0, "z": 1, "w": 1, "h": 14, "d": 7, "color": "#8b5a2b", "shape": "cube", "material": "wood"},
+        {"x": 1, "y": 7, "z": 6, "w": 1, "h": 1, "d": 1, "color": "#d4af37", "shape": "sphere", "material": "metal"}
+      ]
+    },
+    {
+      "asset_tag": "arch_door_locked",
+      "kind": "voxel-prop-v1",
+      "category": "arch",
+      "name_vi": "Cửa gỗ khóa chốt",
+      "size": [1, 1],
+      "height": 2.4,
+      "walkable": false,
+      "mount": "wall",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.65], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 0, "y": 0, "z": 6, "w": 2, "h": 16, "d": 4, "color": "#5c3a21", "shape": "cube", "material": "wood"},
+        {"x": 14, "y": 0, "z": 6, "w": 2, "h": 16, "d": 4, "color": "#5c3a21", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 14, "z": 6, "w": 12, "h": 2, "d": 4, "color": "#5c3a21", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 0, "z": 7, "w": 12, "h": 14, "d": 2, "color": "#7c4d2b", "shape": "cube", "material": "wood"},
+        {"x": 11, "y": 6, "z": 6, "w": 2, "h": 3, "d": 4, "color": "#d97706", "shape": "cube", "material": "metal"},
+        {"x": 11, "y": 8, "z": 5, "w": 2, "h": 2, "d": 1, "color": "#fbbf24", "shape": "torus", "material": "metal"}
+      ]
+    },
+    {
+      "asset_tag": "arch_window_tall",
+      "kind": "voxel-prop-v1",
+      "category": "arch",
+      "name_vi": "Cửa sổ khung gỗ kính",
+      "size": [1, 1],
+      "height": 2.4,
+      "walkable": false,
+      "mount": "wall",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.65], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 0, "y": 0, "z": 6, "w": 16, "h": 4, "d": 4, "color": "#e6e1d6", "shape": "cube", "material": "plastic"},
+        {"x": 0, "y": 4, "z": 6, "w": 2, "h": 12, "d": 4, "color": "#8c6239", "shape": "cube", "material": "wood"},
+        {"x": 14, "y": 4, "z": 6, "w": 2, "h": 12, "d": 4, "color": "#8c6239", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 14, "z": 6, "w": 12, "h": 2, "d": 4, "color": "#8c6239", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 4, "z": 7, "w": 12, "h": 10, "d": 2, "color": "#bae6fd", "shape": "cube", "material": "glass"}
+      ]
+    },
+    {
+      "asset_tag": "sofa_velvet_2x1",
+      "kind": "voxel-prop-v1",
+      "category": "living",
+      "name_vi": "Ghế sofa nhung đôi",
+      "size": [2, 1],
+      "height": 0.95,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "sit": {"offset": [0.0, 0.44, 0.18], "rot_y": 0.0},
+        "lie": {"offset": [0.0, 0.46, 0.0], "rot_y": 1.5708},
+        "stand": {"offset": [0.0, 0.0, 0.85], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 1, "y": 0, "z": 2, "w": 1, "h": 2, "d": 1, "color": "#4a3222", "shape": "cylinder", "material": "wood"},
+        {"x": 14, "y": 0, "z": 2, "w": 1, "h": 2, "d": 1, "color": "#4a3222", "shape": "cylinder", "material": "wood"},
+        {"x": 1, "y": 0, "z": 13, "w": 1, "h": 2, "d": 1, "color": "#4a3222", "shape": "cylinder", "material": "wood"},
+        {"x": 14, "y": 0, "z": 13, "w": 1, "h": 2, "d": 1, "color": "#4a3222", "shape": "cylinder", "material": "wood"},
+        {"x": 1, "y": 2, "z": 2, "w": 14, "h": 4, "d": 12, "color": "#3b4252", "shape": "cube", "material": "fabric"},
+        {"x": 2, "y": 6, "z": 4, "w": 6, "h": 2, "d": 10, "color": "#4c566a", "shape": "cube", "material": "fabric"},
+        {"x": 8, "y": 6, "z": 4, "w": 6, "h": 2, "d": 10, "color": "#4c566a", "shape": "cube", "material": "fabric"},
+        {"x": 1, "y": 6, "z": 1, "w": 14, "h": 10, "d": 3, "color": "#3b4252", "shape": "cube", "material": "fabric"},
+        {"x": 0, "y": 4, "z": 2, "w": 2, "h": 7, "d": 12, "color": "#3b4252", "shape": "cube", "material": "fabric"},
+        {"x": 14, "y": 4, "z": 2, "w": 2, "h": 7, "d": 12, "color": "#3b4252", "shape": "cube", "material": "fabric"},
+        {"x": 3, "y": 8, "z": 4, "w": 3, "h": 3, "d": 2, "color": "#d97706", "shape": "slope", "material": "fabric"}
+      ]
+    },
+    {
+      "asset_tag": "coffee_table_glass",
+      "kind": "voxel-prop-v1",
+      "category": "living",
+      "name_vi": "Bàn trà mặt kính",
+      "size": [1, 1],
+      "height": 0.45,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.75], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 2, "y": 0, "z": 2, "w": 1, "h": 12, "d": 1, "color": "#334155", "shape": "bar", "material": "metal"},
+        {"x": 13, "y": 0, "z": 2, "w": 1, "h": 12, "d": 1, "color": "#334155", "shape": "bar", "material": "metal"},
+        {"x": 2, "y": 0, "z": 13, "w": 1, "h": 12, "d": 1, "color": "#334155", "shape": "bar", "material": "metal"},
+        {"x": 13, "y": 0, "z": 13, "w": 1, "h": 12, "d": 1, "color": "#334155", "shape": "bar", "material": "metal"},
+        {"x": 2, "y": 3, "z": 2, "w": 12, "h": 1, "d": 12, "color": "#78350f", "shape": "cube", "material": "wood"},
+        {"x": 1, "y": 12, "z": 1, "w": 14, "h": 2, "d": 14, "color": "#cbd5e1", "shape": "cube", "material": "glass"}
+      ]
+    },
+    {
+      "asset_tag": "bookshelf_tall_2x1",
+      "kind": "voxel-prop-v1",
+      "category": "living",
+      "name_vi": "Tủ sách gỗ cao",
+      "size": [2, 1],
+      "height": 2.1,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.75], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 1, "y": 0, "z": 2, "w": 14, "h": 1, "d": 11, "color": "#5c3a21", "shape": "cube", "material": "wood"},
+        {"x": 1, "y": 1, "z": 2, "w": 1, "h": 15, "d": 11, "color": "#5c3a21", "shape": "cube", "material": "wood"},
+        {"x": 14, "y": 1, "z": 2, "w": 1, "h": 15, "d": 11, "color": "#5c3a21", "shape": "cube", "material": "wood"},
+        {"x": 1, "y": 1, "z": 2, "w": 14, "h": 15, "d": 2, "color": "#5c3a21", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 5, "z": 3, "w": 12, "h": 1, "d": 10, "color": "#6b4423", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 10, "z": 3, "w": 12, "h": 1, "d": 10, "color": "#6b4423", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 15, "z": 3, "w": 12, "h": 1, "d": 10, "color": "#6b4423", "shape": "cube", "material": "wood"},
+        {"x": 3, "y": 6, "z": 4, "w": 3, "h": 4, "d": 6, "color": "#991b1b", "shape": "cube", "material": "plastic"},
+        {"x": 7, "y": 6, "z": 4, "w": 4, "h": 4, "d": 6, "color": "#1e40af", "shape": "cube", "material": "plastic"},
+        {"x": 3, "y": 11, "z": 4, "w": 4, "h": 4, "d": 6, "color": "#065f46", "shape": "cube", "material": "plastic"},
+        {"x": 9, "y": 11, "z": 4, "w": 3, "h": 4, "d": 6, "color": "#b45309", "shape": "cube", "material": "plastic"}
+      ]
+    },
+    {
+      "asset_tag": "lamp_floor_warm",
+      "kind": "voxel-prop-v1",
+      "category": "living",
+      "name_vi": "Đèn cây ánh vàng",
+      "size": [1, 1],
+      "height": 1.7,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.7], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 5, "y": 0, "z": 5, "w": 6, "h": 1, "d": 6, "color": "#b45309", "shape": "cylinder", "material": "metal"},
+        {"x": 7, "y": 1, "z": 7, "w": 2, "h": 11, "d": 2, "color": "#d97706", "shape": "cylinder", "material": "metal"},
+        {"x": 7, "y": 12, "z": 7, "w": 2, "h": 2, "d": 2, "color": "#fef08a", "shape": "sphere", "material": "neon"},
+        {"x": 4, "y": 11, "z": 4, "w": 8, "h": 5, "d": 8, "color": "#fef3c7", "shape": "cylinder", "material": "fabric"}
+      ]
+    },
+    {
+      "asset_tag": "fireplace_hearth_2x1",
+      "kind": "voxel-prop-v1",
+      "category": "living",
+      "name_vi": "Lò sưởi đá cổ điển",
+      "size": [2, 1],
+      "height": 1.8,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.8], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 1, "y": 0, "z": 3, "w": 14, "h": 2, "d": 12, "color": "#64748b", "shape": "cube", "material": "plastic"},
+        {"x": 2, "y": 2, "z": 3, "w": 3, "h": 10, "d": 9, "color": "#475569", "shape": "cube", "material": "plastic"},
+        {"x": 11, "y": 2, "z": 3, "w": 3, "h": 10, "d": 9, "color": "#475569", "shape": "cube", "material": "plastic"},
+        {"x": 1, "y": 12, "z": 2, "w": 14, "h": 2, "d": 11, "color": "#5c3a21", "shape": "cube", "material": "wood"},
+        {"x": 4, "y": 14, "z": 2, "w": 8, "h": 2, "d": 8, "color": "#475569", "shape": "cube", "material": "plastic"},
+        {"x": 5, "y": 2, "z": 5, "w": 6, "h": 2, "d": 4, "color": "#451a03", "shape": "cylinder", "material": "wood"},
+        {"x": 6, "y": 4, "z": 6, "w": 4, "h": 3, "d": 3, "color": "#f97316", "shape": "slope", "material": "neon"}
+      ]
+    },
+    {
+      "asset_tag": "bed_double_2x2",
+      "kind": "voxel-prop-v1",
+      "category": "bedroom",
+      "name_vi": "Giường đôi bọc nệm",
+      "size": [2, 2],
+      "height": 0.9,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "lie": {"offset": [0.0, 0.44, 0.0], "rot_y": 0.0},
+        "sit": {"offset": [0.85, 0.42, 0.1], "rot_y": 1.5708},
+        "stand": {"offset": [0.0, 0.0, 1.35], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 1, "y": 0, "z": 1, "w": 14, "h": 4, "d": 14, "color": "#6b4423", "shape": "cube", "material": "wood"},
+        {"x": 1, "y": 4, "z": 1, "w": 14, "h": 12, "d": 2, "color": "#5c3a21", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 4, "z": 3, "w": 12, "h": 4, "d": 11, "color": "#f8fafc", "shape": "cube", "material": "fabric"},
+        {"x": 2, "y": 5, "z": 7, "w": 12, "h": 4, "d": 7, "color": "#334155", "shape": "cube", "material": "fabric"},
+        {"x": 3, "y": 8, "z": 3, "w": 4, "h": 2, "d": 3, "color": "#e2e8f0", "shape": "cube", "material": "fabric"},
+        {"x": 9, "y": 8, "z": 3, "w": 4, "h": 2, "d": 3, "color": "#e2e8f0", "shape": "cube", "material": "fabric"}
+      ]
+    },
+    {
+      "asset_tag": "wardrobe_tall_2x1",
+      "kind": "voxel-prop-v1",
+      "category": "bedroom",
+      "name_vi": "Tủ quần áo gỗ lớn",
+      "size": [2, 1],
+      "height": 2.15,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "hide_inside": {"offset": [0.0, 0.05, 0.0], "rot_y": 0.0},
+        "stand": {"offset": [0.0, 0.0, 0.85], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 1, "y": 0, "z": 2, "w": 14, "h": 1, "d": 12, "color": "#452815", "shape": "cube", "material": "wood"},
+        {"x": 1, "y": 1, "z": 2, "w": 14, "h": 14, "d": 11, "color": "#6b4423", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 2, "z": 13, "w": 5, "h": 12, "d": 1, "color": "#7c4d2b", "shape": "cube", "material": "wood"},
+        {"x": 9, "y": 2, "z": 13, "w": 5, "h": 12, "d": 1, "color": "#7c4d2b", "shape": "cube", "material": "wood"},
+        {"x": 6, "y": 7, "z": 14, "w": 1, "h": 2, "d": 1, "color": "#fbbf24", "shape": "bar", "material": "metal"},
+        {"x": 9, "y": 7, "z": 14, "w": 1, "h": 2, "d": 1, "color": "#fbbf24", "shape": "bar", "material": "metal"},
+        {"x": 1, "y": 15, "z": 1, "w": 14, "h": 1, "d": 13, "color": "#5c3a21", "shape": "cube", "material": "wood"}
+      ]
+    },
+    {
+      "asset_tag": "nightstand_1x1",
+      "kind": "voxel-prop-v1",
+      "category": "bedroom",
+      "name_vi": "Tủ đầu giường có ngăn kéo",
+      "size": [1, 1],
+      "height": 0.65,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.75], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 2, "y": 0, "z": 2, "w": 2, "h": 3, "d": 2, "color": "#452815", "shape": "cube", "material": "wood"},
+        {"x": 12, "y": 0, "z": 2, "w": 2, "h": 3, "d": 2, "color": "#452815", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 0, "z": 12, "w": 2, "h": 3, "d": 2, "color": "#452815", "shape": "cube", "material": "wood"},
+        {"x": 12, "y": 0, "z": 12, "w": 2, "h": 3, "d": 2, "color": "#452815", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 3, "z": 2, "w": 12, "h": 10, "d": 12, "color": "#7c4d2b", "shape": "cube", "material": "wood"},
+        {"x": 3, "y": 8, "z": 14, "w": 10, "h": 4, "d": 1, "color": "#8b5a2b", "shape": "cube", "material": "wood"},
+        {"x": 7, "y": 9, "z": 15, "w": 2, "h": 2, "d": 1, "color": "#e2e8f0", "shape": "sphere", "material": "metal"},
+        {"x": 6, "y": 13, "z": 6, "w": 4, "h": 3, "d": 4, "color": "#fde68a", "shape": "cylinder", "material": "neon"}
+      ]
+    },
+    {
+      "asset_tag": "vanity_mirror_1x1",
+      "kind": "voxel-prop-v1",
+      "category": "bedroom",
+      "name_vi": "Bàn trang điểm có gương",
+      "size": [1, 1],
+      "height": 1.5,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "sit": {"offset": [0.0, 0.42, 0.45], "rot_y": 3.1416},
+        "stand": {"offset": [0.0, 0.0, 0.85], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 2, "y": 0, "z": 3, "w": 2, "h": 6, "d": 2, "color": "#5c3a21", "shape": "bar", "material": "wood"},
+        {"x": 12, "y": 0, "z": 3, "w": 2, "h": 6, "d": 2, "color": "#5c3a21", "shape": "bar", "material": "wood"},
+        {"x": 2, "y": 0, "z": 10, "w": 2, "h": 6, "d": 2, "color": "#5c3a21", "shape": "bar", "material": "wood"},
+        {"x": 12, "y": 0, "z": 10, "w": 2, "h": 6, "d": 2, "color": "#5c3a21", "shape": "bar", "material": "wood"},
+        {"x": 1, "y": 6, "z": 2, "w": 14, "h": 2, "d": 9, "color": "#f5f5f4", "shape": "cube", "material": "wood"},
+        {"x": 3, "y": 8, "z": 2, "w": 10, "h": 8, "d": 2, "color": "#d97706", "shape": "cube", "material": "metal"},
+        {"x": 4, "y": 9, "z": 3, "w": 8, "h": 6, "d": 1, "color": "#e0f2fe", "shape": "cube", "material": "glass"},
+        {"x": 5, "y": 0, "z": 11, "w": 6, "h": 4, "d": 4, "color": "#fbcfe8", "shape": "cylinder", "material": "fabric"}
+      ]
+    },
+    {
+      "asset_tag": "rug_persian_2x2",
+      "kind": "voxel-prop-v1",
+      "category": "bedroom",
+      "name_vi": "Thảm Ba Tư trải sàn",
+      "size": [2, 2],
+      "height": 0.06,
+      "walkable": true,
+      "mount": "floor",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.03, 0.0], "rot_y": 0.0},
+        "sit": {"offset": [0.0, 0.06, 0.0], "rot_y": 0.0}
+      },
+      "voxels": [
+        {"x": 0, "y": 0, "z": 0, "w": 16, "h": 8, "d": 16, "color": "#7f1d1d", "shape": "cube", "material": "fabric"},
+        {"x": 2, "y": 2, "z": 2, "w": 12, "h": 8, "d": 12, "color": "#b45309", "shape": "cube", "material": "fabric"},
+        {"x": 5, "y": 4, "z": 5, "w": 6, "h": 8, "d": 6, "color": "#991b1b", "shape": "cube", "material": "fabric"},
+        {"x": 7, "y": 6, "z": 7, "w": 2, "h": 8, "d": 2, "color": "#fef3c7", "shape": "stud", "material": "fabric"}
+      ]
+    },
+    {
+      "asset_tag": "kitchen_counter_2x1",
+      "kind": "voxel-prop-v1",
+      "category": "kitchen",
+      "name_vi": "Quầy bếp đá cẩm thạch",
+      "size": [2, 1],
+      "height": 0.95,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.8], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 1, "y": 0, "z": 2, "w": 14, "h": 13, "d": 12, "color": "#f1f5f9", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 2, "z": 14, "w": 5, "h": 10, "d": 1, "color": "#cbd5e1", "shape": "cube", "material": "wood"},
+        {"x": 9, "y": 2, "z": 14, "w": 5, "h": 10, "d": 1, "color": "#cbd5e1", "shape": "cube", "material": "wood"},
+        {"x": 0, "y": 13, "z": 1, "w": 16, "h": 2, "d": 14, "color": "#e2e8f0", "shape": "cube", "material": "plastic"},
+        {"x": 11, "y": 15, "z": 4, "w": 2, "h": 1, "d": 2, "color": "#94a3b8", "shape": "bar", "material": "metal"}
+      ]
+    },
+    {
+      "asset_tag": "dining_table_2x1",
+      "kind": "voxel-prop-v1",
+      "category": "kitchen",
+      "name_vi": "Bàn ăn gỗ sồi",
+      "size": [2, 1],
+      "height": 0.8,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.85], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 1, "y": 0, "z": 2, "w": 2, "h": 13, "d": 2, "color": "#5c3a21", "shape": "cube", "material": "wood"},
+        {"x": 13, "y": 0, "z": 2, "w": 2, "h": 13, "d": 2, "color": "#5c3a21", "shape": "cube", "material": "wood"},
+        {"x": 1, "y": 0, "z": 12, "w": 2, "h": 13, "d": 2, "color": "#5c3a21", "shape": "cube", "material": "wood"},
+        {"x": 13, "y": 0, "z": 12, "w": 2, "h": 13, "d": 2, "color": "#5c3a21", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 11, "z": 3, "w": 12, "h": 2, "d": 10, "color": "#6b4423", "shape": "cube", "material": "wood"},
+        {"x": 0, "y": 13, "z": 1, "w": 16, "h": 3, "d": 14, "color": "#8b5a2b", "shape": "cube", "material": "wood"}
+      ]
+    },
+    {
+      "asset_tag": "dining_chair_1x1",
+      "kind": "voxel-prop-v1",
+      "category": "kitchen",
+      "name_vi": "Ghế ăn tựa gỗ",
+      "size": [1, 1],
+      "height": 0.95,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "sit": {"offset": [0.0, 0.44, 0.04], "rot_y": 0.0},
+        "stand": {"offset": [0.0, 0.0, 0.72], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 3, "y": 0, "z": 3, "w": 2, "h": 6, "d": 2, "color": "#5c3a21", "shape": "bar", "material": "wood"},
+        {"x": 11, "y": 0, "z": 3, "w": 2, "h": 6, "d": 2, "color": "#5c3a21", "shape": "bar", "material": "wood"},
+        {"x": 3, "y": 0, "z": 11, "w": 2, "h": 6, "d": 2, "color": "#5c3a21", "shape": "bar", "material": "wood"},
+        {"x": 11, "y": 0, "z": 11, "w": 2, "h": 6, "d": 2, "color": "#5c3a21", "shape": "bar", "material": "wood"},
+        {"x": 3, "y": 6, "z": 3, "w": 10, "h": 2, "d": 10, "color": "#a16207", "shape": "cube", "material": "fabric"},
+        {"x": 3, "y": 8, "z": 3, "w": 10, "h": 8, "d": 2, "color": "#6b4423", "shape": "cube", "material": "wood"}
+      ]
+    },
+    {
+      "asset_tag": "fridge_retro_1x1",
+      "kind": "voxel-prop-v1",
+      "category": "kitchen",
+      "name_vi": "Tủ lạnh cổ điển",
+      "size": [1, 1],
+      "height": 1.85,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.8], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 2, "y": 0, "z": 2, "w": 12, "h": 10, "d": 12, "color": "#a7f3d0", "shape": "cube", "material": "metal"},
+        {"x": 2, "y": 10, "z": 2, "w": 12, "h": 6, "d": 12, "color": "#6ee7b7", "shape": "cube", "material": "metal"},
+        {"x": 11, "y": 6, "z": 14, "w": 1, "h": 3, "d": 1, "color": "#e2e8f0", "shape": "bar", "material": "metal"},
+        {"x": 11, "y": 12, "z": 14, "w": 1, "h": 3, "d": 1, "color": "#e2e8f0", "shape": "bar", "material": "metal"}
+      ]
+    },
+    {
+      "asset_tag": "tea_set_surface",
+      "kind": "voxel-prop-v1",
+      "category": "kitchen",
+      "name_vi": "Bộ ấm trà sứ",
+      "size": [1, 1],
+      "height": 0.4,
+      "walkable": false,
+      "mount": "surface",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.65], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 2, "y": 0, "z": 3, "w": 12, "h": 2, "d": 10, "color": "#78350f", "shape": "cube", "material": "wood"},
+        {"x": 5, "y": 2, "z": 6, "w": 5, "h": 5, "d": 5, "color": "#f8fafc", "shape": "cylinder", "material": "plastic"},
+        {"x": 6, "y": 7, "z": 7, "w": 3, "h": 2, "d": 3, "color": "#cbd5e1", "shape": "sphere", "material": "plastic"},
+        {"x": 11, "y": 2, "z": 5, "w": 2, "h": 2, "d": 2, "color": "#f8fafc", "shape": "cylinder", "material": "plastic"},
+        {"x": 11, "y": 2, "z": 9, "w": 2, "h": 2, "d": 2, "color": "#f8fafc", "shape": "cylinder", "material": "plastic"}
+      ]
+    },
+    {
+      "asset_tag": "bathtub_clawfoot_2x1",
+      "kind": "voxel-prop-v1",
+      "category": "bathroom",
+      "name_vi": "Bồn tắm chân sư tử",
+      "size": [2, 1],
+      "height": 0.75,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "lie": {"offset": [0.0, 0.32, 0.0], "rot_y": 1.5708},
+        "sit": {"offset": [0.45, 0.35, 0.0], "rot_y": -1.5708},
+        "stand": {"offset": [0.0, 0.0, 0.8], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 2, "y": 0, "z": 3, "w": 2, "h": 3, "d": 2, "color": "#d97706", "shape": "sphere", "material": "metal"},
+        {"x": 12, "y": 0, "z": 3, "w": 2, "h": 3, "d": 2, "color": "#d97706", "shape": "sphere", "material": "metal"},
+        {"x": 2, "y": 0, "z": 11, "w": 2, "h": 3, "d": 2, "color": "#d97706", "shape": "sphere", "material": "metal"},
+        {"x": 12, "y": 0, "z": 11, "w": 2, "h": 3, "d": 2, "color": "#d97706", "shape": "sphere", "material": "metal"},
+        {"x": 1, "y": 3, "z": 2, "w": 14, "h": 11, "d": 12, "color": "#f8fafc", "shape": "cube", "material": "plastic"},
+        {"x": 3, "y": 10, "z": 4, "w": 10, "h": 3, "d": 8, "color": "#7dd3fc", "shape": "cube", "material": "glass"},
+        {"x": 13, "y": 14, "z": 7, "w": 2, "h": 2, "d": 2, "color": "#cbd5e1", "shape": "bar", "material": "metal"}
+      ]
+    },
+    {
+      "asset_tag": "sink_marble_1x1",
+      "kind": "voxel-prop-v1",
+      "category": "bathroom",
+      "name_vi": "Chậu rửa mặt đá trắng",
+      "size": [1, 1],
+      "height": 0.9,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.75], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 5, "y": 0, "z": 5, "w": 6, "h": 10, "d": 6, "color": "#e2e8f0", "shape": "cylinder", "material": "plastic"},
+        {"x": 2, "y": 10, "z": 3, "w": 12, "h": 4, "d": 10, "color": "#f8fafc", "shape": "cube", "material": "plastic"},
+        {"x": 4, "y": 13, "z": 5, "w": 8, "h": 1, "d": 6, "color": "#bae6fd", "shape": "cube", "material": "glass"},
+        {"x": 7, "y": 14, "z": 3, "w": 2, "h": 2, "d": 2, "color": "#94a3b8", "shape": "bar", "material": "metal"}
+      ]
+    },
+    {
+      "asset_tag": "toilet_porcelain_1x1",
+      "kind": "voxel-prop-v1",
+      "category": "bathroom",
+      "name_vi": "Bồn cầu sứ trắng",
+      "size": [1, 1],
+      "height": 0.85,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "sit": {"offset": [0.0, 0.42, 0.1], "rot_y": 0.0},
+        "stand": {"offset": [0.0, 0.0, 0.75], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 5, "y": 0, "z": 5, "w": 6, "h": 5, "d": 7, "color": "#e2e8f0", "shape": "cylinder", "material": "plastic"},
+        {"x": 4, "y": 5, "z": 5, "w": 8, "h": 4, "d": 8, "color": "#f8fafc", "shape": "cylinder", "material": "plastic"},
+        {"x": 3, "y": 6, "z": 2, "w": 10, "h": 9, "d": 4, "color": "#f1f5f9", "shape": "cube", "material": "plastic"},
+        {"x": 7, "y": 15, "z": 3, "w": 2, "h": 1, "d": 2, "color": "#94a3b8", "shape": "stud", "material": "metal"}
+      ]
+    },
+    {
+      "asset_tag": "mirror_cabinet_1x1",
+      "kind": "voxel-prop-v1",
+      "category": "bathroom",
+      "name_vi": "Tủ gương treo tường",
+      "size": [1, 1],
+      "height": 0.9,
+      "walkable": false,
+      "mount": "wall",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.65], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 2, "y": 2, "z": 1, "w": 12, "h": 12, "d": 4, "color": "#cbd5e1", "shape": "cube", "material": "wood"},
+        {"x": 3, "y": 3, "z": 5, "w": 10, "h": 10, "d": 1, "color": "#e0f2fe", "shape": "cube", "material": "glass"},
+        {"x": 2, "y": 1, "z": 1, "w": 12, "h": 1, "d": 5, "color": "#94a3b8", "shape": "cube", "material": "metal"}
+      ]
+    },
+    {
+      "asset_tag": "desk_mahogany_2x1",
+      "kind": "voxel-prop-v1",
+      "category": "study",
+      "name_vi": "Bàn làm việc gỗ gụ",
+      "size": [2, 1],
+      "height": 0.8,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.85], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 1, "y": 0, "z": 2, "w": 4, "h": 13, "d": 12, "color": "#451a03", "shape": "cube", "material": "wood"},
+        {"x": 11, "y": 0, "z": 2, "w": 4, "h": 13, "d": 12, "color": "#451a03", "shape": "cube", "material": "wood"},
+        {"x": 0, "y": 13, "z": 1, "w": 16, "h": 2, "d": 14, "color": "#78350f", "shape": "cube", "material": "wood"},
+        {"x": 2, "y": 8, "z": 14, "w": 2, "h": 1, "d": 1, "color": "#fbbf24", "shape": "bar", "material": "metal"},
+        {"x": 12, "y": 8, "z": 14, "w": 2, "h": 1, "d": 1, "color": "#fbbf24", "shape": "bar", "material": "metal"},
+        {"x": 5, "y": 15, "z": 4, "w": 6, "h": 1, "d": 7, "color": "#14532d", "shape": "cube", "material": "fabric"}
+      ]
+    },
+    {
+      "asset_tag": "office_chair_1x1",
+      "kind": "voxel-prop-v1",
+      "category": "study",
+      "name_vi": "Ghế xoay bọc da",
+      "size": [1, 1],
+      "height": 1.05,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "sit": {"offset": [0.0, 0.46, 0.04], "rot_y": 0.0},
+        "stand": {"offset": [0.0, 0.0, 0.75], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 4, "y": 0, "z": 4, "w": 8, "h": 2, "d": 8, "color": "#334155", "shape": "cylinder", "material": "metal"},
+        {"x": 7, "y": 2, "z": 7, "w": 2, "h": 4, "d": 2, "color": "#475569", "shape": "cylinder", "material": "metal"},
+        {"x": 3, "y": 6, "z": 3, "w": 10, "h": 2, "d": 10, "color": "#1e293b", "shape": "cube", "material": "fabric"},
+        {"x": 3, "y": 8, "z": 3, "w": 10, "h": 8, "d": 2, "color": "#1e293b", "shape": "cube", "material": "fabric"},
+        {"x": 2, "y": 7, "z": 4, "w": 1, "h": 3, "d": 7, "color": "#334155", "shape": "bar", "material": "metal"},
+        {"x": 13, "y": 7, "z": 4, "w": 1, "h": 3, "d": 7, "color": "#334155", "shape": "bar", "material": "metal"}
+      ]
+    },
+    {
+      "asset_tag": "safe_steel_1x1",
+      "kind": "voxel-prop-v1",
+      "category": "study",
+      "name_vi": "Két sắt thép mật mã",
+      "size": [1, 1],
+      "height": 0.9,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.75], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 2, "y": 0, "z": 2, "w": 12, "h": 14, "d": 12, "color": "#334155", "shape": "cube", "material": "metal"},
+        {"x": 3, "y": 1, "z": 14, "w": 10, "h": 12, "d": 1, "color": "#475569", "shape": "cube", "material": "metal"},
+        {"x": 7, "y": 7, "z": 15, "w": 3, "h": 3, "d": 1, "color": "#cbd5e1", "shape": "torus", "material": "metal"},
+        {"x": 4, "y": 6, "z": 15, "w": 1, "h": 4, "d": 1, "color": "#e2e8f0", "shape": "bar", "material": "metal"}
+      ]
+    },
+    {
+      "asset_tag": "crate_storage_1x1",
+      "kind": "voxel-prop-v1",
+      "category": "study",
+      "name_vi": "Rương gỗ lớn chứa đồ",
+      "size": [1, 1],
+      "height": 1.1,
+      "walkable": false,
+      "mount": "floor",
+      "pose_slots": {
+        "hide_inside": {"offset": [0.0, 0.05, 0.0], "rot_y": 0.0},
+        "stand": {"offset": [0.0, 0.0, 0.78], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 1, "y": 0, "z": 1, "w": 14, "h": 13, "d": 14, "color": "#92400e", "shape": "cube", "material": "wood"},
+        {"x": 1, "y": 0, "z": 1, "w": 2, "h": 15, "d": 2, "color": "#475569", "shape": "bar", "material": "metal"},
+        {"x": 13, "y": 0, "z": 1, "w": 2, "h": 15, "d": 2, "color": "#475569", "shape": "bar", "material": "metal"},
+        {"x": 1, "y": 0, "z": 13, "w": 2, "h": 15, "d": 2, "color": "#475569", "shape": "bar", "material": "metal"},
+        {"x": 13, "y": 0, "z": 13, "w": 2, "h": 15, "d": 2, "color": "#475569", "shape": "bar", "material": "metal"},
+        {"x": 1, "y": 13, "z": 1, "w": 14, "h": 3, "d": 14, "color": "#78350f", "shape": "cube", "material": "wood"},
+        {"x": 7, "y": 11, "z": 15, "w": 2, "h": 3, "d": 1, "color": "#d97706", "shape": "cube", "material": "metal"}
+      ]
+    },
+    {
+      "asset_tag": "mystery_placeholder",
+      "kind": "voxel-prop-v1",
+      "category": "mystery",
+      "name_vi": "Vật thể chưa định danh",
+      "size": [1, 1],
+      "height": 0.75,
+      "walkable": false,
+      "mount": "surface",
+      "pose_slots": {
+        "stand": {"offset": [0.0, 0.0, 0.7], "rot_y": 3.1416}
+      },
+      "voxels": [
+        {"x": 3, "y": 0, "z": 3, "w": 10, "h": 2, "d": 10, "color": "#312e81", "shape": "torus", "material": "metal"},
+        {"x": 4, "y": 2, "z": 4, "w": 8, "h": 10, "d": 8, "color": "#818cf8", "shape": "cube", "material": "glass"},
+        {"x": 6, "y": 13, "z": 6, "w": 4, "h": 3, "d": 4, "color": "#a855f7", "shape": "sphere", "material": "neon"}
+      ]
+    }
+  ]
+}

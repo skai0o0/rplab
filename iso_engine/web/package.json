@@ -1,0 +1,5 @@
+{
+  "name": "iso-engine-web",
+  "private": true,
+  "type": "module"
+}

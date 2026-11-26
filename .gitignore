@@ -6,3 +6,7 @@ __pycache__/
 *.zip
 .DS_Store
 Thumbs.db
+
+# Du lieu chay cuc bo (DB chat, traces, prompt tuy chinh) - khong dua len repo
+webui/data/
+iso_engine/data/*.db

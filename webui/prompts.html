@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prompt Studio · RP Lab v2</title>
+<style>
+:root{
+  --bg:#f6f7f9;--card:#ffffff;--fg:#18181b;--muted:#6b7280;--line:#e4e4e7;
+  --accent:#2563eb;--soft:#f1f5f9;--ok:#15803d;--warn:#b45309;--err:#dc2626;
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1115;--card:#171a21;--fg:#e4e4e7;--muted:#9ca3af;--line:#272b36;
+    --soft:#1e232e;--ok:#4ade80;--warn:#fbbf24;--err:#f87171;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1115;--card:#171a21;--fg:#e4e4e7;--muted:#9ca3af;--line:#272b36;
+  --soft:#1e232e;--ok:#4ade80;--warn:#fbbf24;--err:#f87171;
+  color-scheme:dark;
+}
+:root[data-theme="light"]{color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg);height:100vh;height:100dvh;display:flex;flex-direction:column;font-size:14px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font:inherit;padding:6px 11px;min-height:34px;border-radius:7px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer;transition:border-color .15s,filter .15s}
+button:hover{border-color:var(--accent);filter:brightness(.97)}
+button:disabled{opacity:.5;cursor:not-allowed}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+button.danger{color:var(--err);border-color:rgba(220,38,38,.35)}
+button.small{padding:3px 9px;font-size:12px;min-height:30px}
+#themeBtn{min-height:34px;min-width:34px;padding:4px 9px}
+input,textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:7px 9px;transition:border-color .15s,box-shadow .15s}
+input:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(37,99,235,.16)}
+textarea{width:100%;font-family:ui-monospace,Consolas,monospace;font-size:12.5px;line-height:1.45;resize:vertical}
+code{font-family:ui-monospace,Consolas,monospace;font-size:12px;background:var(--soft);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere;word-break:break-word}
+.tipbox code{word-break:break-all;display:inline-block;max-width:100%}
+
+#topbar{position:relative;display:flex;align-items:center;gap:8px;padding:8px 16px;min-height:48px;background:var(--card);border-bottom:1px solid var(--line);flex-wrap:wrap;z-index:10}
+#topbar h1{margin:0;font-size:16px;display:flex;align-items:center;gap:8px;order:1}
+.nav{font-size:12.5px;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap;order:2}
+#searchBox{flex:1;min-width:190px;max-width:340px;margin-left:auto;order:3}
+#customBadge{order:4}#dirtyBadge{order:5}#resetAllBtn{order:6}#saveBtn{order:7}#themeBtn{order:8}
+.topbar-actions{display:contents}
+.pill{font-size:11.5px;padding:2px 8px;border-radius:99px;border:1px solid var(--line);background:var(--soft);font-weight:600}
+.pill.custom{color:var(--warn);border-color:rgba(245,158,11,.45);background:rgba(245,158,11,.1)}
+.pill.dirty{color:var(--accent);border-color:rgba(37,99,235,.45);background:rgba(37,99,235,.1)}
+
+#main{flex:1;display:flex;min-height:0}
+aside{width:255px;min-width:220px;border-right:1px solid var(--line);background:var(--card);padding:12px;display:flex;flex-direction:column;gap:6px;overflow:auto;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.gbtn{width:100%;text-align:left;padding:9px 10px;border-radius:8px;border:1px solid transparent;background:transparent;display:flex;flex-direction:column;gap:2px}
+.gbtn:hover{background:var(--soft)}
+.gbtn.on{background:rgba(37,99,235,.1);border-color:rgba(37,99,235,.35)}
+.gbtn .gt{display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:13px}
+.gbtn .gd{font-size:11.5px;color:var(--muted)}
+.tipbox{margin-top:auto;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--soft);font-size:11.5px;color:var(--muted);line-height:1.45}
+
+#content{flex:1;overflow:auto;padding:16px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.banner{padding:9px 12px;border-radius:8px;margin-bottom:12px;font-size:13px;border:1px solid var(--line);display:none}
+.banner.ok{display:block;border-color:rgba(21,128,61,.4);background:rgba(34,197,94,.1);color:var(--ok)}
+.banner.err{display:block;border-color:rgba(220,38,38,.4);background:rgba(239,68,68,.1);color:var(--err)}
+.ghdr{margin:0 0 14px 0}
+.ghdr h2{margin:0 0 4px 0;font-size:17px}
+.ghdr p{margin:0;color:var(--muted);font-size:13px}
+
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:14px}
+.pcard.is-custom{border-left:4px solid #f59e0b}
+.pcard.is-dirty{box-shadow:0 0 0 1px var(--accent)}
+.pcard-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.pcard-top b{font-size:14.5px}
+.pcard-acts{margin-left:auto;display:flex;gap:6px;align-items:center}
+.pdesc{color:var(--muted);font-size:12.5px;margin-bottom:8px;line-height:1.4}
+.chips{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px;font-size:12px;color:var(--muted)}
+.chip{font-family:ui-monospace,Consolas,monospace;font-size:11.5px;padding:2px 7px;border-radius:5px;border:1px solid var(--line);background:var(--soft);cursor:pointer}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.flabel{display:block;font-size:12px;font-weight:600;margin:8px 0 4px 0;color:var(--muted)}
+.crit-row{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap;font-size:12.5px}
+.crit-row input[type=number]{width:92px}
+.pwarn{margin-top:6px;padding:6px 9px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(220,38,38,.35);color:var(--err);font-size:12px;display:none}
+.diff-box{margin-top:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:8px;font-family:ui-monospace,Consolas,monospace;font-size:11.5px;max-height:280px;overflow:auto;display:none}
+.dline{white-space:pre-wrap;word-break:break-word;padding:1px 4px;border-radius:3px}
+.dline.add{background:rgba(34,197,94,.16);color:var(--ok)}
+.dline.del{background:rgba(239,68,68,.15);color:var(--err)}
+.dline.ctx{color:var(--muted)}
+
+#menuBtn,.drawer-head,#moreBtn,.mob-lbl{display:none}
+.drawer-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40}
+.drawer-backdrop.on{display:block}
+@media (max-width:820px){
+  body{overflow:hidden}
+  .drawer-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;margin-bottom:4px;border-bottom:1px solid var(--line)}
+  aside{position:fixed;top:0;left:0;bottom:0;width:min(84vw,310px);min-width:0;z-index:50;transform:translateX(-100%);transition:transform .22s ease;box-shadow:4px 0 24px rgba(0,0,0,.28)}
+  aside.open{transform:translateX(0)}
+  #topbar{padding:6px 10px;gap:6px;min-height:48px}
+  #topbar > #menuBtn,#topbar > #moreBtn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;min-height:36px;padding:0;border-radius:10px;font-size:17px;flex:0 0 auto}
+  #topbar > #menuBtn{order:1}
+  #topbar h1{order:2;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:15px}
+  #saveBtn{order:3;padding:5px 10px;font-size:12.5px;min-height:34px;border-radius:10px}
+  #topbar > #moreBtn{order:4}
+  #dirtyBadge{order:5}
+  #searchBox{order:6;flex:1 1 100%;max-width:none;margin-left:0;min-height:36px;border-radius:10px}
+  .topbar-actions{display:none;position:absolute;top:calc(100% + 4px);right:10px;min-width:230px;flex-direction:column;gap:6px;padding:8px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 28px rgba(0,0,0,.38);z-index:45}
+  .topbar-actions.open{display:flex}
+  .topbar-actions .nav,.topbar-actions #customBadge,.topbar-actions #resetAllBtn,.topbar-actions #themeBtn{order:0}
+  .topbar-actions .nav{padding:4px 6px 8px;border-bottom:1px solid var(--line)}
+  .topbar-actions #customBadge{align-self:flex-start}
+  .topbar-actions button{width:100%;display:flex;align-items:center;justify-content:flex-start;text-align:left;padding:8px 10px;min-height:38px;border-radius:8px;font-size:13.5px}
+  #content{padding:12px}
+  .mob-lbl{display:inline}
+  input,select,textarea{font-size:16px}
+}
+@media (max-width:640px){
+  #saveBtn{font-size:12px;padding:5px 9px}
+}
+</style>
+</head>
+<body>
+<div id="topbar">
+  <button id="menuBtn" class="small" title="Mở danh sách nhóm">☰</button>
+  <h1>🎛 Prompt Studio</h1>
+  <input id="searchBox" type="search" placeholder="Tìm theo tên, key, hoặc nội dung prompt...">
+  <span class="pill dirty" id="dirtyBadge" style="display:none">Có thay đổi chưa lưu</span>
+  <button id="saveBtn" class="primary" title="Lưu xuống data/prompts_custom.json và áp dụng ngay (Ctrl+S)">💾 Lưu &amp; Hot-Reload</button>
+  <button id="moreBtn" class="icon-btn" title="Thao tác khác" aria-haspopup="true" aria-expanded="false">⋯</button>
+  <div id="topbarMenu" class="topbar-actions">
+    <div class="nav">
+      <a href="/group">← Group Chat</a>
+      <span>·</span>
+      <a href="/editor">Soạn bộ</a>
+      <span>·</span>
+      <a href="/">Chat đơn</a>
+    </div>
+    <span class="pill" id="customBadge">0 mục tùy chỉnh</span>
+    <button id="resetAllBtn" class="danger">↺ Khôi phục tất cả</button>
+    <button id="themeBtn" class="small" title="Đổi giao diện sáng/tối">◐<span class="mob-lbl"> Giao diện</span></button>
+  </div>
+</div>
+
+<div id="drawerBackdrop" class="drawer-backdrop"></div>
+<div id="main">
+  <aside>
+    <div class="drawer-head">
+      <b>Nhóm Prompt</b>
+      <button id="closeDrawerBtn" class="small" title="Đóng menu">✕</button>
+    </div>
+    <div id="groupList"></div>
+    <div class="tipbox">
+      <div><b>Hot-Reload:</b> Mọi sửa đổi lưu vào <code id="customPathLabel">data/prompts_custom.json</code> và có hiệu lực ngay ở lượt chat / A/B Replay kế tiếp, không cần khởi động lại server.</div>
+      <div style="margin-top:6px"><b>Biến <code>{...}</code>:</b> Bấm chip phía trên ô nhập để chèn đúng tên biến được phép.</div>
+    </div>
+  </aside>
+  <section id="content">
+    <div id="statusBanner" class="banner"></div>
+    <div id="studioView"><div style="color:var(--muted)">Đang tải cấu hình Prompt...</div></div>
+  </section>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+function setTopbarMenu(open) {
+  const m = $('topbarMenu'), b = $('moreBtn');
+  if (m) m.classList.toggle('open', !!open);
+  if (b) b.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function setDrawer(open) {
+  if (open) setTopbarMenu(false);
+  const aside = document.querySelector('aside');
+  if (aside) aside.classList.toggle('open', !!open);
+  if ($('drawerBackdrop')) $('drawerBackdrop').classList.toggle('on', !!open);
+}
+if ($('menuBtn')) $('menuBtn').onclick = () => setDrawer(true);
+if ($('closeDrawerBtn')) $('closeDrawerBtn').onclick = () => setDrawer(false);
+if ($('drawerBackdrop')) $('drawerBackdrop').onclick = () => setDrawer(false);
+if ($('moreBtn')) $('moreBtn').onclick = e => {
+  e.stopPropagation();
+  setTopbarMenu(!$('topbarMenu')?.classList.contains('open'));
+};
+if ($('topbarMenu')) $('topbarMenu').addEventListener('click', e => {
+  if (e.target.closest('button, a')) setTopbarMenu(false);
+});
+document.addEventListener('click', e => {
+  if (!e.target.closest('#topbarMenu') && !e.target.closest('#moreBtn')) setTopbarMenu(false);
+});
+
+const savedTheme = (() => { try { const v = localStorage.getItem('rplab.theme'); return v === null ? null : JSON.parse(v); } catch { return null; } })();
+if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+$('themeBtn').onclick = () => {
+  const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem('rplab.theme', JSON.stringify(next)); } catch {}
+};
+
+let STUDIO = null;
+let ACTIVE_GROUP = 'all';
+let DRAFTS = {};
+let ACTIVE_INPUT = null;
+
+function setBanner(msg, kind) {
+  const b = $('statusBanner');
+  if (!msg) { b.className = 'banner'; b.textContent = ''; return; }
+  b.className = 'banner ' + (kind || 'ok');
+  b.textContent = msg;
+}
+
+function unknownPlaceholders(text, allowed) {
+  const allow = new Set(allowed || []);
+  const cleaned = String(text || '').replace(/\{\{/g, '').replace(/\}\}/g, '');
+  const bad = [];
+  const re = /\{([A-Za-z_][A-Za-z0-9_]*)(?:[^{}]*)\}/g;
+  let m;
+  while ((m = re.exec(cleaned)) !== null) {
+    // Bo qua chuoi JSON co dau nhay ngay ben trong ngoac nhon
+    if (cleaned[m.index + 1] === '"' || cleaned[m.index + 1] === "'") continue;
+    if (!allow.has(m[1]) && !bad.includes(m[1])) bad.push(m[1]);
+  }
+  return bad;
+}
+
+function itemCurrent(key) {
+  const it = STUDIO.items[key];
+  const d = DRAFTS[key];
+  if (d) return d;
+  if (it.kind === 'criterion') {
+    return {
+      q: it.q ?? '',
+      fix: it.fix ?? '',
+      threshold: it.threshold != null ? Number(it.threshold) : '',
+    };
+  }
+  return { text: it.text ?? '' };
+}
+
+function itemSaved(key) {
+  const it = STUDIO.items[key];
+  if (it.kind === 'criterion') {
+    return {
+      q: it.q ?? '',
+      fix: it.fix ?? '',
+      threshold: it.threshold != null ? Number(it.threshold) : '',
+    };
+  }
+  return { text: it.text ?? '' };
+}
+
+function isItemDirty(key) {
+  if (!DRAFTS[key]) return false;
+  return JSON.stringify(DRAFTS[key]) !== JSON.stringify(itemSaved(key));
+}
+
+function updateTopBadges() {
+  if (!STUDIO) return;
+  const customN = STUDIO.custom_count || 0;
+  $('customBadge').textContent = `${customN} mục tùy chỉnh`;
+  $('customBadge').className = 'pill' + (customN > 0 ? ' custom' : '');
+  const dirtyKeys = Object.keys(STUDIO.items).filter(isItemDirty);
+  $('dirtyBadge').style.display = dirtyKeys.length ? '' : 'none';
+  $('dirtyBadge').textContent = `${dirtyKeys.length} chưa lưu`;
+  $('saveBtn').disabled = !dirtyKeys.length;
+  $('customPathLabel').textContent = STUDIO.custom_path || 'data/prompts_custom.json';
+}
+
+function diffLines(oldStr, newStr) {
+  const a = String(oldStr ?? '').split('\n');
+  const b = String(newStr ?? '').split('\n');
+  if (a.length * b.length > 60000) {
+    return [
+      ...a.map(l => ({ t: 'del', l })),
+      ...b.map(l => ({ t: 'add', l })),
+    ];
+  }
+  const n = a.length, m = b.length;
+  const dp = Array.from({ length: n + 1 }, () => new Uint16Array(m + 1));
+  for (let i = n - 1; i >= 0; i--) {
+    for (let j = m - 1; j >= 0; j--) {
+      dp[i][j] = a[i] === b[j] ? 1 + dp[i + 1][j + 1] : Math.max(dp[i + 1][j], dp[i][j + 1]);
+    }
+  }
+  const out = [];
+  let i = 0, j = 0;
+  while (i < n && j < m) {
+    if (a[i] === b[j]) { out.push({ t: 'ctx', l: a[i] }); i++; j++; }
+    else if (dp[i + 1][j] >= dp[i][j + 1]) { out.push({ t: 'del', l: a[i] }); i++; }
+    else { out.push({ t: 'add', l: b[j] }); j++; }
+  }
+  while (i < n) out.push({ t: 'del', l: a[i++] });
+  while (j < m) out.push({ t: 'add', l: b[j++] });
+  return out;
+}
+
+function renderDiffText(item, cur) {
+  if (item.kind === 'criterion') {
+    const sections = [
+      ['Câu hỏi (q)', item.default_q ?? '', cur.q ?? ''],
+      ['Hướng dẫn sửa (fix)', item.default_fix ?? '', cur.fix ?? ''],
+      ['Ngưỡng (threshold)', String(item.default_threshold ?? ''), String(cur.threshold ?? '')],
+    ];
+    return sections.map(([lbl, defVal, curVal]) => {
+      if (defVal === curVal) return `<div class="dline ctx">[${esc(lbl)}] Không đổi</div>`;
+      return `<div class="dline ctx"><b>--- ${esc(lbl)} ---</b></div>`
+        + diffLines(defVal, curVal).map(d => `<div class="dline ${d.t}">${d.t === 'add' ? '+ ' : (d.t === 'del' ? '- ' : '  ')}${esc(d.l)}</div>`).join('');
+    }).join('');
+  }
+  const defT = item.default_text ?? '';
+  const curT = cur.text ?? '';
+  if (defT === curT) return '<div class="dline ctx">Trùng khớp 100% với bản mặc định.</div>';
+  return diffLines(defT, curT).map(d => `<div class="dline ${d.t}">${d.t === 'add' ? '+ ' : (d.t === 'del' ? '- ' : '  ')}${esc(d.l)}</div>`).join('');
+}
+
+function renderSidebar() {
+  if (!STUDIO) return;
+  const items = Object.entries(STUDIO.items);
+  const customCount = g => items.filter(([, v]) => g === 'all' || v.group === g).filter(([, v]) => v.is_custom).length;
+  const totalCount = g => items.filter(([, v]) => g === 'all' || v.group === g).length;
+  const groups = [{ id: 'all', label: 'Tất cả nhóm', desc: 'Hiển thị toàn bộ prompt trong hệ thống' }, ...STUDIO.groups];
+  const box = $('groupList');
+  box.innerHTML = '';
+  for (const g of groups) {
+    const btn = document.createElement('button');
+    btn.className = 'gbtn' + (ACTIVE_GROUP === g.id ? ' on' : '');
+    const cc = customCount(g.id);
+    btn.innerHTML = `<div class="gt"><span>${esc(g.label)}</span><span class="pill${cc ? ' custom' : ''}">${cc ? cc + '/' : ''}${totalCount(g.id)}</span></div>`
+      + `<div class="gd">${esc(g.desc)}</div>`;
+    btn.onclick = () => { ACTIVE_GROUP = g.id; renderSidebar(); renderItems(); setDrawer(false); };
+    box.append(btn);
+  }
+}
+
+function validateCard(key, card) {
+  const it = STUDIO.items[key];
+  const cur = itemCurrent(key);
+  const bad = it.kind === 'criterion'
+    ? [...new Set([...unknownPlaceholders(cur.q, it.placeholders), ...unknownPlaceholders(cur.fix, it.placeholders)])]
+    : unknownPlaceholders(cur.text, it.placeholders);
+  const w = card.querySelector('.pwarn');
+  if (bad.length) {
+    w.style.display = 'block';
+    w.textContent = '⚠ Placeholder không hợp lệ (không có trong danh sách cho phép): ' + bad.map(x => `{${x}}`).join(', ');
+  } else {
+    w.style.display = 'none';
+    w.textContent = '';
+  }
+  return bad.length === 0;
+}
+
+function renderItems() {
+  if (!STUDIO) return;
+  const q = $('searchBox').value.trim().toLowerCase();
+  const view = $('studioView');
+  const grp = ACTIVE_GROUP === 'all'
+    ? { label: 'Toàn bộ Prompt Registry', desc: 'Quản lý tập trung Writer, Đạo diễn, Gatekeeper, Post-Render và Slash Commands.' }
+    : (STUDIO.groups.find(g => g.id === ACTIVE_GROUP) || { label: ACTIVE_GROUP, desc: '' });
+
+  const entries = Object.entries(STUDIO.items).filter(([k, it]) => {
+    if (ACTIVE_GROUP !== 'all' && it.group !== ACTIVE_GROUP) return false;
+    if (!q) return true;
+    const cur = itemCurrent(k);
+    const hay = [k, it.title, it.desc, cur.text, cur.q, cur.fix].join('\n').toLowerCase();
+    return hay.includes(q);
+  });
+
+  view.innerHTML = `<div class="ghdr"><h2>${esc(grp.label)}</h2><p>${esc(grp.desc)}${q ? ` · lọc "${esc(q)}" (${entries.length} kết quả)` : ''}</p></div>`;
+  if (!entries.length) {
+    view.innerHTML += '<div style="color:var(--muted)">Không tìm thấy prompt nào khớp từ khóa.</div>';
+    return;
+  }
+
+  for (const [key, it] of entries) {
+    const cur = itemCurrent(key);
+    const dirty = isItemDirty(key);
+    const card = document.createElement('div');
+    card.className = 'pcard' + (it.is_custom ? ' is-custom' : '') + (dirty ? ' is-dirty' : '');
+    card.dataset.key = key;
+
+    const badges = (it.is_custom ? '<span class="pill custom">Đang tùy chỉnh</span>' : '<span class="pill">Mặc định</span>')
+      + (dirty ? ' <span class="pill dirty">Chưa lưu</span>' : '');
+    const chips = (it.placeholders && it.placeholders.length)
+      ? `<div class="chips"><span>Biến:</span>${it.placeholders.map(p => `<button type="button" class="chip" data-ph="{${esc(p)}}">{${esc(p)}}</button>`).join('')}</div>`
+      : '';
+
+    let fieldsHtml = '';
+    if (it.kind === 'criterion') {
+      const qRows = Math.min(10, Math.max(3, String(cur.q || '').split('\n').length + 1));
+      const fRows = Math.min(10, Math.max(3, String(cur.fix || '').split('\n').length + 1));
+      fieldsHtml = `<div style="font-size:12px;color:var(--muted);margin-bottom:4px">Nhãn: <b>${esc(it.label || key)}</b> · Chiều tích cực: <code>${esc(String(it.good))}</code></div>`
+        + `<label class="flabel">Câu hỏi Decision (q)</label><textarea rows="${qRows}" data-f="q">${esc(cur.q)}</textarea>`
+        + `<label class="flabel">Hướng dẫn sửa khi trượt (fix)</label><textarea rows="${fRows}" data-f="fix">${esc(cur.fix)}</textarea>`
+        + `<div class="crit-row"><label>Ngưỡng (threshold):</label>`
+        + `<input type="number" min="0.05" max="0.99" step="0.05" data-f="threshold" value="${esc(cur.threshold)}">`
+        + `<span style="color:var(--muted)">Mặc định: ${it.default_threshold != null ? esc(String(it.default_threshold)) : 'dùng slider UI'}</span></div>`;
+    } else {
+      const rows = Math.min(16, Math.max(3, String(cur.text || '').split('\n').length + 1));
+      fieldsHtml = `<textarea rows="${rows}" data-f="text">${esc(cur.text)}</textarea>`;
+    }
+
+    card.innerHTML = `<div class="pcard-top"><b>${esc(it.title || key)}</b><code>${esc(key)}</code>${badges}`
+      + `<div class="pcard-acts"><button type="button" class="small" data-a="diff">⚖️ Xem Diff</button>`
+      + `<button type="button" class="small danger" data-a="reset">↺ Mặc định</button></div></div>`
+      + `<div class="pdesc">${esc(it.desc || '')}</div>`
+      + chips + fieldsHtml
+      + `<div class="pwarn"></div><div class="diff-box"></div>`;
+
+    const bindField = (el, fname) => {
+      el.addEventListener('focus', () => { ACTIVE_INPUT = { key, el, fname }; });
+      el.addEventListener('input', () => {
+        const draft = Object.assign({}, itemCurrent(key));
+        if (fname === 'threshold') {
+          const raw = el.value.trim();
+          draft.threshold = raw === '' ? '' : Number(raw);
+        } else {
+          draft[fname] = el.value;
+        }
+        DRAFTS[key] = draft;
+        card.classList.toggle('is-dirty', isItemDirty(key));
+        validateCard(key, card);
+        updateTopBadges();
+        const db = card.querySelector('.diff-box');
+        if (db.style.display === 'block') db.innerHTML = renderDiffText(it, draft);
+      });
+    };
+    card.querySelectorAll('textarea, input[data-f]').forEach(el => bindField(el, el.dataset.f));
+
+    card.querySelectorAll('[data-ph]').forEach(ch => {
+      ch.onclick = () => {
+        const token = ch.dataset.ph;
+        let target = card.querySelector('textarea[data-f="text"], textarea[data-f="q"]');
+        if (ACTIVE_INPUT && ACTIVE_INPUT.key === key && card.contains(ACTIVE_INPUT.el) && ACTIVE_INPUT.el.tagName === 'TEXTAREA') {
+          target = ACTIVE_INPUT.el;
+        }
+        if (!target) return;
+        const start = target.selectionStart ?? target.value.length;
+        const end = target.selectionEnd ?? start;
+        target.value = target.value.slice(0, start) + token + target.value.slice(end);
+        target.focus();
+        target.setSelectionRange(start + token.length, start + token.length);
+        target.dispatchEvent(new Event('input', { bubbles: true }));
+      };
+    });
+
+    card.querySelector('[data-a="diff"]').onclick = () => {
+      const db = card.querySelector('.diff-box');
+      if (db.style.display === 'block') {
+        db.style.display = 'none';
+      } else {
+        db.innerHTML = renderDiffText(it, itemCurrent(key));
+        db.style.display = 'block';
+      }
+    };
+
+    card.querySelector('[data-a="reset"]').onclick = async () => {
+      delete DRAFTS[key];
+      if (!it.is_custom) {
+        renderItems(); updateTopBadges(); setBanner(`Đã hoàn nguyên thay đổi chưa lưu của "${key}".`, 'ok');
+        return;
+      }
+      if (!confirm(`Khôi phục "${it.title || key}" về mặc định?`)) return;
+      await postPrompts({ action: 'reset', keys: [key] }, `Đã khôi phục "${key}" về mặc định.`);
+    };
+
+    validateCard(key, card);
+    view.append(card);
+  }
+}
+
+async function loadStudio() {
+  try {
+    const r = await fetch('/api/prompts');
+    const j = await r.json();
+    if (!r.ok || j.error) throw new Error(j.error || ('HTTP ' + r.status));
+    STUDIO = j;
+    DRAFTS = {};
+    renderSidebar();
+    renderItems();
+    updateTopBadges();
+  } catch (err) {
+    setBanner('Không tải được danh sách Prompt: ' + err.message, 'err');
+  }
+}
+
+async function postPrompts(payload, okMsg) {
+  setBanner('', 'ok');
+  try {
+    const r = await fetch('/api/prompts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const j = await r.json();
+    if (!r.ok || j.error) throw new Error(j.error || ('HTTP ' + r.status));
+    STUDIO = j;
+    if (payload.action === 'reset') {
+      if (payload.keys) payload.keys.forEach(k => delete DRAFTS[k]);
+      else DRAFTS = {};
+    } else if (payload.updates) {
+      Object.keys(payload.updates).forEach(k => delete DRAFTS[k]);
+    }
+    renderSidebar();
+    renderItems();
+    updateTopBadges();
+    setBanner(okMsg || 'Đã lưu và áp dụng Hot-Reload.', 'ok');
+  } catch (err) {
+    setBanner('Lỗi: ' + err.message, 'err');
+  }
+}
+
+async function saveAll() {
+  if (!STUDIO) return;
+  const dirtyKeys = Object.keys(STUDIO.items).filter(isItemDirty);
+  if (!dirtyKeys.length) return;
+  const badKeys = [];
+  const updates = {};
+  for (const k of dirtyKeys) {
+    const it = STUDIO.items[k];
+    const d = itemCurrent(k);
+    const bad = it.kind === 'criterion'
+      ? [...unknownPlaceholders(d.q, it.placeholders), ...unknownPlaceholders(d.fix, it.placeholders)]
+      : unknownPlaceholders(d.text, it.placeholders);
+    if (bad.length) badKeys.push(`${k}: ${bad.map(x => '{' + x + '}').join(', ')}`);
+    if (it.kind === 'criterion') {
+      const th = d.threshold === '' || d.threshold == null || Number.isNaN(d.threshold) ? null : Number(d.threshold);
+      updates[k] = { q: d.q, fix: d.fix, threshold: th };
+    } else {
+      updates[k] = { text: d.text };
+    }
+  }
+  if (badKeys.length) {
+    setBanner('Không thể lưu vì có placeholder không hợp lệ:\n' + badKeys.join(' | '), 'err');
+    return;
+  }
+  await postPrompts({ updates }, `✓ Đã lưu ${dirtyKeys.length} mục vào data/prompts_custom.json và áp dụng ngay (Hot-Reload).`);
+}
+
+$('saveBtn').onclick = saveAll;
+$('resetAllBtn').onclick = async () => {
+  if (!confirm('Khôi phục TOÀN BỘ prompt về bản gốc mặc định?')) return;
+  await postPrompts({ action: 'reset' }, '✓ Đã khôi phục toàn bộ prompt về mặc định.');
+};
+$('searchBox').addEventListener('input', () => renderItems());
+window.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+    e.preventDefault();
+    saveAll();
+  }
+});
+
+loadStudio();
+</script>
+</body>
+</html>

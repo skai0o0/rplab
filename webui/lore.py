@@ -105,36 +105,51 @@ def _triggered(e, text, whole=True):
     return hit
 
 
-def activate(books, history, scan_depth=4, recursive=True, max_recursion=3, budget=6000, whole_words=True, rng=random):
+def activate(books, history, scan_depth=4, recursive=True, max_recursion=2, budget=6000, whole_words=True, rng=random):
     """books: [{name, entries}], history: [{role, content}] -> (danh sach muc da bat, log ly do)."""
     entries = [e for b in books for e in b["entries"] if e["enabled"] and e["content"].strip()]
-    scan = "\n".join(m["content"] for m in history[-scan_depth:]) if scan_depth > 0 else ""
-    active, why = {}, {}
+    rp_hist = [m for m in (history or []) if m.get("in_context", True) and m.get("speaker") != "command"]
+    hot_scan = "\n".join(m["content"] for m in rp_hist[-2:]) if scan_depth > 0 else ""
+    scan = "\n".join(m["content"] for m in rp_hist[-scan_depth:]) if scan_depth > 0 else ""
+    active, why, tier, hits = {}, {}, {}, {}
     for e in entries:
         if e["constant"]:
             active[id(e)], why[id(e)] = e, "luôn bật"
+            tier[id(e)], hits[id(e)] = 0, 0
         else:
-            hit = _triggered(e, scan, whole_words)
+            hit_hot = _triggered(e, hot_scan, whole_words)
+            hit = hit_hot or _triggered(e, scan, whole_words)
             if hit:
                 active[id(e)], why[id(e)] = e, f"từ khóa “{hit}”"
+                tier[id(e)] = 1 if hit_hot else 2
+                hits[id(e)] = sum(1 for k in e["keys"] if _match(k, scan, e, whole_words))
     rounds = 0
-    while recursive and rounds < max_recursion:
+    rec_added = 0
+    prev_round_entries = [e for e in active.values() if not e["constant"] and not e["prevent_recursion"]]
+    while recursive and rounds < max_recursion and prev_round_entries and rec_added < 4:
         rounds += 1
-        rec_text = "\n".join(e["content"] for e in active.values() if not e["prevent_recursion"])
-        new = 0
+        rec_text = "\n".join(e["content"] for e in prev_round_entries)
+        next_round_entries = []
         for e in entries:
             if id(e) in active or e["exclude_recursion"] or e["constant"]:
                 continue
+            if rec_added >= 4:
+                break
             hit = _triggered(e, rec_text, whole_words)
             if hit:
-                src = next((a["comment"] for a in active.values()
-                            if not a["prevent_recursion"] and _match(hit, a["content"], e, whole_words)), "?")
+                src = next((a["comment"] for a in prev_round_entries
+                            if _match(hit, a["content"], e, whole_words)), "?")
                 active[id(e)], why[id(e)] = e, f"đệ quy từ “{src}” (từ khóa “{hit}”)"
-                new += 1
-        if not new:
+                tier[id(e)] = 3
+                hits[id(e)] = 1
+                rec_added += 1
+                if not e["prevent_recursion"]:
+                    next_round_entries.append(e)
+        if not next_round_entries:
             break
+        prev_round_entries = next_round_entries
     picked, used, log = [], 0, []
-    for e in sorted(active.values(), key=lambda e: (not e["constant"], -e["order"])):
+    for e in sorted(active.values(), key=lambda e: (tier.get(id(e), 9), -hits.get(id(e), 0), -e["order"])):
         if e["probability"] < 100 and rng.randint(1, 100) > e["probability"]:
             log.append({"entry": e["comment"], "book": e["source"], "status": f"bỏ qua (xác suất {e['probability']}%)"})
             continue
